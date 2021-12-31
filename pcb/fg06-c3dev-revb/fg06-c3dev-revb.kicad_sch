@@ -337,7 +337,7 @@
       (property "Value" "KMR-1.8SPI" (id 1) (at 0 21.59 0)
         (effects (font (size 1.27 1.27)))
       )
-      (property "Footprint" "fg-series:KMR-1.8SPI" (id 2) (at 0 -25.4 0)
+      (property "Footprint" "fg-series:KMR-1.8SPI" (id 2) (at 0 -24.13 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "Datasheet" "" (id 3) (at -50.8 34.29 0)
