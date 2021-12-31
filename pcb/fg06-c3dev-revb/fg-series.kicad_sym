@@ -508,7 +508,7 @@
     (property "Value" "M5STAMP-C3" (id 1) (at 0 16.51 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "fg-series:M5Stamp-C3" (id 2) (at 0 -19.05 0)
+    (property "Footprint" "fg-series:M5STAMP-C3" (id 2) (at 0 -19.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 0 -5.08 0)
