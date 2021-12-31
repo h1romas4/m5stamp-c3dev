@@ -423,7 +423,7 @@
       (property "Value" "M5STAMP-C3" (id 1) (at 0 16.51 0)
         (effects (font (size 1.27 1.27)))
       )
-      (property "Footprint" "fg-series:M5Stamp-C3" (id 2) (at 0 -19.05 0)
+      (property "Footprint" "fg-series:M5STAMP-C3" (id 2) (at 0 -19.05 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "Datasheet" "" (id 3) (at 0 -5.08 0)
@@ -1141,7 +1141,7 @@
     (uuid 10c48438-00f1-47d1-b485-8d08aa362ebb)
     (property "Reference" "U2" (id 0) (at 55.88 30.48 0))
     (property "Value" "M5STAMP-C3" (id 1) (at 55.88 33.02 0))
-    (property "Footprint" "fg-series:M5Stamp-C3" (id 2) (at 55.88 68.58 0)
+    (property "Footprint" "fg-series:M5STAMP-C3" (id 2) (at 55.88 68.58 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 55.88 54.61 0)
@@ -1467,7 +1467,7 @@
       (reference "U1") (unit 1) (value "AE-USB2.0-TYPE-C") (footprint "fg-series:AE-USB2.0-TYPE-C")
     )
     (path "/10c48438-00f1-47d1-b485-8d08aa362ebb"
-      (reference "U2") (unit 1) (value "M5STAMP-C3") (footprint "fg-series:M5Stamp-C3")
+      (reference "U2") (unit 1) (value "M5STAMP-C3") (footprint "fg-series:M5STAMP-C3")
     )
     (path "/b757ff68-1d62-4528-8a8b-3d836512d501"
       (reference "U3") (unit 1) (value "KMR-1.8SPI") (footprint "fg-series:KMR-1.8SPI")
