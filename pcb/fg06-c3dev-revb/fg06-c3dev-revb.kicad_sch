@@ -1252,7 +1252,7 @@
   (symbol (lib_id "Switch:SW_DIP_x01") (at 80.01 106.68 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 81b6f73b-0f33-482e-b717-6735907e390f)
-    (property "Reference" "SW2" (id 0) (at 80.01 99.8982 0))
+    (property "Reference" "JP1" (id 0) (at 80.01 99.8982 0))
     (property "Value" "SW_DIP_x01" (id 1) (at 80.01 102.2096 0))
     (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (id 2) (at 80.01 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -1436,6 +1436,9 @@
     (path "/b0d6eac3-a79a-488e-8653-73800df8a7d2"
       (reference "J1") (unit 1) (value "Conn_01x12") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical")
     )
+    (path "/81b6f73b-0f33-482e-b717-6735907e390f"
+      (reference "JP1") (unit 1) (value "SW_DIP_x01") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+    )
     (path "/2a8d72e0-d230-4a61-aa17-fadec28ff265"
       (reference "R1") (unit 1) (value "R") (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal")
     )
@@ -1459,9 +1462,6 @@
     )
     (path "/ab27adc8-3a2e-4599-b616-bcee12157f7c"
       (reference "SW1") (unit 1) (value "SW_Push") (footprint "Button_Switch_THT:SW_PUSH_6mm")
-    )
-    (path "/81b6f73b-0f33-482e-b717-6735907e390f"
-      (reference "SW2") (unit 1) (value "SW_DIP_x01") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
     )
     (path "/0fa9fc53-01f4-4a24-bd32-138cbaf08933"
       (reference "U1") (unit 1) (value "AE-USB2.0-TYPE-C") (footprint "fg-series:AE-USB2.0-TYPE-C")
