@@ -106,9 +106,9 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 
 2. Connect the PC to the USB Type-C of the U1
 3. Open the source file in Visual Studio Code.
-4. Run Task "openocd (debug)" @see [.vscode/tasks.json](https://)
+4. Run Task "openocd (debug)" @see [.vscode/tasks.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/tasks.json#L7-L13)
 5. Set a breakpoint in the source code.
-6. Debug Launch (GDB) @see [.vscode/launch.json](https://)
+6. Debug Launch (GDB) @see [.vscode/launch.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/launch.json#L8-L23)
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
 
