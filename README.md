@@ -114,13 +114,13 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 
 ### Note
 
-Create SPIFFS parteation file
+- Create SPIFFS parteation file
 
 ```
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 font/ font/spiffs_font.bin
 ```
 
-Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
+- Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
 
 Component config → ESP System Settings → Channel for console output
 
