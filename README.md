@@ -32,7 +32,7 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ## PCB and Gerber data
 
-- [KiCad 6 PCB](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
+- [KiCad 6 PCB](https://github.com/h1romas4/m5stamp-c3dev/tree/main/pcb/fg06-c3dev-revb)
 
 - [Gerber Data](https://github.com/h1romas4/m5stamp-c3dev/raw/main/pcb/fg06-c3dev-revb/fg06-c3dev-revb-gerber.zip)
 
