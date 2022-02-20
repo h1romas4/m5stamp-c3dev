@@ -11,13 +11,13 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 
 This repository contains MIT Licensed PCB data and example programs.
 
-![Circuit Diagram](docs/images/m5stamp_c3dev_01.jpg)
+![Circuit Diagram](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_01.jpg)
 
 📼 [YouTube Demo](https://youtu.be/46I3Uo5Xivg)
 
 ## Circuit Diagram
 
-![Circuit Diagram](docs/images/circuit_diagram_01.png)
+![Circuit Diagram](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/circuit_diagram_01.png)
 
 |#Unit|Name|Note|Where to get it|
 |----|----|----|----|
@@ -104,7 +104,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 5. Set a breakpoint in the source code.
 6. Debug Launch (GDB) @see [.vscode/launch.json](https://)
 
-![vscode](docs/images/m5stamp_c3dev_02.png)
+![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
 
 ### Note
 
@@ -122,7 +122,7 @@ Component config → ESP System Settings → Channel for console output
 idf.py menuconfig
 ```
 
-![vscode](docs/images/m5stamp_c3dev_03.png)
+![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
 
 ## Dependencies
 
@@ -136,6 +136,7 @@ Thanks for all the open source.
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|1.10.13|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|1.9.1|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|0.11|
+|[源真ゴシック](http://jikasei.me/font/genshin/)|-|
 
 ## License
 
