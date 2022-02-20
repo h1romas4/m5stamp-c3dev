@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "openocd (debug)",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "board/esp32c3-builtin.cfg"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "openocd flash",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "board/esp32c3-builtin.cfg",
+                "-c",
+                "program_esp build/hello-world.bin 0x10000 verify reset exit"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "idf.py build flash monitor",
+            "command": "idf.py",
+            "args": [
+                "build",
+                "flash",
+                "monitor"
+            ],
+        }
+    ]
+}

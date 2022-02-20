@@ -1,0 +1,15 @@
+[submodule "components/m5stack/M5EPD"]
+	path = components/freetype/M5EPD
+	url = https://github.com/m5stack/M5EPD
+[submodule "components/arduino-esp32"]
+	path = components/arduino-esp32
+	url = https://github.com/espressif/arduino-esp32
+[submodule "components/c3dev/st7735"]
+	path = components/lcd/st7735
+	url = https://github.com/adafruit/Adafruit-ST7735-Library
+[submodule "components/c3dev/agfxlib"]
+	path = components/lcd/agfxlib
+	url = https://github.com/adafruit/Adafruit-GFX-Library
+[submodule "components/tinypng/tinyPNG"]
+	path = components/tinypng/tinyPNG
+	url = https://github.com/olliiiver/tinyPNG

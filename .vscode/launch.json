@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Launch (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "filterStderr": true,
+            "miDebuggerPath": "${env:ESP32_TOOLCHAIN_HOME}/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gdb",
+            "MIMode": "gdb",
+            "targetArchitecture": "x64", // dummy
+            "program": "${workspaceRoot}/build/hello-world.elf",
+            "launchCompleteCommand": "exec-continue",
+            "setupCommands": [
+                { "text": "target extended-remote :3333" }
+            ],
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "externalConsole": false,
+        }
+    ]
+}

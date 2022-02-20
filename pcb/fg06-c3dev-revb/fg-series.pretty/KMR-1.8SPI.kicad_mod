@@ -1,6 +1,6 @@
 (footprint "KMR-1.8SPI" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 61E244F1)
+  (tedit 620F00DA)
   (attr through_hole)
   (fp_text reference "REF**" (at 0 -24.13) (layer "F.SilkS")
     (effects (font (size 1 1) (thickness 0.15)))
@@ -38,8 +38,8 @@
   (pad "15" thru_hole circle (at -24.13 16.51) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) (tstamp 6e435cd4-da2b-4602-a0aa-5dd988834dff))
   (pad "16" thru_hole circle (at -24.13 19.05) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) (tstamp 6f675e5f-8fe6-4148-baf1-da97afc770f8))
   (model "$KIPRJMOD/fg-series.vrml2/KMR-18.x3d"
-    (offset (xyz 0 0 0))
+    (offset (xyz 0 0 5))
     (scale (xyz 4 4 4))
-    (rotate (xyz 0 0 0))
+    (rotate (xyz -90 0 -90))
   )
 )

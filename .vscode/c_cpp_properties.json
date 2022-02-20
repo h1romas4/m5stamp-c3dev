@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "esp32c3",
+            "forcedInclude": [
+                "${workspaceRoot}/build/config/sdkconfig.h"
+            ],
+            "defines": [
+                "CONFIG_IDF_TARGET_ESP32C3",
+                "ESP_PLATFORM",
+                "ARDUINO=101"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-x86",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}
