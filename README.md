@@ -30,6 +30,12 @@ This repository contains MIT Licensed PCB data and example programs.
 |SW1|Tact switch|for loader mode and utility|[akizukidenshi.com (JP)](https://akizukidenshi.com/catalog/g/gP-03647/)|
 |J1|12 Pin header|You can use the one that comes with the M5Stamp C3 Mate||
 
+## PCB and Gerber data
+
+- [KiCad 6 PCB](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
+
+- [Gerber Data](https://github.com/h1romas4/m5stamp-c3dev/raw/main/pcb/fg06-c3dev-revb/fg06-c3dev-revb-gerber.zip)
+
 ## Example Source
 
 ### Require
