@@ -1,5 +1,7 @@
 # m5stamp-c3dev
 
+![Main Board](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_01.jpg)
+
 This is a development board for the [M5Stamp C3](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers) (RISC-V/FreeRTOS).
 
 - External USB-C port for JTAG debugging
@@ -10,8 +12,6 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - The size is just Japanese business card
 
 This repository contains MIT Licensed PCB data and example programs.
-
-![Circuit Diagram](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_01.jpg)
 
 📼 [YouTube Demo](https://youtu.be/46I3Uo5Xivg)
 
