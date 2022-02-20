@@ -109,6 +109,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 4. Run Task "openocd (debug)" @see [.vscode/tasks.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/tasks.json#L7-L13)
 5. Set a breakpoint in the source code.
 6. Debug Launch (GDB) @see [.vscode/launch.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/launch.json#L8-L23)
+    The first time you start the program, it will often fail, so if you get an error, retry.
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
 
