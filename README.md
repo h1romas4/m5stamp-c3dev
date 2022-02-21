@@ -135,15 +135,15 @@ idf.py menuconfig
 
 Thanks for all the open source.
 
-|name|version|
-|-|-|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|v3.2.3|
-|[esp32-arduino](https://github.com/espressif/arduino-esp32)|2.0.x master (50e9772)|
-|[M5EPD](https://github.com/m5stack/M5EPD)|0.1.x master(bf4bd28)|
-|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|1.10.13|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|1.9.1|
-|[tinyPNG](https://github.com/olliiiver/tinyPNG)|0.11|
-|[源真ゴシック](http://jikasei.me/font/genshin/)|-|
+|Name|Version|License|
+|-|-|--|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v3.2.3`|BSD License|
+|[esp32-arduino](https://github.com/espressif/arduino-esp32)|2.0.x master (`50e9772`)|LGPL-2.1 License|
+|[M5EPD](https://github.com/m5stack/M5EPD)|0.1.x master(`bf4bd28`)|FreeType Part(The FreeType License)|
+|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.10.13`|BSD License|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT license|
+|[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
+|[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
 
