@@ -15,7 +15,7 @@ This repository contains MIT Licensed PCB data and example programs.
 
 📼 [YouTube Demo](https://youtu.be/46I3Uo5Xivg)
 
-## Circuit Diagram
+## Schematic
 
 ![Circuit Diagram](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/circuit_diagram_01.png)
 
@@ -86,7 +86,7 @@ idf.py build flash
 Write TypeType font to SPIFFS
 
 ```
-parttool.py --port "/dev/ttyACM0" write_partition --partition-name=font --partition-subtype=spiffs --input font/spiffs_font.bin
+parttool.py --port "/dev/ttyACM0" write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
 Restart M5Stamp C3
@@ -118,7 +118,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 - Create SPIFFS parteation file
 
 ```
-python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 font/ font/spiffs_font.bin
+python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
 ```
 
 - Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
