@@ -22,13 +22,13 @@ This repository contains MIT Licensed PCB data and example programs.
 |#Unit|Name|Note|Where to get it|
 |----|----|----|----|
 |U1|AE-USB2.0-TYPE-C|USB 2.0 Type-C Break out board|[akizukidenshi.com (JP)](https://akizukidenshi.com/catalog/g/gK-13080/)|
-|U2|M5Stamp C3|-|+ [M5Stack](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers?variant=40724631257260)<br />+ [SWITCH SCIENCE (JP)](https://www.switch-science.com/catalog/7474/)|
+|U2|M5STAMP-C3|M5Stamp C3|+ [M5Stack](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers?variant=40724631257260)<br />+ [SWITCH SCIENCE (JP)](https://www.switch-science.com/catalog/7474/)|
 |U3|KMR-1.8SPI|KMR-1.8 SPI marked LCD and SD card interface|+ [amazon.co.jp (1)](https://www.amazon.co.jp/dp/B010SHK0Y0/)<br />+ [amazon.co.jp (2)](https://www.amazon.co.jp/gp/product/B07RG8SJVB/)<br />+ [ja.aliexpress.com](https://ja.aliexpress.com/item/4000511275898.html)|
-|R1 - R2|5.2K Resistor|for USB Power supply|-|
-|R3 - R7|10K Resistor|SPI pullup|-|
+|R1 - R2|5.2K Resistor|Pull-down for USB Power supply|-|
+|R3 - R7|10K Resistor|SPI pull-up|-|
 |JP1|Jumper pin|Select external power supply|[akizukidenshi.com (JP)](https://akizukidenshi.com/catalog/g/gP-03687/)|
 |SW1|Tact switch|for loader mode and utility|[akizukidenshi.com (JP)](https://akizukidenshi.com/catalog/g/gP-03647/)|
-|J1|12 Pin header|You can use the one that comes with the M5Stamp C3 Mate||
+|J1|12 Pin header|You can use the one that comes with the M5Stamp C3 Mate|-|
 
 ## PCB and Gerber data
 
