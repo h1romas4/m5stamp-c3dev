@@ -24,18 +24,18 @@ m3ApiRawFunction(c3dev_pset)
     m3ApiGetArg     (uint32_t, color)
 
     // current_gas -= gas;
-
     m3ApiSuccess();
 }
 
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
+    const char* c3dev = "c3dev";
     // (type $t0 (func (param i32) (result i32)))
     // (type $t1 (func (param i32 i32 i32)))
     // (import "c3dev" "random" (func $c3dev.random (type $t0)))
     // (import "c3dev" "pset" (func $c3dev.pset (type $t1)))
-    m3_LinkRawFunction(module, "c3dev", "random", "i(i)",  &c3dev_random);
-    m3_LinkRawFunction(module, "c3dev", "pset", "v(i, i, i)",  &c3dev_pset);
+    m3_LinkRawFunction(module, c3dev, "random", "i(i)",  &c3dev_random);
+    m3_LinkRawFunction(module, c3dev, "pset", "v(i, i, i)",  &c3dev_pset);
 
     return m3Err_none;
 }
@@ -70,7 +70,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    // link arduino library
+    // link c3dev function
     result = link_c3dev(runtime);
     if (result) {
         ESP_LOGE(TAG, "link_c3dev: %s", result);
