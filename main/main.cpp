@@ -21,6 +21,12 @@ static const char *TAG = "main.cpp";
 SPIClass *spi = &SPI;
 
 /**
+ * SPIFFS member
+ */
+fs::SPIFFSFS SPIFFS_FONT;
+fs::SPIFFSFS SPIFFS_WASM;
+
+/**
  * LCD member
  */
 Adafruit_ST7735 tft = Adafruit_ST7735(spi, C3DEV_LCD_CS, C3DEV_LCD_DC, C3DEV_LCD_RST);
@@ -164,8 +170,8 @@ void setup(void)
     SPI.setFrequency(C3DEV_SPI_CLOCK);
 
     // FreeType initialize
-    SPIFFS.begin(false, "/spiffs", 4, "font");
-    ffsupport_setffs(SPIFFS);
+    SPIFFS_FONT.begin(false, "/font", 4, "font");
+    ffsupport_setffs(SPIFFS_FONT);
     if (font_face_init_fs(&font_face, "/GENSHINM.TTF") != ESP_OK) {
         ESP_LOGE(TAG, "Font load faild.");
     }
@@ -190,7 +196,24 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
     // Test WebAssembly
-    load_wasm();
+    SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
+    File wasm_file = SPIFFS_WASM.open("/app.wasm", "rb");
+    size_t wasm_size = wasm_file.size();
+    ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
+    // Read .wasm
+    uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
+    if(wasm_binary == nullptr) {
+        ESP_LOGE(TAG, "Memory alloc error");
+    }
+    if(wasm_file.read(wasm_binary, wasm_size) != wasm_size) {
+        ESP_LOGE(TAG, "SPIFFS read error");
+    }
+    wasm_file.close();
+    SPIFFS_WASM.end();
+    // Load WebAssembly
+    load_wasm(wasm_binary, wasm_size);
+
+    SPIFFS_FONT.end();
 }
 
 void loop(void)
