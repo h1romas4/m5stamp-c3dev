@@ -1,12 +1,44 @@
-#include <stdint.h>
+#include "Arduino.h"
 #include "esp_log.h"
 #include "esp_err.h"
+#include <stdint.h>
 
 #include "wasm3.h"
 #include "m3_env.h"
-#include "fib32.wasm.h"
+#include "m3_api_libc.h"
+
+#include "c3dev_board.h"
 
 static const char *TAG = "test_wasm3.c";
+
+m3ApiRawFunction(c3dev_random) {
+    m3ApiReturnType (uint32_t)
+    m3ApiGetArg     (uint32_t, max)
+    m3ApiReturn     (esp_random());
+}
+
+m3ApiRawFunction(c3dev_pset)
+{
+    m3ApiGetArg     (uint32_t, x)
+    m3ApiGetArg     (uint32_t, y)
+    m3ApiGetArg     (uint32_t, color)
+
+    // current_gas -= gas;
+
+    m3ApiSuccess();
+}
+
+M3Result link_c3dev(IM3Runtime runtime) {
+    IM3Module module = runtime->modules;
+    // (type $t0 (func (param i32) (result i32)))
+    // (type $t1 (func (param i32 i32 i32)))
+    // (import "c3dev" "random" (func $c3dev.random (type $t0)))
+    // (import "c3dev" "pset" (func $c3dev.pset (type $t1)))
+    m3_LinkRawFunction(module, "c3dev", "random", "i(i)",  &c3dev_random);
+    m3_LinkRawFunction(module, "c3dev", "pset", "v(i, i, i)",  &c3dev_pset);
+
+    return m3Err_none;
+}
 
 esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 {
@@ -38,8 +70,16 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    IM3Function f;
-    result = m3_FindFunction(&f, runtime, "fib");
+    // link arduino library
+    result = link_c3dev(runtime);
+    if (result) {
+        ESP_LOGE(TAG, "link_c3dev: %s", result);
+        return ESP_FAIL;
+    }
+
+    // export function circle(x: u32, y: u32, r: u32, color: u16): void
+    IM3Function circle;
+    result = m3_FindFunction(&circle, runtime, "circle");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
@@ -47,20 +87,13 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 
     ESP_LOGI(TAG, "Running...");
 
-    result = m3_CallV(f, 24);
+    result = m3_CallV(circle, 80, 64, 64, 0xffff);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
 
-    unsigned value = 0;
-    result = m3_GetResultsV(f, &value);
-    if (result) {
-        ESP_LOGE(TAG, "m3_GetResults: %s", result);
-        return ESP_FAIL;
-    }
-
-    ESP_LOGI(TAG, "Result: %u", value);
+    ESP_LOGI(TAG, "Executed.");
 
     return ESP_OK;
 }
