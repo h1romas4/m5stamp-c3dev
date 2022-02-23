@@ -87,7 +87,8 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 
     ESP_LOGI(TAG, "Running...");
 
-    result = m3_CallV(circle, 80, 64, 64, 0xffff);
+    const char* i_argv[4] = { "80", "64", "64", "0xffff" };
+    result = m3_CallArgv(circle, 4, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
