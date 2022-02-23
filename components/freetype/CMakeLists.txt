@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-set(COMPONENT_ADD_INCLUDEDIRS
+
+set(INCLUDEDIRS
     M5EPD/src
     M5EPD/src/base
     M5EPD/src/freetype
@@ -9,7 +10,7 @@ set(COMPONENT_ADD_INCLUDEDIRS
     src/
 )
 
-file(GLOB SRCS
+set(SRCS
     M5EPD/src/font_render.c
     M5EPD/src/ffsupport.cpp
     M5EPD/src/truetype/ttinterp.c
@@ -64,7 +65,4 @@ file(GLOB SRCS
     src/freetype_helper.c
 )
 
-set(COMPONENT_SRCS ${SRCS})
-set(COMPONENT_REQUIRES arduino-esp32)
-
-register_component()
+idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS} REQUIRES arduino-esp32)

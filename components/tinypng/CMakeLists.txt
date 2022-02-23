@@ -1,17 +1,16 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(COMPONENT_ADD_INCLUDEDIRS
+set(INCLUDEDIRS
     tinyPNG
 )
 
-file(GLOB SRCS
+set(SRCS
     tinyPNG/tinyPNG.cpp
 )
-set(COMPONENT_SRCS ${SRCS})
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS})
 
-set(CXX_COMPILE_OPTIONS "-Dtypeof=__typeof__ -DDEFLATE_ALLOCATION_DYNAMIC")
-
-register_component()
+target_compile_options(${COMPONENT_TARGET} PUBLIC
+    -std=c++17
+    -Dtypeof=__typeof__
+    -DDEFLATE_ALLOCATION_DYNAMIC)
