@@ -1,15 +1,13 @@
-set(COMPONENT_ADD_INCLUDEDIRS
+set(INCLUDEDIRS
     ./
 )
 
-file(GLOB SRCS
-    hello_world_main.cpp
+set(SRCS
+    main.cpp
     test_wasm3.c
 )
 
-set(COMPONENT_SRCS ${SRCS})
-
-set(CXX_COMPILE_OPTIONS
-)
-
-register_component()
+idf_component_register(
+    INCLUDE_DIRS ${INCLUDEDIRS}
+    SRCS ${SRCS}
+    REQUIRES arduino-esp32 freetype lcd tinypng wasm)

@@ -7,7 +7,7 @@
 #include "m3_env.h"
 #include "fib32.wasm.h"
 
-static const char *TAG = "test_wasm3";
+static const char *TAG = "test_wasm3.c";
 
 esp_err_t load_wasm(void)
 {

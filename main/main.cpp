@@ -13,7 +13,7 @@
 #include "c3dev_board.h"
 #include "test_wasm3.h"
 
-static const char *TAG = "hello_world_main";
+static const char *TAG = "main.cpp";
 
 /**
  * SPI member
