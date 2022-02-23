@@ -13,3 +13,6 @@
 [submodule "components/tinypng/tinyPNG"]
 	path = components/tinypng/tinyPNG
 	url = https://github.com/olliiiver/tinyPNG
+[submodule "components/wasm/wasm3"]
+	path = components/wasm/wasm3
+	url = https://github.com/wasm3/wasm3
