@@ -8,7 +8,10 @@
             "defines": [
                 "CONFIG_IDF_TARGET_ESP32C3",
                 "ESP_PLATFORM",
-                "ARDUINO=101"
+                "ARDUINO=101",
+                "M3_COMPILER_GCC",
+                "__riscv",
+                "__riscv_xlen"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
