@@ -11,8 +11,9 @@
 #include "tinyPNG.h"
 
 #include "c3dev_board.h"
+#include "test_wasm3.h"
 
-static const char *TAG = "c3dev";
+static const char *TAG = "hello_world_main";
 
 /**
  * SPI member
@@ -187,6 +188,9 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-1.PNG", 80, 0);
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
+
+    // Test WebAssembly
+    load_wasm();
 }
 
 void loop(void)

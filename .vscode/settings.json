@@ -4,6 +4,9 @@
         "font_render.h": "c",
         "ffsupport.h": "c",
         "sd.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "wasm3.h": "c",
+        "m3_env.h": "c",
+        "fib32.wasm.h": "c"
     }
 }

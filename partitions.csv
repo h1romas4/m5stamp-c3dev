@@ -4,3 +4,4 @@ nvs,      data, nvs,     0x9000,   0x6000,
 phy_init, data, phy,     0xf000,   0x1000,
 app,      app,  factory, 0x10000,  0x100000,
 font,     data, spiffs,  0x110000, 0x100000
+wasm,     data, spiffs,  0x210000, 0x100000
