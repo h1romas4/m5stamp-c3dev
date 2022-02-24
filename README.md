@@ -46,6 +46,10 @@ This repository contains MIT Licensed PCB data and example programs.
 get_idf
 
 ```
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+```
+
+```
 $ get_idf
 Detecting the Python interpreter
 ... snip ...
