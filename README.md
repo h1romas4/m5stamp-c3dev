@@ -40,10 +40,14 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF v4.4](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/#step-1-install-prerequisites)
+- [Setup ESF-IDF v4.4](https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32c3/get-started/index.html#installation-step-by-step)
 - [(Optional)Setup OpenOCD with ESP32 JTAG support](https://github.com/espressif/openocd-esp32)
 
 get_idf
+
+```
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+```
 
 ```
 $ get_idf
