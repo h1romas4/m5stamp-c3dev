@@ -1,2 +1,3 @@
-export declare function random(max: u32): u32;
-export declare function pset(x: u32, y: u32, color: u16): void;
+export declare function delay(wait: i32): void;
+export declare function random(max: i32): i32;
+export declare function pset(x: i32, y: i32, color: i32): void;

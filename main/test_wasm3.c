@@ -12,30 +12,32 @@
 static const char *TAG = "test_wasm3.c";
 
 m3ApiRawFunction(c3dev_random) {
-    m3ApiReturnType (uint32_t)
-    m3ApiGetArg     (uint32_t, max)
-    m3ApiReturn     (esp_random());
+    m3ApiReturnType (int32_t)
+    m3ApiGetArg     (int32_t, max)
+    m3ApiReturn     (esp_random(/* max */));
+}
+
+m3ApiRawFunction(c3dev_delay) {
+    m3ApiGetArg     (int32_t, wait)
+    delay(wait);
+    m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_pset)
 {
-    m3ApiGetArg     (uint32_t, x)
-    m3ApiGetArg     (uint32_t, y)
-    m3ApiGetArg     (uint32_t, color)
+    m3ApiGetArg     (int32_t, x)
+    m3ApiGetArg     (int32_t, y)
+    m3ApiGetArg     (int32_t, color)
 
-    // current_gas -= gas;
     m3ApiSuccess();
 }
 
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
-    const char* c3dev = "c3dev";
-    // (type $t0 (func (param i32) (result i32)))
-    // (type $t1 (func (param i32 i32 i32)))
-    // (import "c3dev" "random" (func $c3dev.random (type $t0)))
-    // (import "c3dev" "pset" (func $c3dev.pset (type $t1)))
-    m3_LinkRawFunction(module, c3dev, "random", "i(i)",  &c3dev_random);
-    m3_LinkRawFunction(module, c3dev, "pset", "v(i, i, i)",  &c3dev_pset);
+
+    m3_LinkRawFunction(module, "c3dev", "random", "i(i)",  &c3dev_random);
+    m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
+    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset);
 
     return m3Err_none;
 }
@@ -77,7 +79,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    // export function circle(x: u32, y: u32, r: u32, color: u16): void
     IM3Function circle;
     result = m3_FindFunction(&circle, runtime, "circle");
     if (result) {
