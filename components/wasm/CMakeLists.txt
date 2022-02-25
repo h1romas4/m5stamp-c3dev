@@ -8,10 +8,10 @@ set(INCLUDEDIRS
 
 set(SRCS
     wasm3/source/m3_api_libc.c
+    wasm3/source/m3_api_wasi.c
+    wasm3/source/m3_api_uvwasi.c
     wasm3/source/m3_api_meta_wasi.c
     wasm3/source/m3_api_tracer.c
-    wasm3/source/m3_api_uvwasi.c
-    wasm3/source/m3_api_wasi.c
     wasm3/source/m3_bind.c
     wasm3/source/m3_code.c
     wasm3/source/m3_compile.c
@@ -22,7 +22,6 @@ set(SRCS
     wasm3/source/m3_info.c
     wasm3/source/m3_module.c
     wasm3/source/m3_parse.c
-    wasm3/source/extensions/m3_extensions.c
 )
 
 idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS})
@@ -32,3 +31,12 @@ target_compile_options(${COMPONENT_TARGET} PUBLIC
     -DM3_IN_IRAM
     -O3
     -freorder-blocks)
+
+set_source_files_properties(wasm3/source/m3_env.c
+    PROPERTIES COMPILE_FLAGS
+    -Wno-sign-compare
+)
+
+set_source_files_properties(wasm3/source/m3_api_meta_wasi.c
+    PROPERTIES COMPILE_FLAGS -Wno-incompatible-pointer-types
+)
