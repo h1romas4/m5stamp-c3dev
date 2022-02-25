@@ -29,6 +29,8 @@ m3ApiRawFunction(c3dev_pset)
     m3ApiGetArg     (int32_t, y)
     m3ApiGetArg     (int32_t, color)
 
+    tft.drawPixel(x, y, color);
+
     m3ApiSuccess();
 }
 
@@ -88,7 +90,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 
     ESP_LOGI(TAG, "Running...");
 
-    const char* i_argv[4] = { "80", "64", "64", "0xffff" };
+    const char* i_argv[4] = { "80", "64", "64", "65535" };
     result = m3_CallArgv(circle, 4, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);

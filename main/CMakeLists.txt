@@ -4,7 +4,7 @@ set(INCLUDEDIRS
 
 set(SRCS
     main.cpp
-    test_wasm3.c
+    test_wasm3.cpp
 )
 
 idf_component_register(
