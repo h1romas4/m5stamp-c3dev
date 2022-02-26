@@ -19,8 +19,8 @@ export function circle(x: u32, y: u32, r: u32, color: u16): void {
     // c3dev.drawString(new ArrayBuffer(10));
     // String.UTF8.encode("TEST STRING1");
 
-    // ArrayBuffer
-    new ArrayBuffer(10);
+    // ArrayBuffer (enable GC)
+    new ArrayBuffer(1);
     // TODO: All the variables under this will be broken.
 
     while(xx >= yy) {
