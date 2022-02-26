@@ -6,7 +6,7 @@
       "assemblyscript": "^0.19.23"
   },
   "scripts": {
-    "asbuild:optimized": "asc src/main.ts -b ../resources/wasm/app.wasm -t build/app.wat -d build/app.d.ts --use Math=NativeMathf -O3 --optimize",
+    "asbuild:optimized": "asc src/main.ts -b ../resources/wasm/app.wasm -t build/app.wat -d build/app.d.ts --use Math=NativeMathf --use abort= -O3 --optimize",
     "asbuild": "npm run asbuild:optimized"
   },
   "author": "h1romas4",

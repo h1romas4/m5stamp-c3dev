@@ -11,35 +11,58 @@
 
 static const char *TAG = "test_wasm3.c";
 
+// (type $t1 (func (result f64)))
+// (import "env" "seed" (func $env.seed (type $t1)))
 m3ApiRawFunction(c3dev_random) {
-    m3ApiReturnType (int32_t)
-    m3ApiGetArg     (int32_t, max)
-    m3ApiReturn     (esp_random(/* max */));
+    m3ApiReturnType(float_t)       // 32bit
+    m3ApiReturn(esp_random());     // uint32_t */
 }
 
 m3ApiRawFunction(c3dev_delay) {
-    m3ApiGetArg     (int32_t, wait)
+    m3ApiGetArg(int32_t, wait)
+
     delay(wait);
+
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_pset)
 {
-    m3ApiGetArg     (int32_t, x)
-    m3ApiGetArg     (int32_t, y)
-    m3ApiGetArg     (int32_t, color)
+    m3ApiGetArg(int32_t, x)
+    m3ApiGetArg(int32_t, y)
+    m3ApiGetArg(int32_t, color)
+
+    ESP_LOGI(TAG, "pset(%d, %d, %d)", x, y, color);
 
     tft.drawPixel(x, y, color);
+    m3ApiSuccess();
+}
 
+m3ApiRawFunction(c3dev_abort)
+{
+    m3ApiGetArg(int32_t, i0)
+    m3ApiGetArg(int32_t, i1)
+    m3ApiGetArg(int32_t, i2)
+    m3ApiGetArg(int32_t, i3)
+    ESP_LOGI(TAG, "c3dev_abort: %d %d %d %d", i0, i1, i2, i3);
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(c3dev_draw_string)
+{
+    m3ApiGetArgMem(const char *, utf8_null_terminated_string)
+    ESP_LOGI(TAG, "%s", utf8_null_terminated_string);
     m3ApiSuccess();
 }
 
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
-    m3_LinkRawFunction(module, "c3dev", "random", "i(i)",  &c3dev_random);
-    m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
-    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset);
+    m3_LinkRawFunction(module, "env", "seed", "F()",  &c3dev_random); // OK
+    m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay); // OK
+    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset); // OK
+    // m3_LinkRawFunction(module, "env", "abort", "v(iiii)",  &c3dev_abort);
+    m3_LinkRawFunction(module, "c3dev", "drawString", "v(*)",  &c3dev_draw_string);
 
     return m3Err_none;
 }
