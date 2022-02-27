@@ -12,11 +12,23 @@
 
 static const char *TAG = "test_wasm3.c";
 
-// (type $t1 (func (result f64)))
-// (import "env" "seed" (func $env.seed (type $t1)))
+// (import "env" "seed" (func $env.seed (type $t3)))
 m3ApiRawFunction(c3dev_random) {
     m3ApiReturnType(float_t)       // 32bit
     m3ApiReturn(esp_random());     // uint32_t */
+}
+
+// (import "env" "abort" (func $env.abort (type $t1)))
+m3ApiRawFunction(c3dev_abort)
+{
+    m3ApiGetArgMem(const char *, message)
+    m3ApiGetArgMem(const char *, fileName)
+    m3ApiGetArg(int32_t, lineNumber)
+    m3ApiGetArg(int32_t, columnNumber)
+
+    ESP_LOGE(TAG, "c3dev_abort: %s %s %d %d", message, fileName, lineNumber, columnNumber);
+
+    m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_delay) {
@@ -34,25 +46,17 @@ m3ApiRawFunction(c3dev_pset)
     m3ApiGetArg(int32_t, color)
 
     ESP_LOGI(TAG, "pset(%d, %d, %d)", x, y, color);
-
     tft.drawPixel(x, y, color);
-    m3ApiSuccess();
-}
 
-m3ApiRawFunction(c3dev_abort)
-{
-    m3ApiGetArgMem(const char *, message)
-    m3ApiGetArgMem(const char *, fileName)
-    m3ApiGetArg(int32_t, lineNumber)
-    m3ApiGetArg(int32_t, columnNumber)
-    ESP_LOGI(TAG, "c3dev_abort: %s %s %d %d", message, fileName, lineNumber, columnNumber);
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_draw_string)
 {
     m3ApiGetArgMem(const char *, utf8_null_terminated_string)
+
     ESP_LOGI(TAG, "%s", utf8_null_terminated_string);
+
     m3ApiSuccess();
 }
 
