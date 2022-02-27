@@ -30,7 +30,7 @@ target_compile_options(${COMPONENT_TARGET} PUBLIC
     -DESP32
     -DM3_IN_IRAM
     -O3
-    # -Dd_m3FixedHeap=131070
+    -Dd_m3FixedHeap=131070
     -Wno-visibility)
 
 set_source_files_properties(wasm3/source/m3_env.c
