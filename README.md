@@ -129,7 +129,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 
 ```
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
-python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/wasm resources/spiffs_wasm.bin
+python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin
 ```
 
 - Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
