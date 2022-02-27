@@ -41,11 +41,11 @@ m3ApiRawFunction(c3dev_pset)
 
 m3ApiRawFunction(c3dev_abort)
 {
-    m3ApiGetArg(int32_t, i0)
-    m3ApiGetArg(int32_t, i1)
-    m3ApiGetArg(int32_t, i2)
-    m3ApiGetArg(int32_t, i3)
-    ESP_LOGI(TAG, "c3dev_abort: %d %d %d %d", i0, i1, i2, i3);
+    m3ApiGetArgMem(const char *, message)
+    m3ApiGetArgMem(const char *, fileName)
+    m3ApiGetArg(int32_t, lineNumber)
+    m3ApiGetArg(int32_t, columnNumber)
+    ESP_LOGI(TAG, "c3dev_abort: %s %s %d %d", message, fileName, lineNumber, columnNumber);
     m3ApiSuccess();
 }
 
@@ -59,10 +59,10 @@ m3ApiRawFunction(c3dev_draw_string)
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
-    m3_LinkRawFunction(module, "env", "seed", "F()",  &c3dev_random); // OK
-    m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay); // OK
-    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset); // OK
-    // m3_LinkRawFunction(module, "env", "abort", "v(iiii)",  &c3dev_abort);
+    m3_LinkRawFunction(module, "env", "seed", "F()",  &c3dev_random);
+    m3_LinkRawFunction(module, "env", "abort", "v(**ii)",  &c3dev_abort);
+    m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
+    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset);
     m3_LinkRawFunction(module, "c3dev", "drawString", "v(*)",  &c3dev_draw_string);
 
     return m3Err_none;
