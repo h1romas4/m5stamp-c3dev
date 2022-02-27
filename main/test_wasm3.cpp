@@ -10,7 +10,7 @@
 
 #include "c3dev_board.h"
 
-static const char *TAG = "test_wasm3.c";
+static const char *TAG = "test_wasm3.cpp";
 
 // (import "env" "seed" (func $env.seed (type $t3)))
 m3ApiRawFunction(c3dev_random) {
