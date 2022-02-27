@@ -117,7 +117,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     ESP_LOGI(TAG, "Running...");
-
     ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
     const char* i_argv[4] = { "80", "64", "64", "65535" };
     result = m3_CallArgv(circle, 4, i_argv);

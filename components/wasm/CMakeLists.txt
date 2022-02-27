@@ -31,6 +31,11 @@ target_compile_options(${COMPONENT_TARGET} PUBLIC
     -DM3_IN_IRAM
     -O3
     -Dd_m3FixedHeap=131070
+    -DDEBUG
+    -Dd_m3LogNativeStack
+    -Dd_m3LogHeapOps
+    -Dd_m3SkipStackCheck
+    -Dd_m3SkipMemoryBoundsCheck
     -Wno-visibility)
 
 set_source_files_properties(wasm3/source/m3_env.c
