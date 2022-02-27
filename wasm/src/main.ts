@@ -17,6 +17,7 @@ export function circle(x: u32, y: u32, r: u32, color: u16): void {
     // AS: --lowMemoryLimit 64
     // ERROR AS104: Low memory limit exceeded by static data: 340 > 64
     // AS: --lowMemoryLimit 2048
+    // c3dev.drawString(String.UTF8.encode(`${x}, ${y}, ${r}, ${color}`, true));
     new ArrayBuffer(1);
     // TODO: All the variables under this will be broken.
 
