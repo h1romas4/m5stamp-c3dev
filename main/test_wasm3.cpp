@@ -76,6 +76,8 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 {
     M3Result result = m3Err_none;
 
+    ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
+
     ESP_LOGI(TAG, "Loading WebAssembly...");
     IM3Environment env = m3_NewEnvironment();
     if (!env) {
@@ -117,7 +119,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     ESP_LOGI(TAG, "Running...");
-    ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
     const char* i_argv[4] = { "80", "64", "64", "65535" };
     result = m3_CallArgv(circle, 4, i_argv);
     if (result) {
@@ -126,6 +127,13 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     ESP_LOGI(TAG, "Executed.");
+
+    // wasm3/source/m3_function.c:86
+    // Guru Meditation Error: Core  0 panic'ed (Load access fault)
+    // m3_FreeModule(module);
+    // m3_FreeRuntime(runtime);
+
+    ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
 
     return ESP_OK;
 }
