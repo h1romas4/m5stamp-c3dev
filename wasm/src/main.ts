@@ -11,15 +11,12 @@ export function circle(x: u32, y: u32, r: u32, color: u16): void {
     let yy: u32 = 0;
     let err = 0;
 
-    // c3dev.drawString(String.UTF8.encode("TEST STRING1", true));
-    // c3dev.drawString(String.UTF8.encode("TEST STRING2", true));
-    // c3dev.delay(100);
-    // c3dev.drawString(String.UTF8.encode("TEST STRING3", true));
-
-    // c3dev.drawString(new ArrayBuffer(10));
-    // String.UTF8.encode("TEST STRING1");
-
     // Execute Wasm3 heap allocation
+    // Wasm3: -Dd_m3FixedHeap=131070
+    //  heap_caps_get_free_size: 86664
+    // AS: --lowMemoryLimit 64
+    // ERROR AS104: Low memory limit exceeded by static data: 340 > 64
+    // AS: --lowMemoryLimit 2048
     new ArrayBuffer(1);
     // TODO: All the variables under this will be broken.
 
