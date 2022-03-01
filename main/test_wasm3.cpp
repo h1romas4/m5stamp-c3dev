@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include "SPIFFS.h"
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_heap_caps.h"
@@ -11,6 +12,11 @@
 #include "c3dev_board.h"
 
 static const char *TAG = "test_wasm3.cpp";
+
+/**
+ * SPIFFS member
+ */
+fs::SPIFFSFS SPIFFS_WASM;
 
 // (import "env" "seed" (func $env.seed (type $t3)))
 m3ApiRawFunction(c3dev_random) {
@@ -136,4 +142,28 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
 
     return ESP_OK;
+}
+
+void exec_wasm(void)
+{
+    SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
+
+    File wasm_file = SPIFFS_WASM.open("/app.wasm", "rb");
+    size_t wasm_size = wasm_file.size();
+
+    ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
+    // Read .wasm
+    uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
+    if(wasm_binary == nullptr) {
+        ESP_LOGE(TAG, "Memory alloc error");
+    }
+    if(wasm_file.read(wasm_binary, wasm_size) != wasm_size) {
+        ESP_LOGE(TAG, "SPIFFS read error");
+    }
+
+    wasm_file.close();
+    SPIFFS_WASM.end();
+
+    // Load and Run WebAssembly
+    load_wasm(wasm_binary, wasm_size);
 }

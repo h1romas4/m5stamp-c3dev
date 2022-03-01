@@ -17,24 +17,7 @@ fs::SPIFFSFS SPIFFS_FONT;
  * FreeType member
  */
 font_face_t font_face;
-font_render_t font_render;
-static const int font_size = 20;
-static const int font_cache_size = 64;
 const uint8_t alphamap[16] = {0, 17, 34, 51, 68, 85, 102, 119, 136, 153, 170, 187, 204, 221, 238, 255};
-
-void init_freetype(void)
-{
-    // FreeType initialize
-    SPIFFS_FONT.begin(false, "/font", 4, "font");
-    ffsupport_setffs(SPIFFS_FONT);
-    if (font_face_init_fs(&font_face, "/GENSHINM.TTF") != ESP_OK) {
-        ESP_LOGE(TAG, "Font load faild.");
-    }
-    // Font render initialize
-    if (font_render_init(&font_render, &font_face, font_size, font_cache_size) != ESP_OK) {
-        ESP_LOGE(TAG, "Render creation failed.");
-    }
-}
 
 /**
  * Utility drawFreetypeBitmap
@@ -58,7 +41,7 @@ void drawFreetypeBitmap(int32_t cx, int32_t cy, uint16_t bw, uint16_t bh, uint16
 /**
  * Utility drawString
  */
-void drawString(const char *string, int32_t poX, int32_t poY, uint16_t fg, font_render_t *render)
+void draw_freetype_string(const char *string, int32_t poX, int32_t poY, uint16_t fg, font_render_t *render)
 {
     int16_t sumX = 0;
     uint16_t len = strlen(string);
@@ -82,13 +65,24 @@ void drawString(const char *string, int32_t poX, int32_t poY, uint16_t fg, font_
     }
 }
 
-/**
- * Example Draw FreeType
- */
-void draw_freetype()
+void init_freetype(void)
 {
-    drawString("M5Stamp C3", 10, 28, ST77XX_RED, &font_render);
-    drawString("Development", 10, 28 * 2, ST77XX_WHITE, &font_render);
-    drawString("Board", 10, 28 * 3, ST77XX_WHITE, &font_render);
-    drawString("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render);
+    // FreeType initialize
+    SPIFFS_FONT.begin(false, "/font", 4, "font");
+    ffsupport_setffs(SPIFFS_FONT);
+    if (font_face_init_fs(&font_face, "/GENSHINM.TTF") != ESP_OK) {
+        ESP_LOGE(TAG, "Font load faild.");
+    }
+}
+
+font_render_t create_freetype_render(uint32_t font_size, uint32_t font_cache_size)
+{
+    font_render_t font_render;
+
+    // Font render initialize
+    if (font_render_init(&font_render, &font_face, font_size, font_cache_size) != ESP_OK) {
+        ESP_LOGE(TAG, "Render creation failed.");
+    }
+
+    return font_render;
 }
