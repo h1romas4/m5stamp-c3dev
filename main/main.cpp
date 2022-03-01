@@ -7,6 +7,7 @@
 #include "c3dev_board.h"
 #include "test_freetype.h"
 #include "test_tinypng.h"
+#include "test_i2c_gpio1819.h"
 #include "test_wasm3.h"
 
 static const char *TAG = "main.cpp";
@@ -57,8 +58,11 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
+    // Test I2C on disabled JTAG GPIO 18/19
+    init_i2c_gpio1819();
+
     // Test WebAssembly
-    exec_wasm();
+    // exec_wasm();
 }
 
 void loop(void)
