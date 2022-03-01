@@ -28,12 +28,6 @@ font_render_t font_render;
 
 void setup(void)
 {
-    // Sharing the SPI bus among SD card and other SPI devices
-    // https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-reference/peripherals/sdspi_share.html
-    // first step C3DEV_LCD_CS high
-    pinMode(C3DEV_LCD_CS, OUTPUT);
-    digitalWrite(7, HIGH);
-
     // SW initialize
     pinMode(C3DEV_SW1, INPUT); // external pull up
     pinMode(M5STAMP_C3_SW, INPUT_PULLUP);
