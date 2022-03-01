@@ -51,7 +51,7 @@ m3ApiRawFunction(c3dev_pset)
     m3ApiGetArg(int32_t, y)
     m3ApiGetArg(int32_t, color)
 
-    ESP_LOGI(TAG, "pset(%d, %d, %d)", x, y, color);
+    // ESP_LOGI(TAG, "pset(%d, %d, %d)", x, y, color);
     tft.drawPixel(x, y, color);
 
     m3ApiSuccess();
