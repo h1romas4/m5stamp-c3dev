@@ -58,7 +58,7 @@ void setup(void)
     draw_freetype_string("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render);
 
     // Test SD card and PNG
-    draw_sdcard_png("/M5STACK/TEST10-0.PNG", 0, 0);
+    // draw_sdcard_png("/M5STACK/TEST10-0.PNG", 0, 0);
     // draw_sdcard_png("/M5STACK/TEST10-1.PNG", 80, 0);
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
