@@ -1,6 +1,8 @@
 #include "Arduino.h"
+#include "SPIFFS.h"
 #include "esp_log.h"
 #include "esp_err.h"
+#include "esp_heap_caps.h"
 #include <stdint.h>
 
 #include "wasm3.h"
@@ -9,27 +11,57 @@
 
 #include "c3dev_board.h"
 
-static const char *TAG = "test_wasm3.c";
+static const char *TAG = "test_wasm3.cpp";
 
+/**
+ * SPIFFS member
+ */
+fs::SPIFFSFS SPIFFS_WASM;
+
+// (import "env" "seed" (func $env.seed (type $t3)))
 m3ApiRawFunction(c3dev_random) {
-    m3ApiReturnType (int32_t)
-    m3ApiGetArg     (int32_t, max)
-    m3ApiReturn     (esp_random(/* max */));
+    m3ApiReturnType(float_t)       // 32bit
+    m3ApiReturn(esp_random());     // uint32_t */
+}
+
+// (import "env" "abort" (func $env.abort (type $t1)))
+m3ApiRawFunction(c3dev_abort)
+{
+    m3ApiGetArgMem(const char *, message)
+    m3ApiGetArgMem(const char *, fileName)
+    m3ApiGetArg(int32_t, lineNumber)
+    m3ApiGetArg(int32_t, columnNumber)
+
+    ESP_LOGE(TAG, "c3dev_abort: %s %s %d %d", message, fileName, lineNumber, columnNumber);
+
+    m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_delay) {
-    m3ApiGetArg     (int32_t, wait)
+    m3ApiGetArg(int32_t, wait)
+
     delay(wait);
+
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(c3dev_pset)
 {
-    m3ApiGetArg     (int32_t, x)
-    m3ApiGetArg     (int32_t, y)
-    m3ApiGetArg     (int32_t, color)
+    m3ApiGetArg(int32_t, x)
+    m3ApiGetArg(int32_t, y)
+    m3ApiGetArg(int32_t, color)
 
+    // ESP_LOGI(TAG, "pset(%d, %d, %d)", x, y, color);
     tft.drawPixel(x, y, color);
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(c3dev_draw_string)
+{
+    m3ApiGetArgMem(const char *, utf8_null_terminated_string)
+
+    ESP_LOGI(TAG, "%s", utf8_null_terminated_string);
 
     m3ApiSuccess();
 }
@@ -37,9 +69,11 @@ m3ApiRawFunction(c3dev_pset)
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
-    m3_LinkRawFunction(module, "c3dev", "random", "i(i)",  &c3dev_random);
+    m3_LinkRawFunction(module, "env", "seed", "F()",  &c3dev_random);
+    m3_LinkRawFunction(module, "env", "abort", "v(**ii)",  &c3dev_abort);
     m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
     m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset);
+    m3_LinkRawFunction(module, "c3dev", "drawString", "v(*)",  &c3dev_draw_string);
 
     return m3Err_none;
 }
@@ -47,6 +81,8 @@ M3Result link_c3dev(IM3Runtime runtime) {
 esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 {
     M3Result result = m3Err_none;
+
+    ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
 
     ESP_LOGI(TAG, "Loading WebAssembly...");
     IM3Environment env = m3_NewEnvironment();
@@ -89,7 +125,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     ESP_LOGI(TAG, "Running...");
-
     const char* i_argv[4] = { "80", "64", "64", "65535" };
     result = m3_CallArgv(circle, 4, i_argv);
     if (result) {
@@ -99,5 +134,36 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
 
     ESP_LOGI(TAG, "Executed.");
 
+    // wasm3/source/m3_function.c:86
+    // Guru Meditation Error: Core  0 panic'ed (Load access fault)
+    // m3_FreeModule(module);
+    // m3_FreeRuntime(runtime);
+
+    ESP_LOGI(TAG, "heap_caps_get_free_size: %d", heap_caps_get_free_size(MALLOC_CAP_8BIT));
+
     return ESP_OK;
+}
+
+void exec_wasm(void)
+{
+    SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
+
+    File wasm_file = SPIFFS_WASM.open("/app.wasm", "rb");
+    size_t wasm_size = wasm_file.size();
+
+    ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
+    // Read .wasm
+    uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
+    if(wasm_binary == nullptr) {
+        ESP_LOGE(TAG, "Memory alloc error");
+    }
+    if(wasm_file.read(wasm_binary, wasm_size) != wasm_size) {
+        ESP_LOGE(TAG, "SPIFFS read error");
+    }
+
+    wasm_file.close();
+    SPIFFS_WASM.end();
+
+    // Load and Run WebAssembly
+    load_wasm(wasm_binary, wasm_size);
 }

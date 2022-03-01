@@ -16,3 +16,4 @@
 #define M5STAMP_C3_SW 3
 
 extern Adafruit_ST7735 tft;
+extern SPIClass *spi;
