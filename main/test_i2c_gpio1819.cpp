@@ -14,10 +14,11 @@ QMP6988 qmp6988;
 void init_i2c_gpio1819(void)
 {
     // Disable JTAG (not working yet)
+    CLEAR_PERI_REG_MASK(USB_DEVICE_CONF0_REG, USB_DEVICE_USB_PAD_ENABLE);
     gpio_hal_iomux_func_sel(GPIO_PIN_MUX_REG[I2C_SDA], PIN_FUNC_GPIO);
     gpio_hal_iomux_func_sel(GPIO_PIN_MUX_REG[I2C_SCL], PIN_FUNC_GPIO);
-    pinMode(I2C_SDA, INPUT | OUTPUT);
-    pinMode(I2C_SCL, INPUT | OUTPUT);
+    pinMode(I2C_SDA, INPUT_PULLUP | OUTPUT);
+    pinMode(I2C_SCL, INPUT_PULLUP | OUTPUT);
     digitalWrite(I2C_SDA, LOW);
     digitalWrite(I2C_SCL, LOW);
 
