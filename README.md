@@ -149,8 +149,8 @@ Thanks for all the open source.
 |Name|Version|License|
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4`|BSD License|
-|[esp32-arduino](https://github.com/espressif/arduino-esp32)|2.0.x master (`50e9772`)|LGPL-2.1 License|
-|[M5EPD](https://github.com/m5stack/M5EPD)|0.1.x master(`bf4bd28`)|FreeType Part(The FreeType License)|
+|[esp32-arduino](https://github.com/espressif/arduino-esp32)|master (`4da1051`)|LGPL-2.1 License|
+|[M5EPD](https://github.com/m5stack/M5EPD)|master(`bf4bd28`)|FreeType Part(The FreeType License)|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.10.13`|BSD License|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT license|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
