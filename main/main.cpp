@@ -41,7 +41,9 @@ void setup(void)
     tft.setSPISpeed(C3DEV_SPI_CLOCK);
     tft.setRotation(1);
     tft.fillScreen(ST77XX_BLACK);
+    // If the color is inverted, set to 1.
     tft.invertDisplay(0);
+    // tft.invertDisplay(1);
 
     // Test FreeType
     init_freetype();
