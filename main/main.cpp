@@ -58,15 +58,39 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
-    // Test I2C on disabled JTAG GPIO 18/19
-    init_i2c_gpio1819();
-
     // Test WebAssembly
     // exec_wasm();
+
+    // Test I2C (UNITENV sensor) on disabled JTAG GPIO 18/19
+    tft.fillScreen(ST77XX_BLACK);
+    init_i2c_gpio1819();
+    draw_freetype_string("ENV.III SENSOR", 8, 24, ST77XX_RED, &font_render);
+    draw_freetype_string("温度:" , 8, 28 * 2, ST77XX_WHITE, &font_render);
+    draw_freetype_string("湿度:" , 8, 28 * 3, ST77XX_WHITE, &font_render);
+    draw_freetype_string("気圧:" , 8, 28 * 4, ST77XX_WHITE, &font_render);
 }
+
+/**
+ * UNITENV member
+ */
+unitenv_t unitenv;
+#define UNITENV_STRLEN 64
+char str_unitenv_tmp[UNITENV_STRLEN];
+char str_unitenv_hum[UNITENV_STRLEN];
+char str_unitenv_pressure[UNITENV_STRLEN];
 
 void loop(void)
 {
+    // Test I2C (UNITENV sensor)
+    get_i2c_unitenv_data(&unitenv);
+    snprintf(str_unitenv_tmp, UNITENV_STRLEN, "%2.1f 度", unitenv.tmp);
+    snprintf(str_unitenv_hum, UNITENV_STRLEN, "%2.1f %%", unitenv.hum);
+    snprintf(str_unitenv_pressure, UNITENV_STRLEN, "%0.2f hPa", unitenv.pressure);
+    draw_freetype_string(str_unitenv_tmp, 54, 28 * 2, ST77XX_WHITE, &font_render);
+    draw_freetype_string(str_unitenv_hum, 54, 28 * 3, ST77XX_WHITE, &font_render);
+    draw_freetype_string(str_unitenv_pressure, 54, 28 * 4, ST77XX_WHITE, &font_render);
+
+    // Test SW
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
     delay(1000);
 }
