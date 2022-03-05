@@ -125,6 +125,16 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 
 ### Note
 
+- If the LCD color is inverted.
+
+`main/main.cpp`
+
+```c
+    // If the color is inverted, set to 1.
+    tft.invertDisplay(0);
+    // tft.invertDisplay(1);
+```
+
 - Create SPIFFS parteation file
 
 ```
