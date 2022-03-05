@@ -80,6 +80,7 @@ void setup(void)
     tft.setSPISpeed(C3DEV_SPI_CLOCK);
     tft.setRotation(1);
     tft.fillScreen(ST77XX_BLACK);
+    tft.invertDisplay(0);
 
     // Test FreeType
     init_freetype();
