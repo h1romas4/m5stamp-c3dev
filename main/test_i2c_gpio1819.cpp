@@ -22,6 +22,9 @@ void init_i2c_gpio1819(void)
     digitalWrite(I2C_SDA, LOW);
     digitalWrite(I2C_SCL, LOW);
 
+    // https://community.m5stack.com/topic/3715/m5stamp-c3-i2c-interface
+    // But I'm still unable to read from the I2C device. I've got other stuff working on the board
+    // (like a fan-control, and a water pump) but I2C and Servos are steadfastly refusing to function.
     Wire.begin(I2C_SDA, I2C_SCL);
     if(!qmp6988.init()) {
         ESP_LOGE(TAG, "Could not find a valid qmp6988 sensor");
