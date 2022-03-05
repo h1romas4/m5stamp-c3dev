@@ -59,9 +59,10 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
     // Test WebAssembly
-    // exec_wasm();
+    exec_wasm();
 
     // Test I2C (UNITENV sensor) on disabled JTAG GPIO 18/19
+    delay(500);
     tft.fillScreen(ST77XX_BLACK);
     init_i2c_gpio1819();
     draw_freetype_string("ENV.III SENSOR", 8, 24, ST77XX_RED, &font_render);
