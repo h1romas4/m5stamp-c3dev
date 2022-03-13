@@ -117,6 +117,17 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
+    ESP_LOGI(TAG, "Running...");
+
+    // TODO: Workaround: Perform GC initialization of AssemblyScript.
+    IM3Function init;
+    result = m3_FindFunction(&init, runtime, "init");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
+        return ESP_FAIL;
+    }
+    m3_Call(init, 0, nullptr);
+
     IM3Function circle;
     result = m3_FindFunction(&circle, runtime, "circle");
     if (result) {
@@ -124,7 +135,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    ESP_LOGI(TAG, "Running...");
     const char* i_argv[4] = { "80", "64", "64", "65535" };
     result = m3_CallArgv(circle, 4, i_argv);
     if (result) {
