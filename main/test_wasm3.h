@@ -1,3 +1,4 @@
 #include <stdint.h>
 
-void exec_wasm(void);
+esp_err_t init_wasm(void);
+esp_err_t tick_wasm(void);

@@ -26,6 +26,11 @@ Adafruit_ST7735 tft = Adafruit_ST7735(spi, C3DEV_LCD_CS, C3DEV_LCD_DC, C3DEV_LCD
  */
 font_render_t font_render;
 
+/**
+ * Wasm3 member
+ */
+boolean enable_wasm = false;
+
 void setup(void)
 {
     // SW initialize
@@ -48,11 +53,11 @@ void setup(void)
     // Test FreeType
     init_freetype();
     font_render = create_freetype_render(/* font size */ 20, /* font cache */ 64);
-
     draw_freetype_string("M5Stamp C3", 10, 28, ST77XX_RED, &font_render);
     draw_freetype_string("Development", 10, 28 * 2, ST77XX_WHITE, &font_render);
     draw_freetype_string("Board", 10, 28 * 3, ST77XX_WHITE, &font_render);
     draw_freetype_string("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render);
+    delay(1000);
 
     // Test SD card and PNG
     // draw_sdcard_png("/M5STACK/TEST10-0.PNG", 0, 0);
@@ -61,11 +66,14 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
     // Test WebAssembly
-    exec_wasm();
+    if(init_wasm() == ESP_OK) enable_wasm = true;
 }
 
 void loop(void)
 {
+    // Test Switch
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+    // Test WebAssembly
+    if(enable_wasm) tick_wasm();
     delay(1000);
 }
