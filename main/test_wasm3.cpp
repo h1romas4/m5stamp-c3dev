@@ -37,19 +37,29 @@ fs::SPIFFSFS SPIFFS_WASM;
  */
 font_render_t wasm_font_render;
 
-void as_unpin_ptr(uint32_t wasm_prt)
+void as_gc_unpin_ptr(uint32_t wasm_prt)
 {
     M3Result result = m3Err_none;
 
     char str_32bit[11];
 
     sprintf(str_32bit, "%d", wasm_prt);
-    ESP_LOGI(TAG, "as_unpin_ptr: %s", str_32bit);
+    ESP_LOGI(TAG, "as_gc_unpin_ptr: %s", str_32bit);
 
     const char* i_argv[1] = { str_32bit };
     result = m3_CallArgv(wasm3_func_unpin, 1, i_argv);
     if (result) {
-        ESP_LOGE(TAG, "m3_Call:as_unpin_ptr: %s", result);
+        ESP_LOGE(TAG, "m3_Call:as_gc_unpin_ptr: %s", result);
+    }
+}
+
+void as_gc_collect()
+{
+    M3Result result = m3Err_none;
+
+    result = m3_Call(wasm3_func_collect, 0, nullptr);
+    if (result) {
+        ESP_LOGE(TAG, "m3_Call:as_gc_collect: %s", result);
     }
 }
 
@@ -69,7 +79,7 @@ m3ApiRawFunction(c3dev_abort)
     m3ApiGetArg(int32_t, lineNumber)
     m3ApiGetArg(int32_t, columnNumber)
 
-    ESP_LOGE(TAG, "c3dev_abort: %s %s %d %d", message, fileName, lineNumber, columnNumber);
+    ESP_LOGE(TAG, "c3dev_abort: %ls %ls %d %d", message, fileName, lineNumber, columnNumber);
 
     m3ApiSuccess();
 }
@@ -110,7 +120,7 @@ m3ApiRawFunction(c3dev_log)
     m3ApiGetArgMem(char *, utf8_null_terminated_string)
 
     ESP_LOGI(TAG, "c3dev_log: %s", utf8_null_terminated_string);
-    as_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
+    // as_gc_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
 
     m3ApiSuccess();
 }
@@ -124,7 +134,7 @@ m3ApiRawFunction(c3dev_draw_string)
 
     draw_freetype_string(utf8_null_terminated_string, x, y + FREETYPE_FONT_SIZE, color, &wasm_font_render);
     ESP_LOGI(TAG, "draw_freetype_string(%d, %d, %d, %s)", x, y, color, utf8_null_terminated_string);
-    as_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
+    // as_gc_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
 
     m3ApiSuccess();
 }
@@ -277,6 +287,9 @@ esp_err_t tick_wasm(void)
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
+
+    // GC for AssemblyScript --runtime minimal
+    as_gc_collect();
 
     return ESP_OK;
 }
