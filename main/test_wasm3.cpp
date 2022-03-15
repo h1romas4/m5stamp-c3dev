@@ -37,6 +37,11 @@ fs::SPIFFSFS SPIFFS_WASM;
  */
 font_render_t wasm_font_render;
 
+/**
+ * as_gc_unpin_ptr
+ *
+ * ex. as_gc_unpin_ptr(m3ApiPtrToOffset(string_ptr));
+ */
 void as_gc_unpin_ptr(uint32_t wasm_prt)
 {
     M3Result result = m3Err_none;
@@ -53,7 +58,10 @@ void as_gc_unpin_ptr(uint32_t wasm_prt)
     }
 }
 
-void as_gc_collect()
+/**
+ * as_gc_collect.
+ */
+void as_gc_collect(void)
 {
     M3Result result = m3Err_none;
 
@@ -104,7 +112,7 @@ m3ApiRawFunction(c3dev_delay) {
     m3ApiSuccess();
 }
 
-m3ApiRawFunction(c3dev_pset)
+m3ApiRawFunction(c3dev_draw_pixel)
 {
     m3ApiGetArg(int32_t, x)
     m3ApiGetArg(int32_t, y)
@@ -115,12 +123,24 @@ m3ApiRawFunction(c3dev_pset)
     m3ApiSuccess();
 }
 
+m3ApiRawFunction(c3dev_draw_line)
+{
+    m3ApiGetArg(int32_t, x0)
+    m3ApiGetArg(int32_t, y0)
+    m3ApiGetArg(int32_t, x1)
+    m3ApiGetArg(int32_t, y1)
+    m3ApiGetArg(int32_t, color)
+
+    tft.drawLine(x0, y0, x1, y1, color);
+
+    m3ApiSuccess();
+}
+
 m3ApiRawFunction(c3dev_log)
 {
     m3ApiGetArgMem(char *, utf8_null_terminated_string)
 
     ESP_LOGI(TAG, "c3dev_log: %s", utf8_null_terminated_string);
-    // as_gc_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
 
     m3ApiSuccess();
 }
@@ -134,7 +154,6 @@ m3ApiRawFunction(c3dev_draw_string)
 
     draw_freetype_string(utf8_null_terminated_string, x, y + FREETYPE_FONT_SIZE, color, &wasm_font_render);
     ESP_LOGI(TAG, "draw_freetype_string(%d, %d, %d, %s)", x, y, color, utf8_null_terminated_string);
-    // as_gc_unpin_ptr(m3ApiPtrToOffset(utf8_null_terminated_string));
 
     m3ApiSuccess();
 }
@@ -146,7 +165,8 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "env", "abort", "v(**ii)",  &c3dev_abort);
     m3_LinkRawFunction(module, "c3dev", "now", "I()",  &c3dev_now);
     m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
-    m3_LinkRawFunction(module, "c3dev", "pset", "v(iii)",  &c3dev_pset);
+    m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
+    m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
@@ -288,7 +308,7 @@ esp_err_t tick_wasm(void)
         return ESP_FAIL;
     }
 
-    // GC for AssemblyScript --runtime minimal
+    // GC by tick for AssemblyScript --runtime minimal
     as_gc_collect();
 
     return ESP_OK;

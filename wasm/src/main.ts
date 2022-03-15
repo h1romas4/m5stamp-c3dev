@@ -12,14 +12,14 @@ export function clock(x: u32, y: u32, r: u32, color: u16): void {
     let err = 0;
 
     while(xx >= yy) {
-        c3dev.pset(x + xx, y + yy, color);
-        c3dev.pset(x + yy, y + xx, color);
-        c3dev.pset(x - yy, y + xx, color);
-        c3dev.pset(x - xx, y + yy, color);
-        c3dev.pset(x - xx, y - yy, color);
-        c3dev.pset(x - yy, y - xx, color);
-        c3dev.pset(x + yy, y - xx, color);
-        c3dev.pset(x + xx, y - yy, color);
+        c3dev.draw_pixel(x + xx, y + yy, color);
+        c3dev.draw_pixel(x + yy, y + xx, color);
+        c3dev.draw_pixel(x - yy, y + xx, color);
+        c3dev.draw_pixel(x - xx, y + yy, color);
+        c3dev.draw_pixel(x - xx, y - yy, color);
+        c3dev.draw_pixel(x - yy, y - xx, color);
+        c3dev.draw_pixel(x + yy, y - xx, color);
+        c3dev.draw_pixel(x + xx, y - yy, color);
         if(err <= 0) {
             yy++;
             err += 2 * yy + 1;
