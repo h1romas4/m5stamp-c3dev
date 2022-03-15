@@ -25,7 +25,7 @@ IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
-#define FREETYPE_FONT_SIZE 16
+#define FREETYPE_FONT_SIZE 14
 
 /**
  * SPIFFS member
@@ -153,7 +153,7 @@ m3ApiRawFunction(c3dev_draw_string)
     m3ApiGetArgMem(char *, utf8_null_terminated_string)
 
     draw_freetype_string(utf8_null_terminated_string, x, y + FREETYPE_FONT_SIZE, color, &wasm_font_render);
-    ESP_LOGI(TAG, "draw_freetype_string(%d, %d, %d, %s)", x, y, color, utf8_null_terminated_string);
+    // ESP_LOGI(TAG, "draw_freetype_string(%d, %d, %d, %s)", x, y, color, utf8_null_terminated_string);
 
     m3ApiSuccess();
 }
@@ -246,9 +246,9 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
     }
-    // export function clock(x: u32, y: u32, r: u32, color: u16): void;
-    const char* i_argv[4] = { "80", "64", "64", "65535" };
-    result = m3_CallArgv(clock, 4, i_argv);
+    // export function clock(x: u32, y: u32, r: u32): void;
+    const char* i_argv[4] = { "80", "64", "64" };
+    result = m3_CallArgv(clock, 3, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;

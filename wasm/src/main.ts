@@ -6,10 +6,11 @@ export function init(): void {
     (u16)(Math.random() * 65535);
 }
 
-export function clock(x: u32, y: u32, r: u32, color: u16): void {
+export function clock(x: u32, y: u32, r: u32): void {
     let xx: u32 = r;
     let yy: u32 = 0;
     let err = 0;
+    const color = c3dev.COLOR.RED;
 
     while(xx >= yy) {
         c3dev.draw_pixel(x + xx, y + yy, color);
