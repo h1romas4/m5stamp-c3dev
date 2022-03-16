@@ -28,12 +28,14 @@ let wasmExports;
  */
 (function() {
     canvas = document.getElementById('screen');
-    canvas.setAttribute('width', CANVAS_WIDTH);
-    canvas.setAttribute('height', CANVAS_HEIGHT);
+    canvas.setAttribute('width', CANVAS_WIDTH * 2);
+    canvas.setAttribute('height', CANVAS_HEIGHT * 2);
     canvas.style.width = CANVAS_WIDTH * 2 + "px";
     canvas.style.heigth = CANVAS_HEIGHT * 2 + "px";
     canvasContext = canvas.getContext('2d');
+    canvasContext.scale(2, 2);
     canvasContext.font = `${CANVAS_FONT_SIZE}px sans-serif`;
+    canvasContext.imageSmoothingEnabled = true;
 })();
 
 /**
@@ -69,8 +71,10 @@ function createImports() {
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x, y, 1, 1);
         },
-        'draw_string': (i0, i1, i2, i3) => {
-            console.log(`c3dev.draw_string: ${i0}, ${i1}, ${i2}, ${i3}`);
+        'draw_string': (x, y, color, string) => {
+            console.log(`c3dev.draw_string: ${x}, ${y}, ${color}, ${string}`);
+            canvasContext.fillStyle = convertRGB565toStyle(color);
+            canvasContext.fillText(decodeUTF8(string), x, y + CANVAS_FONT_SIZE);
         },
         'now': () => {
             return BigInt(Date.now());
@@ -95,6 +99,18 @@ function convertRGB565toStyle(rgb565) {
         `${(Number(b8).toString(16)).padStart(2, '0')}`;
 }
 
+function decodeUTF8(wasmPtr) {
+    const memory = wasmExports.memory.buffer;
+    // https://www.assemblyscript.org/memory.html#internals
+    // TODO: internal: #rtSize
+    const rtSize = new Uint32Array(memory, wasmPtr - 4, 1) - /* null terminated */ 1;
+    // ArrayBuffer
+    const utf8 = new Uint8Array(memory, wasmPtr, rtSize);
+    var decoder = new TextDecoder('utf-8');
+
+    return decoder.decode(utf8);
+}
+
 /**
  * Main
  */
@@ -102,5 +118,8 @@ function convertRGB565toStyle(rgb565) {
     await loadWasm();
     wasmExports.clock(80, 64, 64);
     wasmExports.init();
-    wasmExports.tick();
+    // setInterval(() => {
+        wasmExports.tick();
+        wasmExports.__collect() // clean up all garbage
+    // }, 500);
 })();
