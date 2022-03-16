@@ -35,6 +35,7 @@ let wasmExports;
     canvasContext = canvas.getContext('2d');
     canvasContext.scale(2, 2);
     canvasContext.font = `${CANVAS_FONT_SIZE}px sans-serif`;
+    canvasContext.lineWidth = 1;
     canvasContext.imageSmoothingEnabled = true;
 })();
 
@@ -72,9 +73,15 @@ function createImports() {
             canvasContext.fillRect(x, y, 1, 1);
         },
         'draw_string': (x, y, color, string) => {
-            console.log(`c3dev.draw_string: ${x}, ${y}, ${color}, ${string}`);
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillText(decodeUTF8(string), x, y + CANVAS_FONT_SIZE);
+        },
+        'draw_line': (x0, y0, x1, y1, color) => {
+            canvasContext.strokeStyle = convertRGB565toStyle(color);
+            canvasContext.beginPath();
+            canvasContext.moveTo(x0, y0);
+            canvasContext.lineTo(x1, y1);
+            canvasContext.stroke();
         },
         'now': () => {
             return BigInt(Date.now());

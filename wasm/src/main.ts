@@ -34,6 +34,8 @@ export function clock(x: u32, y: u32, r: u32): void {
 export function tick(): void {
     const now: Date = new Date(c3dev.now());
 
+    c3dev.draw_line(0, 0, 160, 128, c3dev.COLOR.RED);
+
     c3dev.drawString(28, 16 * 3, c3dev.COLOR.WHITE, now.toDateString());
     c3dev.drawString(52, 16 * 4, c3dev.COLOR.WHITE, now.toTimeString());
 }
