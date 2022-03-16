@@ -10,8 +10,15 @@ export function clock(x: u32, y: u32, r: u32): void {
     let xx: u32 = r;
     let yy: u32 = 0;
     let err = 0;
-    const color = c3dev.COLOR.RED;
 
+    for(let angle: f32 = 0; angle < 360; angle++) {
+        let rad: f32 = (angle / 180) * Math.PI;
+        let tx: u32 = x + <i32>(Math.cos(rad) * <f32>r);
+        let ty: u32 = y + <i32>(Math.sin(rad) * <f32>r);
+        c3dev.draw_line(x, y, tx, ty, <u32>((angle / 360) * 0xffff));
+    }
+
+    const color = c3dev.COLOR.RED;
     while(xx >= yy) {
         c3dev.draw_pixel(x + xx, y + yy, color);
         c3dev.draw_pixel(x + yy, y + xx, color);
@@ -33,8 +40,6 @@ export function clock(x: u32, y: u32, r: u32): void {
 
 export function tick(): void {
     const now: Date = new Date(c3dev.now());
-
-    c3dev.draw_line(0, 0, 160, 128, c3dev.COLOR.RED);
 
     c3dev.drawString(28, 16 * 3, c3dev.COLOR.WHITE, now.toDateString());
     c3dev.drawString(52, 16 * 4, c3dev.COLOR.WHITE, now.toTimeString());
