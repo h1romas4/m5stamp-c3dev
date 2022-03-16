@@ -13,8 +13,12 @@ body {
     background-color: black;
 }
 
-canvas {
+.lcd {
+    border: 6px solid white;
+}
+
+.lcd #screen {
     display: block;
     background-color: black;
-    border: 4px solid white;
+    border: 8px solid black;
 }
