@@ -66,15 +66,14 @@ function createImports() {
     };
     imports['c3dev'] = {
         'draw_pixel': (x, y, color) => {
-            canvasContext.fillStyle = 'red';
+            canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x, y, 1, 1);
-            console.log(`c3dev.draw_pixel: ${x}, ${y}, ${color}`);
         },
         'draw_string': (i0, i1, i2, i3) => {
             console.log(`c3dev.draw_string: ${i0}, ${i1}, ${i2}, ${i3}`);
         },
         'now': () => {
-            return Date.now();
+            return BigInt(Date.now());
         }
     };
 
@@ -82,16 +81,18 @@ function createImports() {
 }
 
 /**
- * Convert RGB565 to 888
+ * Convert RGB565 to Canvas style
  * @param {string} rgb565
  */
-function convertRGB565to888String(rgb565) {
-    const r5 = rgb565 & 0b1111100000000000 >> 11;
-    const g6 = rgb565 & 0b0000011111100000 >> 5;
-    const b6 = rgb565 & 0b0000000000011111;
-    const r8 = (r5 * 255 + 15) / 31;
-    const g8 = (g6 * 255 + 31) / 63;
-    const b8 = (b5 * 255 + 15) / 31;
+function convertRGB565toStyle(rgb565) {
+    const r8 = (rgb565 & 0xF800) >> 8;
+    const g8 = (rgb565 & 0x07E0) >> 3;
+    const b8 = (rgb565 & 0x001F) << 3;
+
+    return `#` +
+        `${(Number(r8).toString(16)).padStart(2, '0')}` +
+        `${(Number(g8).toString(16)).padStart(2, '0')}` +
+        `${(Number(b8).toString(16)).padStart(2, '0')}`;
 }
 
 /**
@@ -100,4 +101,6 @@ function convertRGB565to888String(rgb565) {
 (async function() {
     await loadWasm();
     wasmExports.clock(80, 64, 64);
+    wasmExports.init();
+    wasmExports.tick();
 })();
