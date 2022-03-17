@@ -73,20 +73,20 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
-    // Test NVS and Wifi
-    if(preferences.begin("wifi", true)) {
+    // Test NVS and Wifi (Push SW1)
+    if(digitalRead(C3DEV_SW1) == 0 && preferences.begin("wifi", true)) {
         String ssid = preferences.getString("ssid");
         String passwd = preferences.getString("passwd");
-        String ntp1 = preferences.getString("ntp1");
-        String ntp2 = preferences.getString("ntp2");
-        String ntp3 = preferences.getString("ntp3");
 
-        ESP_LOGI(TAG, "connect to %s", ssid);
+        ESP_LOGI(TAG, "Connect to %s", ssid);
         WiFi.begin(ssid.c_str(), passwd.c_str());
-        configTime(9 * 3600L, 0, ntp1.c_str(), ntp2.c_str(), ntp3.c_str());
-        ESP_LOGI(TAG, "configured time from NTP");
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(200);
+        }
+        ESP_LOGI(TAG, "Connected!");
+        configTime(9 * 3600L, 0, "ntp1.jst.mfeed.ad.jp", "ntp2.jst.mfeed.ad.jp", "ntp3.jst.mfeed.ad.jp");
+        ESP_LOGI(TAG, "Configured time from NTP");
     }
-
 
     // Test WebAssembly
     if(init_wasm() == ESP_OK) enable_wasm = true;

@@ -103,14 +103,13 @@ Setup WiFi
 
 1. Change WiFi Setting
 
-`nvs_partition.csv`: Set own `[ssid]`, `[password]`, `[ntp server]`
+`nvs_partition.csv`: Set own `[ssid]`, `[password]`
 
 ```
 key,type,encoding,value
 wifi,namespace,,
 ssid,data,string,[ssid]
 passwd,data,string,[password]
-ntp,data,string,[ntp server]
 ```
 
 2. Create NVS Partation file

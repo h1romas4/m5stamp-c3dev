@@ -2,6 +2,3 @@ key,type,encoding,value
 wifi,namespace,,
 ssid,data,string,[ssid]
 passwd,data,string,[password]
-ntp1,data,string,[ntp1 server]
-ntp2,data,string,[ntp2 server]
-ntp3,data,string,[ntp3 server]

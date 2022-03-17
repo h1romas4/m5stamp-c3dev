@@ -98,7 +98,7 @@ m3ApiRawFunction(c3dev_now)
 
     struct timeval tv_now;
     gettimeofday(&tv_now, NULL);
-    int64_t time_ms = (int64_t)tv_now.tv_sec * 1000L;
+    int64_t time_ms = (int64_t)tv_now.tv_sec * 1000L + /* UTC+9 */ 3600000 * 9;
     ESP_LOGI(TAG, "c3dev_now: %d", time_ms);
 
     m3ApiReturn(time_ms);
