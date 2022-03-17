@@ -1,4 +1,6 @@
 #include "Arduino.h"
+#include "WiFi.h"
+#include "Preferences.h"
 #include "esp_log.h"
 #include "SPI.h"
 #include "Adafruit_GFX.h"
@@ -15,6 +17,12 @@ static const char *TAG = "main.cpp";
  * SPI member
  */
 SPIClass *spi = &SPI;
+
+
+/**
+ * NVS member
+ */
+Preferences preferences;
 
 /**
  * LCD member
@@ -64,6 +72,21 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-1.PNG", 80, 0);
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
+
+    // Test NVS and Wifi
+    if(preferences.begin("wifi", true)) {
+        String ssid = preferences.getString("ssid");
+        String passwd = preferences.getString("passwd");
+        String ntp1 = preferences.getString("ntp1");
+        String ntp2 = preferences.getString("ntp2");
+        String ntp3 = preferences.getString("ntp3");
+
+        ESP_LOGI(TAG, "connect to %s", ssid);
+        WiFi.begin(ssid.c_str(), passwd.c_str());
+        configTime(9 * 3600L, 0, ntp1.c_str(), ntp2.c_str(), ntp3.c_str());
+        ESP_LOGI(TAG, "configured time from NTP");
+    }
+
 
     // Test WebAssembly
     if(init_wasm() == ESP_OK) enable_wasm = true;
