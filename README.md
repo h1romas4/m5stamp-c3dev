@@ -99,6 +99,32 @@ Write WebAssembly(.wasm) to SPIFFS
 parttool.py --port "/dev/ttyACM0" write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
+Setup WiFi
+
+1. Change WiFi Setting
+
+`nvs_partition.csv`: Set own `[ssid]`, `[password]`, `[ntp server]`
+
+```
+key,type,encoding,value
+wifi,namespace,,
+ssid,data,string,[ssid]
+passwd,data,string,[password]
+ntp,data,string,[ntp server]
+```
+
+2. Create NVS Partation file
+
+```
+python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_gen.py generate nvs_partition.csv nvs_partition.bin 0x6000
+```
+
+3. Write NVS Partation
+
+```
+esptool.py write_flash 0x9000 nvs_partition.bin
+```
+
 Restart M5Stamp C3
 
 ```

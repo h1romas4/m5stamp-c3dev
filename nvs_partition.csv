@@ -1,0 +1,5 @@
+key,type,encoding,value
+wifi,namespace,,
+ssid,data,string,[ssid]
+passwd,data,string,[password]
+ntp,data,string,[ntp server]
