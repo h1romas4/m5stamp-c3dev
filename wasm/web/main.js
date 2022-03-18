@@ -83,6 +83,9 @@ function createImports() {
             canvasContext.lineTo(x1, y1);
             canvasContext.stroke();
         },
+        'log': (string) => {
+            console.log(decodeUTF8(string));
+        },
         'now': () => {
             return BigInt(Date.now());
         }
