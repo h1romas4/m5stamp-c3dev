@@ -247,7 +247,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
     // export function clock(x: u32, y: u32, r: u32): void;
-    const char* i_argv[4] = { "80", "64", "64" };
+    const char* i_argv[4] = { "80", "64", "63" };
     result = m3_CallArgv(clock, 3, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
