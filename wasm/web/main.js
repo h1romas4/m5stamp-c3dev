@@ -126,7 +126,7 @@ function decodeUTF8(wasmPtr) {
  */
 (async function() {
     await loadWasm();
-    wasmExports.clock(80, 64, 64);
+    wasmExports.clock(80, 64, 63);
     wasmExports.init();
     // setInterval(() => {
         wasmExports.tick();
