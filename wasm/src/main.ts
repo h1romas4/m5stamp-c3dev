@@ -18,6 +18,10 @@ class AnalogClock {
     private rminute: f32;
     private rsecond: f32;
 
+    private envTmpRaito: i32;
+    private envHumRaito: i32;
+    private envPressureRaito: i32;
+
     constructor(cx: u32, cy: u32, cr:u32) {
         this.cx = cx;
         this.cy = cy;
@@ -60,7 +64,29 @@ class AnalogClock {
             this.drawHand(this.rhour, <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.BLACK);
             this.rhour = nowHands[2];
         }
-        this.drawHand(nowHands[2], <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.GREEN);
+        this.drawHand(nowHands[2], <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.ORANGE);
+
+        const tmp = c3dev.get_env_tmp();
+        const tmpRaito = <i32>Math.round((tmp + 20) * 1.2);
+        if(tmpRaito != this.envTmpRaito) {
+            this.drawArcMeter(60, -60, <f32>tmpRaito, c3dev.COLOR.RED, c3dev.COLOR.BLUE);
+            this.envTmpRaito = tmpRaito;
+            c3dev.drawString(136, 116, c3dev.COLOR.RED, `${tmp}`.slice(0, 4) + "C");
+        }
+        const hum = c3dev.get_env_hum();
+        const humRaito = <i32>Math.round(hum);
+        if(humRaito != this.envHumRaito) {
+            this.drawArcMeter(120, 180, <f32>humRaito, c3dev.COLOR.MAGENTA, c3dev.COLOR.BLUE);
+            this.envHumRaito = humRaito;
+            c3dev.drawString(0, 116, c3dev.COLOR.MAGENTA, `${hum}`.slice(0, 4) + "%");
+        }
+        const pressure = c3dev.get_env_pressure();
+        const pressureRaito = <i32>Math.round(pressure / 20);
+        if(pressureRaito != this.envPressureRaito) {
+            this.drawArcMeter(180, 240, <f32>pressureRaito, c3dev.COLOR.GREEN, c3dev.COLOR.BLUE);
+            this.envPressureRaito = pressureRaito;
+            c3dev.drawString(0, 0, c3dev.COLOR.GREEN, `${pressure}`.slice(0, 5) + "hP");
+        }
     }
 
     drawHand(radian: f32, length: f32, color: c3dev.COLOR): void {
@@ -68,6 +94,34 @@ class AnalogClock {
         const sin = Math.sin(radian);
 
         line(this.cx + <i32>(cos * 4), this.cy + <i32>(sin * 4), this.cx + <i32>(cos * length), this.cy + <i32>(sin * length), color);
+    }
+
+    drawArcMeter(sangle: f32, eangle: f32, ratio: f32, fc: c3dev.COLOR, bc: c3dev.COLOR): void {
+        if(ratio > 100.0) {
+            ratio = 100.0;
+        }
+        let start = sangle;
+        let stop = eangle;
+        if(sangle < eangle) {
+            start = eangle;
+            stop = sangle;
+        }
+        let step: f32 = (100.0 / (start - stop)) / 10;
+
+        let sraito: f32 = 0.0;
+        for(let angle: f32 = start; angle > stop; angle -= 0.1) {
+            const rad: f32 = (angle / 180) * Math.PI;
+            const sx: u32 = this.cx + <i32>(Math.cos(rad) * (<f32>this.cr + 10));
+            const sy: u32 = this.cy + <i32>(Math.sin(rad) * (<f32>this.cr + 10));
+            const tx: u32 = this.cx + <i32>(Math.cos(rad) * (<f32>this.cr + 8));
+            const ty: u32 = this.cy + <i32>(Math.sin(rad) * (<f32>this.cr + 8));
+            let color = fc;
+            if(sraito > ratio) {
+                color = bc;
+            }
+            line(sx, sy, tx, ty, color);
+            sraito += step;
+        }
     }
 
     calcHands(date: Date): Float32Array {

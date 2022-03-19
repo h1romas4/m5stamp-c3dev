@@ -11,6 +11,7 @@
 
 #include "c3dev_board.h"
 #include "test_freetype.h"
+#include "test_i2c_gpio1819.h"
 
 static const char *TAG = "test_wasm3.cpp";
 
@@ -25,7 +26,7 @@ IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
-#define FREETYPE_FONT_SIZE 14
+#define FREETYPE_FONT_SIZE 9
 
 /**
  * SPIFFS member
@@ -36,6 +37,11 @@ fs::SPIFFSFS SPIFFS_WASM;
  * FreeType member
  */
 font_render_t wasm_font_render;
+
+/**
+ * Unit ENV III member
+ */
+unitenv_t unitenv;
 
 /**
  * as_gc_unpin_ptr
@@ -158,6 +164,21 @@ m3ApiRawFunction(c3dev_draw_string)
     m3ApiSuccess();
 }
 
+m3ApiRawFunction(c3dev_get_env_tmp) {
+    m3ApiReturnType(float_t)       // 32bit
+    m3ApiReturn(unitenv.tmp);
+}
+
+m3ApiRawFunction(c3dev_get_env_hum) {
+    m3ApiReturnType(float_t)
+    m3ApiReturn(unitenv.hum);
+}
+
+m3ApiRawFunction(c3dev_get_env_pressure) {
+    m3ApiReturnType(float_t)
+    m3ApiReturn(unitenv.pressure);
+}
+
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
@@ -168,6 +189,9 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
     m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);
+    m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
+    m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);
+    m3_LinkRawFunction(module, "c3dev", "get_env_pressure", "f()",  &c3dev_get_env_pressure);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
     return m3Err_none;
@@ -301,6 +325,9 @@ esp_err_t init_wasm(void)
 esp_err_t tick_wasm(void)
 {
     M3Result result = m3Err_none;
+
+    // Get Unit ENV III date
+    get_i2c_unitenv_data(&unitenv);
 
     result = m3_Call(wasm3_func_tick, 0, nullptr);
     if (result) {

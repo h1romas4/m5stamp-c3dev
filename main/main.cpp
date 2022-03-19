@@ -37,43 +37,6 @@ font_render_t font_render_20px;
 font_render_t font_render_16px;
 
 /**
- * UNITENV member
- */
-#define UNITENV_STRLEN 64
-
-unitenv_t unitenv;
-typedef struct {
-    char tmp[UNITENV_STRLEN];
-    char hum[UNITENV_STRLEN];
-    char pressure[UNITENV_STRLEN];
-} unitenv_srt_t;
-unitenv_srt_t unitenv_before;
-unitenv_srt_t unitenv_now;
-
-void draw_unitenv(void)
-{
-    get_i2c_unitenv_data(&unitenv);
-    snprintf(unitenv_now.tmp, UNITENV_STRLEN, "%2.1f 度", unitenv.tmp);
-    snprintf(unitenv_now.hum, UNITENV_STRLEN, "%2.1f %%", unitenv.hum);
-    snprintf(unitenv_now.pressure, UNITENV_STRLEN, "%0.2f hPa", unitenv.pressure);
-    if(strncmp(unitenv_now.tmp, unitenv_before.tmp, UNITENV_STRLEN) != 0) {
-        tft.fillRect(54, 28 * 2 - 15, 106, 16, ST77XX_BLACK);
-        draw_freetype_string(unitenv_now.tmp, 54, 28 * 2, ST77XX_WHITE, &font_render_16px);
-        strncpy(unitenv_before.tmp, unitenv_now.tmp, UNITENV_STRLEN);
-    }
-    if(strncmp(unitenv_now.hum, unitenv_before.hum, UNITENV_STRLEN) != 0) {
-        tft.fillRect(54, 28 * 3 - 15, 106, 16, ST77XX_BLACK);
-        draw_freetype_string(unitenv_now.hum, 54, 28 * 3, ST77XX_WHITE, &font_render_16px);
-        strncpy(unitenv_before.hum, unitenv_now.hum, UNITENV_STRLEN);
-    }
-    if(strncmp(unitenv_now.pressure, unitenv_before.pressure, UNITENV_STRLEN) != 0) {
-        tft.fillRect(54, 28 * 4 - 15, 106, 16, ST77XX_BLACK);
-        draw_freetype_string(unitenv_now.pressure, 54, 28 * 4, ST77XX_WHITE, &font_render_16px);
-        strncpy(unitenv_before.pressure, unitenv_now.pressure, UNITENV_STRLEN);
-    }
-}
-
-/**
  * Wasm3 member
  */
 boolean enable_wasm = false;
@@ -91,7 +54,7 @@ void setup(void)
     // LCD initialize
     tft.initR(INITR_BLACKTAB);
     tft.setSPISpeed(C3DEV_SPI_CLOCK);
-    tft.setRotation(1);
+    tft.setRotation(3);
     tft.fillScreen(ST77XX_BLACK);
     // If the color is inverted, set to 1.
     tft.invertDisplay(0);
@@ -124,8 +87,25 @@ void setup(void)
         }
         ESP_LOGI(TAG, "Connected!");
         configTime(9 * 3600L, 0, "ntp1.jst.mfeed.ad.jp", "ntp2.jst.mfeed.ad.jp", "ntp3.jst.mfeed.ad.jp");
+        // Wait Time Sync
+        struct tm timeInfo;
+        while(true) {
+            getLocalTime(&timeInfo);
+            if(timeInfo.tm_year > 0) {
+                break;
+            }
+            delay(500);
+            ESP_LOGI(TAG, "waiting time sync..(%d)", timeInfo.tm_year);
+        }
         ESP_LOGI(TAG, "Configured time from NTP");
+        WiFi.disconnect();
+        // not enough memory..
+        ESP_LOGI(TAG, "Restart ESP32C3");
+        esp_restart();
     }
+
+    // Test I2C UnitENV III
+    init_i2c_gpio1819();
 
     // Test WebAssembly
     if(init_wasm() == ESP_OK) enable_wasm = true;
@@ -135,6 +115,10 @@ void loop(void)
 {
     // Test Switch
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+    // Test I2C UnitENV III
+    unitenv_t unitenv;
+    get_i2c_unitenv_data(&unitenv);
+    ESP_LOGI(TAG, "%2.1f 度, %2.1f %%, %0.2f hPa", unitenv.tmp, unitenv.hum, unitenv.pressure);
     // Test WebAssembly
     if(enable_wasm) tick_wasm();
     delay(500);
