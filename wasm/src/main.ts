@@ -49,14 +49,14 @@ class AnalogClock {
             this.drawHand(nowHands[0], <f32>this.cr * this.HAND_LENGTH_SECOND, c3dev.COLOR.BLUE);
             this.rsecond = nowHands[0];
         }
-        if(nowHands[1] != this.rminute || Math.abs(nowHands[1] - this.rsecond) < 0.6) {
+        if(nowHands[1] != this.rminute || Math.abs(nowHands[1] - this.rsecond) < 0.8) {
             if(nowHands[1] != this.rminute) {
                 this.drawHand(this.rminute, <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.BLACK);
             }
             this.drawHand(nowHands[1], <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.ORANGE);
             this.rminute = nowHands[1];
         }
-        if(nowHands[2] != this.rhour || Math.abs(nowHands[2] - this.rsecond) < 0.6 || Math.abs(nowHands[2] - this.rminute) < 0.6) {
+        if(nowHands[2] != this.rhour || Math.abs(nowHands[2] - this.rsecond) < 0.8 || Math.abs(nowHands[2] - this.rminute) < 0.8) {
             if(nowHands[2] != this.rhour) {
                 this.drawHand(this.rhour, <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.BLACK);
             }
