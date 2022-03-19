@@ -93,7 +93,7 @@ Write TypeType font to SPIFFS
 parttool.py --port "/dev/ttyACM0" write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
-Write WebAssembly(.wasm) to SPIFFS
+Write WebAssembly(.wasm) to SPIFFS ([AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/))
 
 ```
 parttool.py --port "/dev/ttyACM0" write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
