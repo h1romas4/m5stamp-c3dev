@@ -36,7 +36,9 @@ class AnalogClock {
             const sy: u32 = this.cy + <i32>(Math.sin(rad) * (<f32>this.cr - 6));
             const tx: u32 = this.cx + <i32>(Math.cos(rad) * (<f32>this.cr - 1));
             const ty: u32 = this.cy + <i32>(Math.sin(rad) * (<f32>this.cr - 1));
-            line(sx, sy, tx, ty, c3dev.COLOR.BLUE);
+            let color = 0x0015;
+            if(<u32>angle % 30 == 0) color = c3dev.COLOR.BLUE;
+            line(sx, sy, tx, ty, color);
         }
     }
 
@@ -46,23 +48,19 @@ class AnalogClock {
         const nowHands = this.calcHands(now);
         if(nowHands[0] != this.rsecond) {
             this.drawHand(this.rsecond, <f32>this.cr * this.HAND_LENGTH_SECOND, c3dev.COLOR.BLACK);
-            this.drawHand(nowHands[0], <f32>this.cr * this.HAND_LENGTH_SECOND, c3dev.COLOR.BLUE);
+            this.drawHand(nowHands[0], <f32>this.cr * this.HAND_LENGTH_SECOND, 0x0015);
             this.rsecond = nowHands[0];
         }
-        if(nowHands[1] != this.rminute || Math.abs(nowHands[1] - this.rsecond) < 0.8) {
-            if(nowHands[1] != this.rminute) {
-                this.drawHand(this.rminute, <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.BLACK);
-            }
-            this.drawHand(nowHands[1], <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.ORANGE);
+        if(nowHands[1] != this.rminute) {
+            this.drawHand(this.rminute, <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.BLACK);
             this.rminute = nowHands[1];
         }
-        if(nowHands[2] != this.rhour || Math.abs(nowHands[2] - this.rsecond) < 0.8 || Math.abs(nowHands[2] - this.rminute) < 0.8) {
-            if(nowHands[2] != this.rhour) {
-                this.drawHand(this.rhour, <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.BLACK);
-            }
-            this.drawHand(nowHands[2], <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.GREEN);
+        this.drawHand(nowHands[1], <f32>this.cr * this.HAND_LENGTH_MINUTE, c3dev.COLOR.ORANGE);
+        if(nowHands[2] != this.rhour) {
+            this.drawHand(this.rhour, <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.BLACK);
             this.rhour = nowHands[2];
         }
+        this.drawHand(nowHands[2], <f32>this.cr * this.HAND_LENGTH_HOUR, c3dev.COLOR.GREEN);
     }
 
     drawHand(radian: f32, length: f32, color: c3dev.COLOR): void {
