@@ -98,5 +98,5 @@ void loop(void)
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
     // Test WebAssembly
     if(enable_wasm) tick_wasm();
-    delay(1000);
+    delay(500);
 }

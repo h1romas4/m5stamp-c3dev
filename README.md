@@ -99,7 +99,7 @@ Write WebAssembly(.wasm) to SPIFFS
 parttool.py --port "/dev/ttyACM0" write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-Setup WiFi
+Setup WiFi (Optional)
 
 1. Change WiFi Setting
 

@@ -87,7 +87,7 @@ function createImports() {
             console.log(decodeUTF8(string));
         },
         'now': () => {
-            return BigInt(Date.now());
+            return BigInt(Date.now() + /* UTC+9 */ 3600000 * 9);
         }
     };
 
@@ -128,8 +128,8 @@ function decodeUTF8(wasmPtr) {
     await loadWasm();
     wasmExports.clock(80, 64, 63);
     wasmExports.init();
-    // setInterval(() => {
+    setInterval(() => {
         wasmExports.tick();
         wasmExports.__collect() // clean up all garbage
-    // }, 500);
+    }, 500);
 })();
