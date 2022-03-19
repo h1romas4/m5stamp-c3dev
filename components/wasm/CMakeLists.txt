@@ -30,19 +30,12 @@ target_compile_options(${COMPONENT_TARGET} PUBLIC
     -DESP32
     -DM3_IN_IRAM
     -O3
-    # -Dd_m3FixedHeap=131070
-    -DDEBUG
-    -Dd_m3LogNativeStack
-    -Dd_m3LogHeapOps
-    -Dd_m3SkipStackCheck
-    -Dd_m3SkipMemoryBoundsCheck
-    -Wno-visibility)
-
-set_source_files_properties(wasm3/source/m3_env.c
-    PROPERTIES COMPILE_FLAGS
-    -Wno-sign-compare
-)
-
-set_source_files_properties(wasm3/source/m3_api_meta_wasi.c
-    PROPERTIES COMPILE_FLAGS -Wno-incompatible-pointer-types
+    -g0
+    -s
+    # -Dd_m3FixedHeap=32768
+    # -DDEBUG
+    # -Dd_m3LogNativeStack
+    # -Dd_m3LogHeapOps
+    # -Dd_m3SkipStackCheck
+    # -Dd_m3SkipMemoryBoundsCheck
 )

@@ -1,0 +1,24 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+.lcd {
+    border: 6px solid white;
+}
+
+.lcd #screen {
+    display: block;
+    background-color: black;
+    border: 8px solid black;
+}

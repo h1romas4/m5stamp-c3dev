@@ -1,4 +1,6 @@
 #include "Arduino.h"
+#include "WiFi.h"
+#include "Preferences.h"
 #include "esp_log.h"
 #include "SPI.h"
 #include "Adafruit_GFX.h"
@@ -16,6 +18,12 @@ static const char *TAG = "main.cpp";
  * SPI member
  */
 SPIClass *spi = &SPI;
+
+
+/**
+ * NVS member
+ */
+Preferences preferences;
 
 /**
  * LCD member
@@ -65,6 +73,11 @@ void draw_unitenv(void)
     }
 }
 
+/**
+ * Wasm3 member
+ */
+boolean enable_wasm = false;
+
 void setup(void)
 {
     // SW initialize
@@ -87,11 +100,11 @@ void setup(void)
     // Test FreeType
     init_freetype();
     font_render_20px = create_freetype_render(/* font size */ 20, /* font cache */ 64);
-
     draw_freetype_string("M5Stamp C3", 10, 28, ST77XX_RED, &font_render_20px);
     draw_freetype_string("Development", 10, 28 * 2, ST77XX_WHITE, &font_render_20px);
     draw_freetype_string("Board", 10, 28 * 3, ST77XX_WHITE, &font_render_20px);
     draw_freetype_string("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render_20px);
+    delay(1000);
 
     // Test SD card and PNG
     // draw_sdcard_png("/M5STACK/TEST10-0.PNG", 0, 0);
@@ -99,26 +112,30 @@ void setup(void)
     // draw_sdcard_png("/M5STACK/TEST10-2.PNG", 0, 60);
     // draw_sdcard_png("/M5STACK/TEST10-3.PNG", 80, 60);
 
-    // Test WebAssembly
-    exec_wasm();
+    // Test NVS and Wifi (Push SW1)
+    if(digitalRead(C3DEV_SW1) == 0 && preferences.begin("wifi", true)) {
+        String ssid = preferences.getString("ssid");
+        String passwd = preferences.getString("passwd");
 
-    // Test I2C (UNITENV sensor) on disabled JTAG GPIO 18/19
-    delay(500);
-    tft.fillScreen(ST77XX_BLACK);
-    init_i2c_gpio1819();
-    // Draw screen
-    font_render_16px = create_freetype_render(/* font size */ 16, /* font cache */ 64);
-    draw_freetype_string("ENV.III SENSOR", 8, 24, ST77XX_RED, &font_render_20px);
-    draw_freetype_string("温度:" , 8, 28 * 2, ST77XX_WHITE, &font_render_16px);
-    draw_freetype_string("湿度:" , 8, 28 * 3, ST77XX_WHITE, &font_render_16px);
-    draw_freetype_string("気圧:" , 8, 28 * 4, ST77XX_WHITE, &font_render_16px);
+        ESP_LOGI(TAG, "Connect to %s", ssid);
+        WiFi.begin(ssid.c_str(), passwd.c_str());
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(200);
+        }
+        ESP_LOGI(TAG, "Connected!");
+        configTime(9 * 3600L, 0, "ntp1.jst.mfeed.ad.jp", "ntp2.jst.mfeed.ad.jp", "ntp3.jst.mfeed.ad.jp");
+        ESP_LOGI(TAG, "Configured time from NTP");
+    }
+
+    // Test WebAssembly
+    if(init_wasm() == ESP_OK) enable_wasm = true;
 }
 
 void loop(void)
 {
-    // Test I2C (UNITENV sensor)
-    draw_unitenv();
-    // Test SW
+    // Test Switch
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
-    delay(1000);
+    // Test WebAssembly
+    if(enable_wasm) tick_wasm();
+    delay(500);
 }
