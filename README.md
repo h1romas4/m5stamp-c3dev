@@ -177,6 +177,10 @@ idf.py menuconfig
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
 
+## AssemblyScript and Wasm3
+
+![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
+
 ## Dependencies
 
 Thanks for all the open source.
