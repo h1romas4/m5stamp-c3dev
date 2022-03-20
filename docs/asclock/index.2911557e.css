@@ -26,6 +26,8 @@ p {
     display: block;
     background-color: black;
     border: 8px solid black;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 #link {
