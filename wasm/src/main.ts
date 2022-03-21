@@ -129,7 +129,7 @@ class AnalogClock {
 
         hands[0] = ((<f32>date.getUTCSeconds() * 6.0) - 90.0) / 180.0 * Math.PI;
         hands[1] = ((<f32>date.getUTCMinutes() * 6.0) - 90.0) / 180.0 * Math.PI;
-        hands[2] = ((Math.abs(12 - <f32>date.getUTCHours()) * 30.0 + <f32>date.getUTCMinutes() * 0.5) - 90.0) / 180.0 * Math.PI;
+        hands[2] = ((<f32>date.getUTCHours() * 30.0 + <f32>date.getUTCMinutes() * 0.5) - 90.0) / 180.0 * Math.PI;
 
         return hands;
     }
