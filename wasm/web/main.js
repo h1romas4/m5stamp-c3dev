@@ -87,7 +87,8 @@ function createImports() {
             console.log(decodeUTF8(string));
         },
         'now': () => {
-            return BigInt(Date.now() + /* UTC+9 */ 3600000 * 9);
+            let offset = new Date().getTimezoneOffset();
+            return BigInt(Date.now() - /* TODO: */ offset * 60 * 1000);
         }
     };
 

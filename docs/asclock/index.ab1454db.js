@@ -604,7 +604,8 @@ const CANVAS_FONT_SIZE = 8;
             console.log(decodeUTF8(string));
         },
         'now': ()=>{
-            return BigInt(Date.now() + /* UTC+9 */ 32400000);
+            let offset = new Date().getTimezoneOffset();
+            return BigInt(Date.now() - /* TODO: */ offset * 60000);
         }
     };
     return imports;
