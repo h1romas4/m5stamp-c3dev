@@ -4,3 +4,4 @@ pcb/fg06-c3dev-revb/fg06-c3dev-revb-backups
 fp-info-cache
 sdkconfig.old
 nvs_partition.bin
+components/unitenv/
