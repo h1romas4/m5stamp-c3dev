@@ -13,6 +13,11 @@ body {
     background-color: black;
 }
 
+p {
+    color: #fff;
+    text-align: center;
+}
+
 .lcd {
     border: 6px solid white;
 }
@@ -21,4 +26,16 @@ body {
     display: block;
     background-color: black;
     border: 8px solid black;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#link {
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+#link a {
+    color:#00a040;
+    text-decoration: overline;
 }

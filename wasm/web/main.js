@@ -3,7 +3,7 @@
  */
 const CANVAS_WIDTH = 160;
 const CANVAS_HEIGHT = 128;
-const CANVAS_FONT_SIZE = 14;
+const CANVAS_FONT_SIZE = 8;
 
 /**
  * Canvas
@@ -82,6 +82,15 @@ function createImports() {
             canvasContext.moveTo(x0, y0);
             canvasContext.lineTo(x1, y1);
             canvasContext.stroke();
+        },
+        'get_env_tmp': () => {
+            return 19.771495819091798;
+        },
+        'get_env_hum': () => {
+            return 45.947967529296878;
+        },
+        'get_env_pressure': () => {
+            return 996.9368896484375;
         },
         'log': (string) => {
             console.log(decodeUTF8(string));
