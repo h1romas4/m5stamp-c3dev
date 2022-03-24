@@ -25,7 +25,7 @@ IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
-#define FREETYPE_FONT_SIZE 14
+#define FREETYPE_FONT_SIZE 9
 
 /**
  * SPIFFS member
@@ -158,6 +158,21 @@ m3ApiRawFunction(c3dev_draw_string)
     m3ApiSuccess();
 }
 
+m3ApiRawFunction(c3dev_get_env_tmp) {
+    m3ApiReturnType(float_t)
+    m3ApiReturn(/* dummy */20.0);
+}
+
+m3ApiRawFunction(c3dev_get_env_hum) {
+    m3ApiReturnType(float_t)
+    m3ApiReturn(/* dummy */40.0);
+}
+
+m3ApiRawFunction(c3dev_get_env_pressure) {
+    m3ApiReturnType(float_t)
+    m3ApiReturn(/* dummy */1000.0);
+}
+
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
@@ -168,6 +183,9 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
     m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);
+    m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
+    m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);
+    m3_LinkRawFunction(module, "c3dev", "get_env_pressure", "f()",  &c3dev_get_env_pressure);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
     return m3Err_none;
