@@ -27,8 +27,7 @@ Adafruit_ST7735 tft = Adafruit_ST7735(spi, C3DEV_LCD_CS, C3DEV_LCD_DC, C3DEV_LCD
 /**
  * FreeType member
  */
-font_render_t font_render_20px;
-font_render_t font_render_16px;
+font_render_t font_render;
 
 /**
  * Wasm3 member
@@ -89,11 +88,11 @@ void setup(void)
 
     // Test FreeType
     init_freetype();
-    font_render_20px = create_freetype_render(/* font size */ 20, /* font cache */ 64);
-    draw_freetype_string("M5Stamp C3", 10, 28, ST77XX_RED, &font_render_20px);
-    draw_freetype_string("Development", 10, 28 * 2, ST77XX_WHITE, &font_render_20px);
-    draw_freetype_string("Board", 10, 28 * 3, ST77XX_WHITE, &font_render_20px);
-    draw_freetype_string("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render_20px);
+    font_render = create_freetype_render(/* font size */ 20, /* font cache */ 64);
+    draw_freetype_string("M5Stamp C3", 10, 28, ST77XX_RED, &font_render);
+    draw_freetype_string("Development", 10, 28 * 2, ST77XX_WHITE, &font_render);
+    draw_freetype_string("Board", 10, 28 * 3, ST77XX_WHITE, &font_render);
+    draw_freetype_string("RISC-V", 10, 28 * 4, ST77XX_BLUE, &font_render);
     delay(1000);
 
     // Test SD card and PNG
