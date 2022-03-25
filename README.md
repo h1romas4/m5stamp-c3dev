@@ -83,20 +83,20 @@ For bug reports, read
 git clone and build
 
 ```
-git clone  --recursive https://github.com/h1romas4/m5stamp-c3dev
+git clone --recursive https://github.com/h1romas4/m5stamp-c3dev
 idf.py build flash
 ```
 
 Write TypeType font to SPIFFS
 
 ```
-parttool.py --port "/dev/ttyACM0" write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
+parttool.py write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
 Write WebAssembly(.wasm) to SPIFFS ([AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/))
 
 ```
-parttool.py --port "/dev/ttyACM0" write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
+parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
 Setup WiFi (Optional)
@@ -124,7 +124,7 @@ python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_ge
 esptool.py write_flash 0x9000 nvs_partition.bin
 ```
 
-Restart M5Stamp C3
+Restart M5Stamp C3  (NTP synchronization is performed by pressing the SW1 after the startup logo)
 
 ```
 idf.py monitor
@@ -176,6 +176,34 @@ idf.py menuconfig
 ```
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
+
+## AssemblyScript and Wasm3
+
+![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
+
+## Build AssemblyScript
+
+```
+cd wasm
+npm install
+```
+
+**Web Browser Development**
+
+```
+npm run asbuild:web
+npm run start
+# http://localhost:1234/
+```
+
+**Build and Flash**
+
+```
+npm run asbuild
+cd ..
+python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin
+parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
+```
 
 ## Dependencies
 

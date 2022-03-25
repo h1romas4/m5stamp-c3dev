@@ -26,7 +26,7 @@ set(SRCS
 
 idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS})
 
-target_compile_options(${COMPONENT_TARGET} PUBLIC
+target_compile_options(${COMPONENT_TARGET} PRIVATE
     -DESP32
     -DM3_IN_IRAM
     -O3
