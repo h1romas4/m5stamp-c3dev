@@ -84,6 +84,7 @@ git clone and build
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stamp-c3dev
+cd m5stamp-c3dev
 idf.py build flash
 ```
 
