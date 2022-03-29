@@ -7,6 +7,7 @@ set(SRCS
     test_wasm3.cpp
     test_freetype.cpp
     test_tinypng.cpp
+    test_nvs_wifi.cpp
     test_i2c_gpio1819.cpp
 )
 
