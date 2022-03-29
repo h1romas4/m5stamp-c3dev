@@ -41,7 +41,6 @@ This repository contains MIT Licensed PCB data and example programs.
 ### Require
 
 - [Setup ESF-IDF v4.4](https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32c3/get-started/index.html#installation-step-by-step)
-- [(Optional)Setup OpenOCD with ESP32 JTAG support](https://github.com/espressif/openocd-esp32)
 
 get_idf
 
@@ -68,7 +67,7 @@ COLLECT_GCC=riscv32-esp-elf-gcc
 gcc version 8.4.0 (crosstool-NG esp-2021r2)
 ```
 
-openocd
+openocd (Optional)
 
 ```
 $ openocd
