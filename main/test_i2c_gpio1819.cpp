@@ -8,6 +8,9 @@
 
 static const char *TAG = "test_i2c_gpio1819.cpp";
 
+// I2C Sensor
+//  M5STACK ENV III Unit
+//  https://docs.m5stack.com/en/unit/envIII
 SHT3X sht30;
 QMP6988 qmp6988;
 
