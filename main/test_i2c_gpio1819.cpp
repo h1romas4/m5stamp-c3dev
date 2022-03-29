@@ -24,7 +24,8 @@ void init_i2c_gpio1819(void)
     // }
     //
     // Force i2c reassignment because Wire is initialized in the SHT3X constructor.
-    i2c_set_pin(0, I2C_SDA, I2C_SCL, true, true, I2C_MODE_MASTER);
+    Wire.end();
+    // or i2c_set_pin(0, I2C_SDA, I2C_SCL, true, true, I2C_MODE_MASTER);
 
     Wire.begin(I2C_SDA, I2C_SCL);
     if(!qmp6988.init()) {
