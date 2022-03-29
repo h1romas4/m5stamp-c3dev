@@ -42,14 +42,14 @@ This repository contains MIT Licensed PCB data and example programs.
 
 - [Setup ESF-IDF v4.4](https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32c3/get-started/index.html#installation-step-by-step)
 
-get_idf
+get_idf or (Windows) ESP-IDF 4.4 command prompt
 
 ```
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
-```
-
-```
+# Linux or macOS ->
+$ alias get_idf='. $HOME/esp/esp-idf/export.sh'
 $ get_idf
+# <-
+
 Detecting the Python interpreter
 ... snip ...
 Done! You can now compile ESP-IDF projects.
