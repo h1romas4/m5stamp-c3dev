@@ -16,9 +16,6 @@
 [submodule "components/wasm/wasm3"]
 	path = components/wasm/wasm3
 	url = https://github.com/wasm3/wasm3
-[submodule "components/unitenv/--force"]
-	path = components/unitenv/--force
-	url = https://github.com/m5stack/UNIT_ENV
 [submodule "components/unitenv/UNIT_ENV"]
 	path = components/unitenv/UNIT_ENV
 	url = https://github.com/m5stack/UNIT_ENV
