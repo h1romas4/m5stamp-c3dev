@@ -15,12 +15,12 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 
 *Sample Sources Included*
 
-- Japanese TrueType font output to LCD
-- Output PNG images in SD card to LCD
-- NTP synchronization via WiFi connection
-- Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III)
-- WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript)
-- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
+- Japanese TrueType font output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
+- Output PNG images in SD card to LCD - [test_tinypng.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_tinypng.cpp)
+- NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
+- Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III) - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp)
+- WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3.cpp)
+- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools) 
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
 - Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
