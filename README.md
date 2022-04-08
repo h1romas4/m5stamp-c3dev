@@ -1,5 +1,7 @@
 # m5stamp-c3dev
 
+![](https://github.com/h1romas4/m5stamp-c3dev/workflows/Build/badge.svg)
+
 ![Main Board](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_01.jpg)
 
 This is a development board for the [M5Stamp C3](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers) (RISC-V/FreeRTOS).
@@ -22,7 +24,7 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
 - Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III) - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp)
 - WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3.cpp)
-- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools) 
+- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
 - Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
