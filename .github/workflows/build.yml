@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: |
         . ~/esp/esp-idf/export.sh
-        make -j4
+        idf.py build
         cd wasm
         npm install
         npm run asbuild
