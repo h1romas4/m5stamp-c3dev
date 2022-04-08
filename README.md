@@ -15,6 +15,8 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 
 **Sample Sources Included**
 
+![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
+
 - Japanese TrueType font output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
 - Output PNG images in SD card to LCD - [test_tinypng.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_tinypng.cpp)
 - NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
@@ -28,7 +30,8 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 
 This repository contains MIT Licensed PCB data and example programs.
 
-📼 [YouTube Demo](https://youtu.be/46I3Uo5Xivg)
+- 📼 [YouTube Demo(LCD)](https://youtu.be/46I3Uo5Xivg)
+- 📼 [YouTube Demo(Wasm3)](https://youtu.be/TagQuPtwKCg)
 
 ## Schematic
 
@@ -193,8 +196,6 @@ idf.py menuconfig
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
 
 ## AssemblyScript and Wasm3
-
-![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
 
 ## Build AssemblyScript
 
