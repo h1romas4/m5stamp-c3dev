@@ -4,7 +4,7 @@
 
 This is a development board for the [M5Stamp C3](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers) (RISC-V/FreeRTOS).
 
-*Hardware*
+**Hardware**
 
 - External USB-C port for JTAG debugging
 - Support for LCD panel and SD card
@@ -13,7 +13,7 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - Pin headers to expose usable GPIOs to the outside
 - The size is just Japanese business card
 
-*Sample Sources Included*
+**Sample Sources Included**
 
 - Japanese TrueType font output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
 - Output PNG images in SD card to LCD - [test_tinypng.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_tinypng.cpp)
