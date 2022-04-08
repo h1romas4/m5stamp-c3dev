@@ -24,7 +24,7 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
 - Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
-- AssembyScript sharing method between web browser and microcontroller
+- AssembyScript sharing method between web browser and microcontroller - [wasm](https://github.com/h1romas4/m5stamp-c3dev/tree/main/wasm)
 
 This repository contains MIT Licensed PCB data and example programs.
 
