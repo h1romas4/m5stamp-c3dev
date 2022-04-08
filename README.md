@@ -4,12 +4,27 @@
 
 This is a development board for the [M5Stamp C3](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers) (RISC-V/FreeRTOS).
 
+*Hardware*
+
 - External USB-C port for JTAG debugging
 - Support for LCD panel and SD card
 - Selecting a power supply
 - Switch(GPIO9) to enter loader mode
 - Pin headers to expose usable GPIOs to the outside
 - The size is just Japanese business card
+
+*Sample Sources Included*
+
+- Japanese TrueType font output to LCD
+- Output PNG images in SD card to LCD
+- NTP synchronization via WiFi connection
+- Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III)
+- WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript)
+- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
+- Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
+- Building libraries and managing dependencies using the esp-idf build system
+- Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
+- AssembyScript sharing method between web browser and microcontroller
 
 This repository contains MIT Licensed PCB data and example programs.
 
