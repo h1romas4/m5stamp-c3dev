@@ -328,6 +328,9 @@ esp_err_t tick_wasm(void)
 
     // Get Unit ENV III date
     get_i2c_unitenv_data(&unitenv);
+    // Show RGB color
+    pixels.setPixelColor(0, pixels.Color(unitenv.tmp * 0.25, unitenv.hum * 0.25, unitenv.pressure * 0.01));
+    pixels.show();
 
     result = m3_Call(wasm3_func_tick, 0, nullptr);
     if (result) {
