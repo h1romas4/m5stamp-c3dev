@@ -18,4 +18,7 @@
 	url = https://github.com/wasm3/wasm3
 [submodule "components/unitenv/UNIT_ENV"]
 	path = components/unitenv/UNIT_ENV
-	url = https://github.com/m5stack/UNIT_ENV.git
+	url = https://github.com/m5stack/UNIT_ENV
+[submodule "components/led/Adafruit_NeoPixel"]
+	path = components/led/Adafruit_NeoPixel
+	url = https://github.com/adafruit/Adafruit_NeoPixel

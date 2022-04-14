@@ -1,8 +1,12 @@
 # m5stamp-c3dev
 
+![](https://github.com/h1romas4/m5stamp-c3dev/workflows/Build/badge.svg)
+
 ![Main Board](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_01.jpg)
 
 This is a development board for the [M5Stamp C3](https://shop.m5stack.com/products/m5stamp-c3-mate-with-pin-headers) (RISC-V/FreeRTOS).
+
+**Hardware**
 
 - External USB-C port for JTAG debugging
 - Support for LCD panel and SD card
@@ -11,9 +15,26 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - Pin headers to expose usable GPIOs to the outside
 - The size is just Japanese business card
 
+**Sample Sources Included**
+
+![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
+
+- Japanese TrueType font output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
+- Output PNG images in SD card to LCD - [test_tinypng.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_tinypng.cpp)
+- NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
+- Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III) - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp)
+- WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3.cpp)
+- Support RGB LED (SK6812)
+- Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
+- Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
+- Building libraries and managing dependencies using the esp-idf build system
+- Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
+- AssembyScript sharing method between web browser and microcontroller - [wasm](https://github.com/h1romas4/m5stamp-c3dev/tree/main/wasm)
+
 This repository contains MIT Licensed PCB data and example programs.
 
-📼 [YouTube Demo](https://youtu.be/46I3Uo5Xivg)
+- 📼 [YouTube Demo(LCD)](https://youtu.be/46I3Uo5Xivg)
+- 📼 [YouTube Demo(Wasm3)](https://youtu.be/TagQuPtwKCg)
 
 ## Schematic
 
@@ -179,8 +200,6 @@ idf.py menuconfig
 
 ## AssemblyScript and Wasm3
 
-![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
-
 ## Build AssemblyScript
 
 ```
@@ -214,9 +233,10 @@ Thanks for all the open source.
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4`|BSD License|
 |[esp32-arduino](https://github.com/espressif/arduino-esp32)|master (`4da1051`)|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|master(`bf4bd28`)|FreeType Part(The FreeType License)|
-|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|master(`9337086`)|MIT license|
+|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|master(`9337086`)|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.10.13`|BSD License|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT license|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT License|
+|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.4`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.19.23`|Apache-2.0 License|

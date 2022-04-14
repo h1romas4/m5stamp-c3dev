@@ -3,6 +3,7 @@
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ST7735.h"
+#include "Adafruit_NeoPixel.h"
 
 #include "c3dev_board.h"
 #include "test_freetype.h"
@@ -22,6 +23,11 @@ SPIClass *spi = &SPI;
  * LCD member
  */
 Adafruit_ST7735 tft = Adafruit_ST7735(spi, C3DEV_LCD_CS, C3DEV_LCD_DC, C3DEV_LCD_RST);
+
+/**
+ * RGB LED member
+ */
+Adafruit_NeoPixel pixels(1, M5STAMP_C3_LED, NEO_GRB + NEO_KHZ800);
 
 /**
  * FreeType member
@@ -51,6 +57,11 @@ void setup(void)
     // If the color is inverted, set to 1.
     tft.invertDisplay(0);
     // tft.invertDisplay(1);
+
+    // RGB LED initialize
+    pixels.begin();
+    pixels.setPixelColor(0, pixels.Color(16, 0, 16));
+    pixels.show();
 
     // Test FreeType
     init_freetype();
