@@ -24,6 +24,7 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
 - Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III) - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp)
 - WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3.cpp)
+- Support RGB LED (SK6812)
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
@@ -232,9 +233,10 @@ Thanks for all the open source.
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4`|BSD License|
 |[esp32-arduino](https://github.com/espressif/arduino-esp32)|master (`4da1051`)|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|master(`bf4bd28`)|FreeType Part(The FreeType License)|
-|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|master(`9337086`)|MIT license|
+|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|master(`9337086`)|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.10.13`|BSD License|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT license|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.1`|MIT License|
+|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.4`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.19.23`|Apache-2.0 License|
