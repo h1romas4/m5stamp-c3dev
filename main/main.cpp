@@ -11,8 +11,6 @@
 #include "test_nvs_wifi.h"
 #include "test_wasm3.h"
 
-#include "test_uart_gpio1819.h"
-
 static const char *TAG = "main.cpp";
 
 /**
