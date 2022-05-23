@@ -22,3 +22,6 @@
 [submodule "components/led/Adafruit_NeoPixel"]
 	path = components/led/Adafruit_NeoPixel
 	url = https://github.com/adafruit/Adafruit_NeoPixel
+[submodule "components/tinygps/TinyGPSPlus"]
+	path = components/tinygps/TinyGPSPlus
+	url = https://github.com/mikalhart/TinyGPSPlus
