@@ -5,6 +5,10 @@
 
 static const char *TAG = "test_nvs_wifi.cpp";
 
+#define NTP_SERVER1 CONFIG_C3DEV_NTP_SERVER1
+#define NTP_SERVER2 CONFIG_C3DEV_NTP_SERVER2
+#define NTP_SERVER3 CONFIG_C3DEV_NTP_SERVER3
+
 void sync_wifi_ntp(void)
 {
     Preferences preferences;
@@ -20,7 +24,7 @@ void sync_wifi_ntp(void)
         delay(200);
     }
     ESP_LOGI(TAG, "Connected!");
-    configTime(9 * 3600L, 0, "ntp1.jst.mfeed.ad.jp", "ntp2.jst.mfeed.ad.jp", "ntp3.jst.mfeed.ad.jp");
+    configTime(9 * 3600L, 0, NTP_SERVER1, NTP_SERVER2, NTP_SERVER3);
     // Wait Time Sync
     struct tm timeInfo;
     while(true) {

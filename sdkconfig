@@ -139,6 +139,23 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# C3DEV Configuration
+#
+
+#
+# NTP Server Configuration
+#
+CONFIG_C3DEV_NTP_SERVER1="ntp1.jst.mfeed.ad.jp"
+CONFIG_C3DEV_NTP_SERVER2="ntp2.jst.mfeed.ad.jp"
+CONFIG_C3DEV_NTP_SERVER3="ntp3.jst.mfeed.ad.jp"
+# end of NTP Server Configuration
+
+# CONFIG_GPIO1819_NONE is not set
+CONFIG_GPIO1819_UNITENV_III=y
+# CONFIG_GPIO1819_UNIT_GPS is not set
+# end of C3DEV Configuration
+
+#
 # Arduino Configuration
 #
 CONFIG_ENABLE_ARDUINO_DEPENDS=y
