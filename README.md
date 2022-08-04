@@ -151,6 +151,14 @@ Restart M5Stamp C3  (NTP synchronization is performed by pressing the SW1 after 
 idf.py monitor
 ```
 
+### Select connected GPIO18 and GPIO19 device
+
+```
+idf.py menuconfig
+```
+
+![](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_05.png)
+
 ### JTAG debug with Visual Studio Code
 
 1. Set ESP32_TOOLCHAIN_HOME
