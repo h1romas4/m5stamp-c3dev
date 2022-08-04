@@ -11,6 +11,13 @@
 #include "test_nvs_wifi.h"
 #include "test_wasm3.h"
 
+#ifdef CONFIG_GPIO1819_UNITENV_III
+#include "test_i2c_gpio1819.h"
+#endif
+#ifdef CONFIG_GPIO1819_UNIT_GPS
+#include "test_uart_gpio1819.h"
+#endif
+
 static const char *TAG = "main.cpp";
 
 /**
@@ -86,6 +93,13 @@ void setup(void)
         // Time synchronization is currently not possible. (TODO)
         esp_restart();
     }
+
+    #ifdef CONFIG_GPIO1819_UNITENV_III
+    init_i2c_gpio1819();
+    #endif
+    #ifdef CONFIG_GPIO1819_UNIT_GPS
+    init_uart_gpio1819();
+    #endif
 
     // Test WebAssembly
     if(init_wasm() == ESP_OK) enable_wasm = true;

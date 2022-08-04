@@ -1,0 +1,24 @@
+menu "C3DEV Configuration"
+    menu "NTP Server Configuration"
+        config C3DEV_NTP_SERVER1
+            string "NTP Server1"
+            default "ntp1.jst.mfeed.ad.jp"
+        config C3DEV_NTP_SERVER2
+            string "NTP Server2"
+            default "ntp2.jst.mfeed.ad.jp"
+        config C3DEV_NTP_SERVER3
+            string "NTP Server3"
+            default "ntp3.jst.mfeed.ad.jp"
+    endmenu
+
+    choice
+        prompt "Select GPIO 18/19"
+            default GPIO1819_NONE
+        config GPIO1819_NONE
+            bool "None"
+        config GPIO1819_UNITENV_III
+            bool "Connect Unit ENV III (I2C)"
+        config GPIO1819_UNIT_GPS
+            bool "Connect Unit GPS (UART)"
+    endchoice
+endmenu

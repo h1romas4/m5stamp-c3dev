@@ -12,6 +12,13 @@
 #include "c3dev_board.h"
 #include "test_freetype.h"
 
+#ifdef CONFIG_GPIO1819_UNITENV_III
+#include "test_i2c_gpio1819.h"
+#endif
+#ifdef CONFIG_GPIO1819_UNIT_GPS
+#include "test_uart_gpio1819.h"
+#endif
+
 static const char *TAG = "test_wasm3.cpp";
 
 /**
