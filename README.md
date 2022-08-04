@@ -61,9 +61,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF v4.4](https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32c3/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF **v4.4.1**](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32c3/get-started/index.html#installation-step-by-step)
 
-get_idf or (Windows) ESP-IDF 4.4 command prompt
+get_idf or (Windows) ESP-IDF **`4.4.1`** command prompt
 
 ```
 # Linux or macOS ->
@@ -230,8 +230,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4`|BSD License|
-|[esp32-arduino](https://github.com/espressif/arduino-esp32)|master (`4da1051`)|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.1`|BSD License|
+|[esp32-arduino](https://github.com/espressif/arduino-esp32)|`2.0.4`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|master(`bf4bd28`)|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|master(`9337086`)|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.10.13`|BSD License|
