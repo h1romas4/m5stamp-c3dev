@@ -29,11 +29,11 @@ void sync_wifi_ntp(void)
     struct tm timeInfo;
     while(true) {
         getLocalTime(&timeInfo);
-        if(timeInfo.tm_year > 0) {
+        if(timeInfo.tm_year > 70) {
             break;
         }
         delay(500);
-        ESP_LOGI(TAG, "waiting time sync..(%d)", timeInfo.tm_year);
+        ESP_LOGI(TAG, "waiting time sync..(%d:%d:%d %d)", timeInfo.tm_hour, timeInfo.tm_min, timeInfo.tm_sec, timeInfo.tm_year);
     }
     ESP_LOGI(TAG, "Configured time from NTP");
     WiFi.disconnect();
