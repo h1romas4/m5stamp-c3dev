@@ -82,6 +82,8 @@ void setup(void)
         sync_wifi_ntp();
         // not enough memory..
         ESP_LOGI(TAG, "Restart ESP32C3");
+        // but RTC is cleared at reboot in esp-idf 4.4.1 and later.
+        // Time synchronization is currently not possible. (TODO)
         esp_restart();
     }
 
