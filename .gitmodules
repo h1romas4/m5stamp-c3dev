@@ -25,3 +25,6 @@
 [submodule "components/tinygps/TinyGPSPlus"]
 	path = components/tinygps/TinyGPSPlus
 	url = https://github.com/mikalhart/TinyGPSPlus
+[submodule "components/lcd/adfruitbus"]
+	path = components/lcd/adfruitbus
+	url = https://github.com/adafruit/Adafruit_BusIO

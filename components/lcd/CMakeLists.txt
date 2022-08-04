@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(INCLUDEDIRS
+    adfruitbus
     agfxlib
     st7735
 )
 
 set(SRCS
+    adfruitbus/Adafruit_BusIO_Register.cpp
+    adfruitbus/Adafruit_I2CDevice.cpp
+    adfruitbus/Adafruit_SPIDevice.cpp
     agfxlib/Adafruit_GFX.cpp
     agfxlib/Adafruit_SPITFT.cpp
     agfxlib/glcdfont.c
