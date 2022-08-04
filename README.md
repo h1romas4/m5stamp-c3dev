@@ -235,7 +235,7 @@ Thanks for all the open source.
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.3`|BSD License|
-|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.13.1`|BSD License|
+|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.13.1`|MIT License|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.3`|MIT License|
 |[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.5`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
