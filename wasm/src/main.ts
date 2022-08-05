@@ -39,7 +39,7 @@ class AnalogClock {
         for(let angle: u32 = 0; angle < 360; angle += 6) {
             const rad = <f32>angle * (Mathf.PI / 180);
             const cos = Mathf.cos(rad);
-            const sin = Mathf.cos(rad);
+            const sin = Mathf.sin(rad);
             const sx = cx + <i32>(cos * (cr - 6));
             const sy = cy + <i32>(sin * (cr - 6));
             const tx = cx + <i32>(cos * (cr - 1));
