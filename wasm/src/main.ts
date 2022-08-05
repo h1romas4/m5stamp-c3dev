@@ -138,7 +138,7 @@ class AnalogClock {
         
         let sraito: f32 = 0;
         for(let angle: f32 = start; angle > stop; angle -= 0.1) {
-            const rad = angle * (Mathf.PI / 180);
+            const rad = angle * DEG_TO_RAD;
             const cos = Mathf.cos(rad);
             const sin = Mathf.sin(rad);
             
