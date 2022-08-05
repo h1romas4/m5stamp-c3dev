@@ -207,8 +207,8 @@ function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
 
 function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
     
-    let dx = <i32>Mathf.abs(<f32>x1 - <f32>x0);
-    let dy = <i32>Mathf.abs(<f32>y1 - <f32>y0);
+    let dx = abs<i32>(x1 - x0);
+    let dy = abs<i32>(y1 - y0);
     let sx = x0 < x1 ? 1: -1;
     let sy = y0 < y1 ? 1: -1;
 
