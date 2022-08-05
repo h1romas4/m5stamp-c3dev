@@ -256,7 +256,7 @@ Thanks for all the open source.
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)|`v1.0.3`|LGPL|
 |[wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.19.23`|Apache-2.0 License|
+|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.20.16`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
