@@ -6,6 +6,12 @@ const HAND_LENGTH_HOUR: f32   = 0.55;
 const HAND_LENGTH_MINUTE: f32 = 0.85;
 const HAND_LENGTH_SECOND: f32 = 0.9;
 
+class Hands {
+    seconds: f32;
+    minutes: f32;
+    hours: f32;
+}
+
 /**
  * Analog Clock
  */
@@ -49,10 +55,10 @@ class AnalogClock {
         const cr = <f32>this.cr;
         const now = new Date(c3dev.now());
 
-        const nowHands = this.calcHands(now);
-        const hs = unchecked(nowHands[0]);
-        const hm = unchecked(nowHands[1]);
-        const hh = unchecked(nowHands[2]);
+        const hands = this.calcHands(now);
+        const hs = hands.seconds;
+        const hm = hands.minutes;
+        const hh = hands.hours;
         
         if(hs != this.rsecond) {
             this.drawHand(this.rsecond, cr * HAND_LENGTH_SECOND, c3dev.COLOR.BLACK);
@@ -142,14 +148,12 @@ class AnalogClock {
         }
     }
 
-    calcHands(date: Date): Float32Array {
-        let hands = new Float32Array(3);
-
-        unchecked(hands[0] = ((<f32>date.getUTCSeconds() * 6.0) - 90.0) / 180.0 * Mathf.PI);
-        unchecked(hands[1] = ((<f32>date.getUTCMinutes() * 6.0) - 90.0) / 180.0 * Mathf.PI);
-        unchecked(hands[2] = ((<f32>date.getUTCHours() * 30.0 + <f32>date.getUTCMinutes() * 0.5) - 90.0) / 180.0 * Mathf.PI);
-
-        return hands;
+    calcHands(date: Date): Hands {
+        return {
+            seconds: ((<f32>date.getUTCSeconds() * 6) - 90) * (Mathf.PI / 180),
+            minutes: ((<f32>date.getUTCMinutes() * 6) - 90) * (Mathf.PI / 180),
+            hours:   ((<f32>date.getUTCHours() * 30 + <f32>date.getUTCMinutes() * 0.5) - 90) * (Mathf.PI / 180)
+        };
     }
 }
 
