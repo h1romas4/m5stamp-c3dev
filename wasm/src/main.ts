@@ -2,6 +2,7 @@ import * as c3dev from "./c3dev";
 
 let analogClock: AnalogClock;
 
+const DEG_TO_RAD: f32         = Math.PI / 180;
 const HAND_LENGTH_HOUR: f32   = 0.55;
 const HAND_LENGTH_MINUTE: f32 = 0.85;
 const HAND_LENGTH_SECOND: f32 = 0.9;
@@ -24,7 +25,11 @@ class AnalogClock {
     private envHumRaito: i32;
     private envPressureRaito: i32;
 
-    constructor(private cx: u32, private cy: u32, private cr: u32) {
+    constructor(
+        private cx: u32,
+        private cy: u32,
+        private cr: u32
+    ) {
         this.init();
     }
 
@@ -37,14 +42,14 @@ class AnalogClock {
         circle(cx, cy, 2, c3dev.COLOR.BLUE);
 
         for(let angle: u32 = 0; angle < 360; angle += 6) {
-            const rad = <f32>angle * (Mathf.PI / 180);
+            const rad = <f32>angle * DEG_TO_RAD;
             const cos = Mathf.cos(rad);
             const sin = Mathf.sin(rad);
             const sx = cx + <i32>(cos * (cr - 6));
             const sy = cy + <i32>(sin * (cr - 6));
             const tx = cx + <i32>(cos * (cr - 1));
             const ty = cy + <i32>(sin * (cr - 1));
-            let color = angle % 30 == 0 
+            const color = angle % 30 == 0 
                 ? c3dev.COLOR.BLUE 
                 : 0x0015;
             line(sx, sy, tx, ty, color);
@@ -125,7 +130,7 @@ class AnalogClock {
             start = eangle;
             stop = sangle;
         }
-        let step: f32 = (100.0 / (start - stop)) / 10;
+        const step: f32 = (100.0 / (start - stop)) / 10;
 
         const cx = this.cx;
         const cy = this.cy;
@@ -142,7 +147,7 @@ class AnalogClock {
             const tx = cx + <i32>(cos * (cr + 8));
             const ty = cy + <i32>(sin * (cr + 8));
 
-            let color = sraito > ratio ? bc : fc;
+            const color = sraito > ratio ? bc : fc;
             line(sx, sy, tx, ty, color);
             sraito += step;
         }
@@ -150,9 +155,9 @@ class AnalogClock {
 
     calcHands(date: Date): Hands {
         return {
-            seconds: ((<f32>date.getUTCSeconds() * 6) - 90) * (Mathf.PI / 180),
-            minutes: ((<f32>date.getUTCMinutes() * 6) - 90) * (Mathf.PI / 180),
-            hours:   ((<f32>date.getUTCHours() * 30 + <f32>date.getUTCMinutes() * 0.5) - 90) * (Mathf.PI / 180)
+            seconds: (<f32>date.getUTCSeconds() * 6 - 90) * DEG_TO_RAD,
+            minutes: (<f32>date.getUTCMinutes() * 6 - 90) * DEG_TO_RAD,
+            hours:   (<f32>date.getUTCHours() * 30 + <f32>date.getUTCMinutes() * 0.5 - 90) * DEG_TO_RAD
         };
     }
 }
@@ -161,7 +166,7 @@ export function init(): void {
     // ToDo: Workaround: Initialize Wasm3 Stack
     new ArrayBuffer(1);
     // Test env.seed
-    (u16)(Mathf.random() * 65535);
+    Mathf.random();
 }
 
 export function clock(x: u32, y: u32, r: u32): void {
@@ -202,14 +207,14 @@ function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
 
 function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
     
-    let dx: i32 = <i32>Mathf.abs(<f32>x1 - <f32>x0);
-    let dy: i32 = <i32>Mathf.abs(<f32>y1 - <f32>y0);
-    let sx: i32 = x0 < x1 ? 1: -1;
-    let sy: i32 = y0 < y1 ? 1: -1;
+    let dx = <i32>Mathf.abs(<f32>x1 - <f32>x0);
+    let dy = <i32>Mathf.abs(<f32>y1 - <f32>y0);
+    let sx = x0 < x1 ? 1: -1;
+    let sy = y0 < y1 ? 1: -1;
 
     let x: i32 = x0;
     let y: i32 = y0;
-    let err: i32 = dx - dy;
+    let err = dx - dy;
 
     while(true) {
         c3dev.draw_pixel(x, y, color);
