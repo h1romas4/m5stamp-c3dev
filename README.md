@@ -251,7 +251,7 @@ Thanks for all the open source.
 |Name|Version|License|
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32c3/get-started/index.html)|`v4.4.2`|BSD License|
-|[esp32-arduino](https://github.com/espressif/arduino-esp32)|`idf-release/v4.4` (c25a640)|LGPL-2.1 License|
+|[esp32-arduino](https://github.com/espressif/arduino-esp32)|`2.0.4` + `idf-release/v4.4` (c25a640)|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.3`|BSD License|
