@@ -157,6 +157,8 @@ idf.py monitor
 idf.py menuconfig
 ```
 
+C3DEV Configuration → Select GPIO 18/19
+
 ![](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_05.png)
 
 ### JTAG debug with Visual Studio Code
