@@ -164,7 +164,7 @@ class AnalogClock {
 
 export function init(): void {
     // ToDo: Workaround: Initialize Wasm3 Stack
-    memor.grow(1);
+    memory.grow(1);
     // Test env.seed
     seed();
 }
