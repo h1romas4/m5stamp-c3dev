@@ -208,16 +208,6 @@ idf.py menuconfig
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
 
-#### WiFi/DHCP
-
-With esp-idf `4.4.1` and arduino-esp32 `2.0.4` , DHCP for WiFi did not work correctly.
-
-> [DHCP client failed on 2.0.4 #7068](https://github.com/espressif/arduino-esp32/issues/7068)
-
-```
-I (4407) esp_netif_handlers: sta ip: 255.255.255.255, mask: 255.255.255.255, gw: 255.255.255.255
-```
-
 ## AssemblyScript and Wasm3
 
 ## Build AssemblyScript
@@ -251,7 +241,7 @@ Thanks for all the open source.
 |Name|Version|License|
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32c3/get-started/index.html)|`v4.4.2`|BSD License|
-|[esp32-arduino](https://github.com/espressif/arduino-esp32)|`2.0.4` + `idf-release/v4.4` (c25a640)|LGPL-2.1 License|
+|[esp32-arduino](https://github.com/espressif/arduino-esp32/releases/tag/2.0.4)|`2.0.4`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.3`|BSD License|
