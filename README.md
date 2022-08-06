@@ -179,7 +179,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
 
 ### Note
 
-- If the LCD color is inverted.
+#### If the LCD color is inverted.
 
 `main/main.cpp`
 
@@ -189,14 +189,14 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
     // tft.invertDisplay(1);
 ```
 
-- Create SPIFFS parteation file
+#### Create SPIFFS parteation file
 
 ```
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin
 ```
 
-- Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
+#### Change the output destination of the log to U1 Serial/JTAG.(Don't forget to put it back)
 
 Component config → ESP System Settings → Channel for console output
 
@@ -206,7 +206,7 @@ idf.py menuconfig
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_03.png)
 
-- WiFi/DHCP
+#### WiFi/DHCP
 
 With esp-idf `4.4.1` and arduino-esp32 `2.0.4` , DHCP for WiFi did not work correctly.
 
