@@ -9,7 +9,7 @@ edition = "2021"
 nmea0183 = "0.3.0"
 
 [profile.release]
-opt-level = 's'
+opt-level = 1
 
 [package.metadata]
 wasm-opt = true
