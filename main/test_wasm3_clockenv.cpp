@@ -313,10 +313,10 @@ esp_err_t init_wasm(void)
 {
     SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
 
-    File wasm_file = SPIFFS_WASM.open("/cloclenv.wasm", "rb");
+    File wasm_file = SPIFFS_WASM.open("/clockenv.wasm", "rb");
     size_t wasm_size = wasm_file.size();
 
-    ESP_LOGI(TAG, "cloclenv.wasm: %d", wasm_size);
+    ESP_LOGI(TAG, "clockenv.wasm: %d", wasm_size);
     // Read .wasm
     uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
     if(wasm_binary == nullptr) {
