@@ -7,10 +7,12 @@
     "@babel/eslint-parser": "^7.18.9",
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
-    "parcel": "^2.7.0",
     "@parcel/source-map": "^2.1.0",
+    "parcel": "^2.7.0",
+    "wabt": "^1.0.29"
   },
   "scripts": {
+    "strip": "npx wasm-strip target/wasm32-unknown-unknown/release/gpsgsv.wasm"
   },
   "author": "h1romas4",
   "license": "MIT"

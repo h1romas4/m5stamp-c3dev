@@ -1,8 +1,24 @@
-use nmea::Nmea;
+use nmea0183::{Parser, ParseResult};
 
 fn main() {
-    let mut nmea = Nmea::new();
-    let gga = "$GPGGA,092750.000,5321.6802,N,00630.3372,W,1,8,1.03,61.7,M,55.2,M,,*76";
-    nmea.parse(gga).unwrap();
-    println!("{}", nmea);
+    let nmea = b"$GPGGA,145659.00,5956.695396,N,03022.454999,E,2,07,0.6,9.0,M,18.0,M,,*62\r\n$GPGGA,,,,,,,,,,,,,,*00\r\n";
+    let mut parser = Parser::new();
+    for b in &nmea[..] {
+        if let Some(result) = parser.parse_from_byte(*b) {
+            match result {
+                Ok(ParseResult::GGA(Some(gga))) => {
+                    println!("{:#?}", gga);
+                }, // Got GGA sentence
+                Ok(ParseResult::GGA(None)) => {
+                    println!("Got GGA sentence without valid data, receiver ok but has no solution");
+                },
+                Ok(_) => {
+                    println!("Some other sentences..");
+                },
+                Err(e) => {
+                    println!("Got parse error");
+                }
+            }
+        }
+    }
 }

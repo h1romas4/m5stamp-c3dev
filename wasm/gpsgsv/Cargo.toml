@@ -6,4 +6,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-nmea = "0.1.0"
+nmea0183 = "0.3.0"
+
+[profile.release]
+opt-level = 's'
+
+[package.metadata]
+wasm-opt = true
