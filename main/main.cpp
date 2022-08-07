@@ -10,13 +10,12 @@
 #include "test_tinypng.h"
 #include "test_nvs_wifi.h"
 
+#include "test_wasm3_clockenv.h"
 #ifdef CONFIG_GPIO1819_UNITENV_III
 #include "test_i2c_gpio1819.h"
 #endif
 #ifdef CONFIG_GPIO1819_UNIT_GPS
 #include "test_uart_gpio1819.h"
-#else
-#include "test_wasm3_clockenv.h"
 #endif
 
 static const char *TAG = "main.cpp";
@@ -110,6 +109,10 @@ void loop(void)
 {
     // Test Switch
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+    // GPS
+    #ifdef CONFIG_GPIO1819_UNIT_GPS
+    get_i2c_unitgps_data();
+    #endif
     // Test WebAssembly
     if(enable_wasm) tick_wasm();
     delay(500);

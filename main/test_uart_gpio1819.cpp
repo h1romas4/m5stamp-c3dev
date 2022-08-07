@@ -16,8 +16,10 @@ TinyGPSPlus gps;
 void init_uart_gpio1819(void)
 {
     GPSRaw.begin(9600);
-    // GPS init
-    GPSRaw.setPins(19, 18);
+    // Set pin (connected reverse)
+    GPSRaw.setPins(/* GPS TXD (yellow) */ 19, /* GPS RXD (write) */ 18);
+
+    ESP_LOGI(TAG, "Hardware serial initialized.");
 }
 
 void get_i2c_unitgps_data()
