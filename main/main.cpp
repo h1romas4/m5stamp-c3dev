@@ -9,13 +9,14 @@
 #include "test_freetype.h"
 #include "test_tinypng.h"
 #include "test_nvs_wifi.h"
-#include "test_wasm3.h"
 
 #ifdef CONFIG_GPIO1819_UNITENV_III
 #include "test_i2c_gpio1819.h"
 #endif
 #ifdef CONFIG_GPIO1819_UNIT_GPS
 #include "test_uart_gpio1819.h"
+#else
+#include "test_wasm3_clockenv.h"
 #endif
 
 static const char *TAG = "main.cpp";

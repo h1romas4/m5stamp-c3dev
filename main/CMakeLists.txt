@@ -4,7 +4,7 @@ set(INCLUDEDIRS
 
 set(SRCS
     main.cpp
-    test_wasm3.cpp
+    test_wasm3_clockenv.cpp
     test_freetype.cpp
     test_tinypng.cpp
     test_nvs_wifi.cpp
