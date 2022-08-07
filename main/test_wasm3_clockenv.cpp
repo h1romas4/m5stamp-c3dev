@@ -20,11 +20,7 @@
 unitenv_t unitenv;
 #endif
 
-#ifdef CONFIG_GPIO1819_UNIT_GPS
-#include "test_uart_gpio1819.h"
-#endif
-
-static const char *TAG = "test_wasm3.cpp";
+static const char *TAG = "test_wasm3_clockenv.cpp";
 
 /**
  * Wasm3 member
