@@ -43,7 +43,7 @@ let wasmExports;
  * Load WebAssembly
  */
 async function loadWasm() {
-    const response = await fetch(new URL('../dist/clockenv.wasm', import.meta.url));
+    const response = await fetch(new URL('../dist/gpsgsv.wasm', import.meta.url));
     const responseArrayBuffer = new Uint8Array(await response.arrayBuffer());
     const wasm_bytes = new Uint8Array(responseArrayBuffer).buffer;
     let module = await WebAssembly.compile(wasm_bytes);
@@ -82,15 +82,6 @@ function createImports() {
             canvasContext.moveTo(x0, y0);
             canvasContext.lineTo(x1, y1);
             canvasContext.stroke();
-        },
-        'get_env_tmp': () => {
-            return 19.771495819091798;
-        },
-        'get_env_hum': () => {
-            return 45.947967529296878;
-        },
-        'get_env_pressure': () => {
-            return 996.9368896484375;
         },
         'log': (string) => {
             console.log(decodeUTF8(string));
@@ -136,7 +127,7 @@ function decodeUTF8(wasmPtr) {
  */
 (async function() {
     await loadWasm();
-    wasmExports.clock(80, 64, 63);
+    wasmExports.gpsgsv(80, 64, 63);
     wasmExports.init();
     setInterval(() => {
         wasmExports.tick();
