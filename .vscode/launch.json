@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "filterStderr": true,
-            "miDebuggerPath": "${env:ESP32_TOOLCHAIN_HOME}/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gdb",
+            "miDebuggerPath": "${env:ESP32_TOOLCHAIN_HOME}/esp-2021r2-patch3-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gdb",
             "MIMode": "gdb",
             "targetArchitecture": "x64", // dummy
             "program": "${workspaceRoot}/build/hello-world.elf",
