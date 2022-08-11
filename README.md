@@ -19,16 +19,10 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 
 ![AssemblyScript and Wasm3](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_04.jpg)
 
-- TrueType font with Japanese output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
+- Japanese TrueType font output to LCD - [test_freetype.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_freetype.cpp)
 - Output PNG images in SD card to LCD - [test_tinypng.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_tinypng.cpp)
 - NTP synchronization via WiFi connection - [test_nvs_wifi.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_nvs_wifi.cpp)
-- Test ADC on GPIO0
-    - UNIT Light - [main.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/main.cpp#L108-L111)
-- Test I2C on GPIO18, 19
-    - UNIT ENV III - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp#L43-L50)
-    - UNIT ULTRASONIC - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp#L52-L61)
-- Test UART on GPIO18, 19
-    - UNIT GPS - [test_uart_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_uart_gpio1819.cpp)
+- Test I2C sensor connection to GPIO 18 and 19 (UNIT ENV III) - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp)
 - WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3.cpp)
 - Support RGB LED (SK6812)
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
