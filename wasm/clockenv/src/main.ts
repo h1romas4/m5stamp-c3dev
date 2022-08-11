@@ -21,6 +21,7 @@ class AnalogClock {
     private envTmpRaito: i32;
     private envHumRaito: i32;
     private envPressureRaito: i32;
+    private envDistance: i32;
 
     constructor(cx: u32, cy: u32, cr:u32) {
         this.cx = cx;
@@ -82,10 +83,16 @@ class AnalogClock {
         }
         const pressure = c3dev.get_env_pressure();
         const pressureRaito = <i32>Math.round(pressure / 20);
+        const intpressure = Math.floor(pressure);
         if(pressureRaito != this.envPressureRaito) {
             this.drawArcMeter(180, 240, <f32>pressureRaito, c3dev.COLOR.GREEN, c3dev.COLOR.BLUE);
             this.envPressureRaito = pressureRaito;
-            c3dev.drawString(0, 0, c3dev.COLOR.GREEN, `${pressure}`.slice(0, 5) + "hP");
+            c3dev.drawString(0, 0, c3dev.COLOR.GREEN, `${pressureRaito}`.slice(0, 4) + "hP");
+        }
+        const distance = <i32>Math.floor(c3dev.get_ultrasonic_distance() / 10);
+        if(distance !=0 && distance / 10 != this.envDistance) {
+            this.envDistance = <i32>(distance / 10);
+            c3dev.drawString(128, 0, c3dev.COLOR.CYAN, `000${distance}cm`.slice(-5));
         }
     }
 

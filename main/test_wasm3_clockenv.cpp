@@ -198,6 +198,15 @@ m3ApiRawFunction(c3dev_get_env_pressure) {
     #endif
 }
 
+m3ApiRawFunction(c3dev_get_ultrasonic_distance) {
+    m3ApiReturnType(float_t)
+    #ifdef CONFIG_GPIO1819_I2C
+    m3ApiReturn(ultrasonic.distance);
+    #else
+    m3ApiReturn(/* dummy */20.0);
+    #endif
+}
+
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
@@ -211,6 +220,7 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
     m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);
     m3_LinkRawFunction(module, "c3dev", "get_env_pressure", "f()",  &c3dev_get_env_pressure);
+    m3_LinkRawFunction(module, "c3dev", "get_ultrasonic_distance", "f()",  &c3dev_get_ultrasonic_distance);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
     return m3Err_none;
