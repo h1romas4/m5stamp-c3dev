@@ -18,6 +18,11 @@
  * Unit ENV III member
  */
 unitenv_t unitenv;
+
+/**
+ * Unit UltraSonic
+ */
+unit_ultrasonic_t ultrasonic;
 #endif
 
 static const char *TAG = "test_wasm3_clockenv.cpp";
@@ -342,7 +347,7 @@ esp_err_t tick_wasm(void)
 
     #ifdef CONFIG_GPIO1819_I2C
     // Get Unit ENV III date
-    get_i2c_unitenv_data(&unitenv);
+    get_i2c_unit_data(&unitenv, &ultrasonic);
     #endif
 
     result = m3_Call(wasm3_func_tick, 0, nullptr);
