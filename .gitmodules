@@ -22,9 +22,12 @@
 [submodule "components/led/Adafruit_NeoPixel"]
 	path = components/led/Adafruit_NeoPixel
 	url = https://github.com/adafruit/Adafruit_NeoPixel
-[submodule "components/tinygps/TinyGPSPlus"]
-	path = components/tinygps/TinyGPSPlus
-	url = https://github.com/mikalhart/TinyGPSPlus
 [submodule "components/lcd/adfruitbus"]
 	path = components/lcd/adfruitbus
 	url = https://github.com/adafruit/Adafruit_BusIO
+[submodule "components/lwgps/lwgps"]
+	path = components/lwgps/lwgps
+	url = https://github.com/MaJerle/lwgps
+[submodule "components/ultrasonic/M5Unit-Sonic"]
+	path = components/ultrasonic/M5Unit-Sonic
+	url = https://github.com/m5stack/M5Unit-Sonic

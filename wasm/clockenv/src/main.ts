@@ -37,7 +37,7 @@ class AnalogClock {
         const cx = this.cx;
         const cy = this.cy;
         const cr = <f32>this.cr;
-        
+
         circle(cx, cy, this.cr, c3dev.COLOR.BLUE);
         circle(cx, cy, 2, c3dev.COLOR.BLUE);
 
@@ -49,8 +49,8 @@ class AnalogClock {
             const sy = cy + <i32>(sin * (cr - 6));
             const tx = cx + <i32>(cos * (cr - 1));
             const ty = cy + <i32>(sin * (cr - 1));
-            const color = angle % 30 == 0 
-                ? c3dev.COLOR.BLUE 
+            const color = angle % 30 == 0
+                ? c3dev.COLOR.BLUE
                 : 0x0015;
             line(sx, sy, tx, ty, color);
         }
@@ -64,7 +64,7 @@ class AnalogClock {
         const hs = hands.seconds;
         const hm = hands.minutes;
         const hh = hands.hours;
-        
+
         if(hs != this.rsecond) {
             this.drawHand(this.rsecond, cr * HAND_LENGTH_SECOND, c3dev.COLOR.BLACK);
             this.drawHand(hs, cr * HAND_LENGTH_SECOND, 0x0015);
@@ -125,7 +125,7 @@ class AnalogClock {
         }
         let start = sangle;
         let stop = eangle;
-        
+
         if(sangle < eangle) {
             start = eangle;
             stop = sangle;
@@ -135,13 +135,13 @@ class AnalogClock {
         const cx = this.cx;
         const cy = this.cy;
         const cr = <f32>this.cr;
-        
+
         let sraito: f32 = 0;
         for(let angle: f32 = start; angle > stop; angle -= 0.1) {
             const rad = angle * DEG_TO_RAD;
             const cos = Mathf.cos(rad);
             const sin = Mathf.sin(rad);
-            
+
             const sx = cx + <i32>(cos * (cr + 10));
             const sy = cy + <i32>(sin * (cr + 10));
             const tx = cx + <i32>(cos * (cr + 8));
@@ -206,7 +206,7 @@ function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
 }
 
 function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
-    
+
     let dx = abs<i32>(x1 - x0);
     let dy = abs<i32>(y1 - y0);
     let sx = x0 < x1 ? 1: -1;

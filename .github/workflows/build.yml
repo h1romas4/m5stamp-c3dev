@@ -26,6 +26,9 @@ jobs:
       run: |
         . ~/esp/esp-idf/export.sh
         idf.py build
-        cd wasm
+        cd wasm/clockenv
+        npm install
+        npm run asbuild
+        cd wasm/gpsgsv
         npm install
         npm run asbuild

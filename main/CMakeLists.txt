@@ -4,7 +4,7 @@ set(INCLUDEDIRS
 
 set(SRCS
     main.cpp
-    test_wasm3.cpp
+    test_wasm3_clockenv.cpp
     test_freetype.cpp
     test_tinypng.cpp
     test_nvs_wifi.cpp
@@ -15,4 +15,4 @@ set(SRCS
 idf_component_register(
     INCLUDE_DIRS ${INCLUDEDIRS}
     SRCS ${SRCS}
-    REQUIRES arduino-esp32 freetype lcd led tinypng tinygps wasm unitenv)
+    REQUIRES arduino-esp32 freetype lcd led tinypng lwgps wasm unitenv ultrasonic)
