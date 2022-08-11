@@ -104,7 +104,7 @@ class AnalogClock {
             this.envPressureRaito = pressureRaito;
             c3dev.drawString(0, 0, c3dev.COLOR.GREEN, `${intpressure}`.slice(0, 4) + "hP");
         }
-        const distance = <i32>Math.floor(c3dev.get_ultrasonic_distance() / 10);
+        const distance = <i32>Mathf.floor(c3dev.get_ultrasonic_distance() / 10);
         if(distance !=0 && distance / 10 != this.envDistance) {
             this.envDistance = <i32>(distance / 10);
             c3dev.drawString(128, 0, c3dev.COLOR.CYAN, `000${distance}cm`.slice(-5));
