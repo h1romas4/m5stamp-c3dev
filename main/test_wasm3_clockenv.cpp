@@ -12,7 +12,7 @@
 #include "c3dev_board.h"
 #include "test_freetype.h"
 
-#ifdef CONFIG_GPIO1819_UNITENV_III
+#ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
 /**
  * Unit ENV III member
@@ -168,7 +168,7 @@ m3ApiRawFunction(c3dev_draw_string)
 
 m3ApiRawFunction(c3dev_get_env_tmp) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_UNITENV_III
+    #ifdef CONFIG_GPIO1819_I2C
     m3ApiReturn(unitenv.tmp);
     #else
     m3ApiReturn(/* dummy */20.0);
@@ -177,7 +177,7 @@ m3ApiRawFunction(c3dev_get_env_tmp) {
 
 m3ApiRawFunction(c3dev_get_env_hum) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_UNITENV_III
+    #ifdef CONFIG_GPIO1819_I2C
     m3ApiReturn(unitenv.hum);
     #else
     m3ApiReturn(/* dummy */40.0);
@@ -186,7 +186,7 @@ m3ApiRawFunction(c3dev_get_env_hum) {
 
 m3ApiRawFunction(c3dev_get_env_pressure) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_UNITENV_III
+    #ifdef CONFIG_GPIO1819_I2C
     m3ApiReturn(unitenv.pressure);
     #else
     m3ApiReturn(/* dummy */1000.0);
@@ -340,7 +340,7 @@ esp_err_t tick_wasm(void)
 {
     M3Result result = m3Err_none;
 
-    #ifdef CONFIG_GPIO1819_UNITENV_III
+    #ifdef CONFIG_GPIO1819_I2C
     // Get Unit ENV III date
     get_i2c_unitenv_data(&unitenv);
     #endif
