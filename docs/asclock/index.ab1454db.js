@@ -566,7 +566,7 @@ const CANVAS_FONT_SIZE = 8;
 /**
  * Load WebAssembly
  */ async function loadWasm() {
-    const response = await fetch(new URL(require("69c9bdf6183552b6")));
+    const response = await fetch(new URL(require("ba524761c7deaf69")));
     const responseArrayBuffer = new Uint8Array(await response.arrayBuffer());
     const wasm_bytes = new Uint8Array(responseArrayBuffer).buffer;
     let module = await WebAssembly.compile(wasm_bytes);
@@ -613,6 +613,9 @@ const CANVAS_FONT_SIZE = 8;
         "get_env_pressure": ()=>{
             return 996.9368896484375;
         },
+        "get_ultrasonic_distance": ()=>{
+            return 4000.10;
+        },
         "log": (string)=>{
             console.log(decodeUTF8(string));
         },
@@ -655,8 +658,8 @@ function decodeUTF8(wasmPtr) {
     }, 500);
 })();
 
-},{"69c9bdf6183552b6":"a6n3f"}],"a6n3f":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("brDXR") + "app.722072a8.wasm" + "?" + Date.now();
+},{"ba524761c7deaf69":"irgyo"}],"irgyo":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("brDXR") + "clockenv.a67d0fc1.wasm" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";

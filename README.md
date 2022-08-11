@@ -219,7 +219,7 @@ idf.py menuconfig
 ## Build AssemblyScript
 
 ```
-cd wasm
+cd wasm/clockenv
 npm install
 ```
 
