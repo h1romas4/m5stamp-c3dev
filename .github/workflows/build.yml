@@ -29,6 +29,6 @@ jobs:
         cd wasm/clockenv
         npm install
         npm run asbuild
-        cd wasm/gpsgsv
+        cd ../gpsgsv
         npm install
         npm run asbuild
