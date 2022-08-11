@@ -92,6 +92,9 @@ function createImports() {
         'get_env_pressure': () => {
             return 996.9368896484375;
         },
+        'get_ultrasonic_distance': () => {
+            return 4000.10;
+        },
         'log': (string) => {
             console.log(decodeUTF8(string));
         },

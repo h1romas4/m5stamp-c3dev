@@ -28,3 +28,6 @@
 [submodule "components/lwgps/lwgps"]
 	path = components/lwgps/lwgps
 	url = https://github.com/MaJerle/lwgps
+[submodule "components/ultrasonic/M5Unit-Sonic"]
+	path = components/ultrasonic/M5Unit-Sonic
+	url = https://github.com/m5stack/M5Unit-Sonic

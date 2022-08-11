@@ -11,10 +11,10 @@
 #include "test_nvs_wifi.h"
 
 #include "test_wasm3_clockenv.h"
-#ifdef CONFIG_GPIO1819_UNITENV_III
+#ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
 #endif
-#ifdef CONFIG_GPIO1819_UNIT_GPS
+#ifdef CONFIG_GPIO1819_UART
 #include "test_uart_gpio1819.h"
 #endif
 
@@ -89,10 +89,10 @@ void setup(void)
         esp_restart();
     }
 
-    #ifdef CONFIG_GPIO1819_UNITENV_III
+    #ifdef CONFIG_GPIO1819_I2C
     init_i2c_gpio1819();
     #endif
-    #ifdef CONFIG_GPIO1819_UNIT_GPS
+    #ifdef CONFIG_GPIO1819_UART
     init_uart_gpio1819();
     #endif
 
@@ -117,7 +117,7 @@ void loop(void)
     pixels.show();
 
     // GPS
-    #ifdef CONFIG_GPIO1819_UNIT_GPS
+    #ifdef CONFIG_GPIO1819_UART
     // get_i2c_unitgps_data();
     #endif
 
