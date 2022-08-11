@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "esp_log.h"
-#include "TinyGPSPlus.h"
+#include "lwgps/lwgps.h"
 
 #include "test_uart_gpio1819.h"
 
@@ -10,30 +10,51 @@ static const char *TAG = "test_uart_gpio1819.cpp";
 //  M5STACK UNIT GPS
 //  https://docs.m5stack.com/en/unit/gps
 HardwareSerial GPSRaw(1);
-// The TinyGPSPlus object
-TinyGPSPlus gps;
+
+/* GPS handle */
+lwgps_t hgps;
 
 void init_uart_gpio1819(void)
 {
     GPSRaw.begin(9600);
-    // GPS init
-    GPSRaw.setPins(19, 18);
+    // Set pin (connected reverse)
+    GPSRaw.setPins(/* GPS TXD (yellow) */ 19, /* GPS RXD (write) */ 18);
+    // Init GPS
+    lwgps_init(&hgps);
+
+    ESP_LOGI(TAG, "Hardware serial and lwgps initialized.");
 }
 
 void get_i2c_unitgps_data()
 {
+    uint8_t buffer[255];
+
     while(GPSRaw.available() > 0) {
-        // encode GPS
-        if(gps.encode(GPSRaw.read())) {
-            // output GPS data
-            if(gps.location.isValid()) {
-                ESP_LOGI(TAG, "Location(lat, lng): (%lf, %lf)", gps.location.lat(), gps.location.lng());
+        size_t size = GPSRaw.read(buffer, sizeof(buffer));
+        if(size > 0) {
+            // ESP_LOGI(TAG, "GPS: %s", buffer);
+            lwgps_process(&hgps, buffer, size);
+        }
+        if(hgps.is_valid == 1) {
+            ESP_LOGI(TAG, "Latitude: %f degrees", hgps.latitude);
+            ESP_LOGI(TAG, "Longitude: %f degrees", hgps.longitude);
+            ESP_LOGI(TAG, "Altitude: %f meters", hgps.altitude);
+
+            for(uint8_t i = 0; i < 12; i++) {
+                if(hgps.satellites_ids[i] != 0) {
+                    ESP_LOGI(TAG, "GSA satellites_ids[%d]=%d", i, hgps.satellites_ids[i]);
+                }
             }
-            if(gps.date.isValid()) {
-                ESP_LOGI(TAG, "Date: %d/%d/%d", gps.date.year(), gps.date.month(), gps.date.day());
-            }
-            if(gps.time.isValid()) {
-                ESP_LOGI(TAG, "Time: %d:%d:%d.%d", gps.time.hour(), gps.time.minute(), gps.time.second(), gps.time.centisecond());
+        }
+        for(uint8_t i = 0; i < 12; i++) {
+            uint8_t num = hgps.sats_in_view_desc[i].num;
+            if(num != 0) {
+                ESP_LOGI(TAG, "GSV %d, elevation %d, azimuth %d, snr %d",
+                    num,
+                    hgps.sats_in_view_desc[i].elevation,
+                    hgps.sats_in_view_desc[i].azimuth,
+                    hgps.sats_in_view_desc[i].snr
+                );
             }
         }
     }

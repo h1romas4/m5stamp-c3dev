@@ -12,8 +12,8 @@
     "assemblyscript": "^0.20.16"
   },
   "scripts": {
-    "asbuild:web": "asc src/main.ts -o ./dist/app.wasm -t build/app.wat -b build/app.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
-    "asbuild:wasm3": "asc src/main.ts -o ../resources/wasm/app.wasm -t build/app.wat -b build/app.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
+    "asbuild:web": "asc src/main.ts -o ./dist/gpspvs.wasm -t build/gpspvs.wat -b build/gpspvs.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
+    "asbuild:wasm3": "asc src/main.ts -o ../../resources/wasm/gpspvs.wasm -t build/gpspvs.wat -b build/gpspvs.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
     "asbuild": "npm run asbuild:wasm3",
     "start": "npm run asbuild:web && parcel web/index.html",
     "deploy": "npm run asbuild:web && parcel --public-url '.' web/index.html"

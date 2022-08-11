@@ -43,7 +43,7 @@ let wasmExports;
  * Load WebAssembly
  */
 async function loadWasm() {
-    const response = await fetch(new URL('../dist/app.wasm', import.meta.url));
+    const response = await fetch(new URL('../dist/clockenv.wasm', import.meta.url));
     const responseArrayBuffer = new Uint8Array(await response.arrayBuffer());
     const wasm_bytes = new Uint8Array(responseArrayBuffer).buffer;
     let module = await WebAssembly.compile(wasm_bytes);
@@ -91,6 +91,9 @@ function createImports() {
         },
         'get_env_pressure': () => {
             return 996.9368896484375;
+        },
+        'get_ultrasonic_distance': () => {
+            return 4000.10;
         },
         'log': (string) => {
             console.log(decodeUTF8(string));

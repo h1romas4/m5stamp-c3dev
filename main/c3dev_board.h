@@ -2,6 +2,8 @@
 #include "Adafruit_ST7735.h"
 #include "Adafruit_NeoPixel.h"
 
+#define C3DEV_GPIO_0 0
+
 #define C3DEV_SPI_CLOCK 25000000
 #define C3DEV_SPI_SCLK 4
 #define C3DEV_SPI_MOSI 5

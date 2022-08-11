@@ -16,11 +16,9 @@ menu "C3DEV Configuration"
             default GPIO1819_NONE
         config GPIO1819_NONE
             bool "None"
-        config GPIO1819_UNITENV_III
-            bool "Connect Unit ENV III (I2C)"
-        config GPIO1819_UNIT_GPS
-            bool "Connect Unit GPS (UART)"
-        config GPIO1819_UNIT_ULTRASONIC
-            bool "Connect Unit ULTRA SONIC (I2C)"
+        config GPIO1819_I2C
+            bool "Connect I2C (UNIT ENV III, UltraSonic)"
+        config GPIO1819_UART
+            bool "Connect Unit UART (UNIT GPS)"
     endchoice
 endmenu

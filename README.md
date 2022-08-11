@@ -244,12 +244,13 @@ Thanks for all the open source.
 |[esp32-arduino](https://github.com/espressif/arduino-esp32/releases/tag/2.0.4)|`2.0.4`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
+|[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.3`|BSD License|
 |[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.13.1`|MIT License|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.3`|MIT License|
 |[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.5`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
-|[TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)|`v1.0.3`|LGPL|
+|[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.20.16`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
