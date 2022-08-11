@@ -12,20 +12,19 @@
 #include "c3dev_board.h"
 #include "test_freetype.h"
 
-#ifdef CONFIG_GPIO1819_I2C
+#ifdef CONFIG_GPIO1819_UNITENV_III
 #include "test_i2c_gpio1819.h"
 /**
  * Unit ENV III member
  */
 unitenv_t unitenv;
-
-/**
- * Unit UltraSonic
- */
-unit_ultrasonic_t ultrasonic;
 #endif
 
-static const char *TAG = "test_wasm3_clockenv.cpp";
+#ifdef CONFIG_GPIO1819_UNIT_GPS
+#include "test_uart_gpio1819.h"
+#endif
+
+static const char *TAG = "test_wasm3.cpp";
 
 /**
  * Wasm3 member
@@ -173,7 +172,7 @@ m3ApiRawFunction(c3dev_draw_string)
 
 m3ApiRawFunction(c3dev_get_env_tmp) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
+    #ifdef CONFIG_GPIO1819_UNITENV_III
     m3ApiReturn(unitenv.tmp);
     #else
     m3ApiReturn(/* dummy */20.0);
@@ -182,7 +181,7 @@ m3ApiRawFunction(c3dev_get_env_tmp) {
 
 m3ApiRawFunction(c3dev_get_env_hum) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
+    #ifdef CONFIG_GPIO1819_UNITENV_III
     m3ApiReturn(unitenv.hum);
     #else
     m3ApiReturn(/* dummy */40.0);
@@ -191,19 +190,10 @@ m3ApiRawFunction(c3dev_get_env_hum) {
 
 m3ApiRawFunction(c3dev_get_env_pressure) {
     m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
+    #ifdef CONFIG_GPIO1819_UNITENV_III
     m3ApiReturn(unitenv.pressure);
     #else
     m3ApiReturn(/* dummy */1000.0);
-    #endif
-}
-
-m3ApiRawFunction(c3dev_get_ultrasonic_distance) {
-    m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
-    m3ApiReturn(ultrasonic.distance);
-    #else
-    m3ApiReturn(/* dummy */20.0);
     #endif
 }
 
@@ -220,7 +210,6 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
     m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);
     m3_LinkRawFunction(module, "c3dev", "get_env_pressure", "f()",  &c3dev_get_env_pressure);
-    m3_LinkRawFunction(module, "c3dev", "get_ultrasonic_distance", "f()",  &c3dev_get_ultrasonic_distance);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
     return m3Err_none;
@@ -324,10 +313,10 @@ esp_err_t init_wasm(void)
 {
     SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
 
-    File wasm_file = SPIFFS_WASM.open("/clockenv.wasm", "rb");
+    File wasm_file = SPIFFS_WASM.open("/app.wasm", "rb");
     size_t wasm_size = wasm_file.size();
 
-    ESP_LOGI(TAG, "clockenv.wasm: %d", wasm_size);
+    ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
     // Read .wasm
     uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
     if(wasm_binary == nullptr) {
@@ -355,9 +344,9 @@ esp_err_t tick_wasm(void)
 {
     M3Result result = m3Err_none;
 
-    #ifdef CONFIG_GPIO1819_I2C
+    #ifdef CONFIG_GPIO1819_UNITENV_III
     // Get Unit ENV III date
-    get_i2c_unit_data(&unitenv, &ultrasonic);
+    get_i2c_unitenv_data(&unitenv);
     #endif
 
     result = m3_Call(wasm3_func_tick, 0, nullptr);

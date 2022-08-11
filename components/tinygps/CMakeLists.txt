@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(INCLUDEDIRS
-    M5Unit-Sonic/src
+    TinyGPSPlus/src
 )
 
 set(SRCS
-    M5Unit-Sonic/src/Unit_Sonic.cpp
+    TinyGPSPlus/src/TinyGPS++.cpp
 )
 
 idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS} REQUIRES arduino-esp32)

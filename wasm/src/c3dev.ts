@@ -6,7 +6,6 @@ export declare function draw_string(x: i32, y: i32, color: i32, string: ArrayBuf
 export declare function get_env_tmp(): f32;
 export declare function get_env_hum(): f32;
 export declare function get_env_pressure(): f32;
-export declare function get_ultrasonic_distance(): f32;
 
 export declare function log(string: ArrayBuffer): void;
 
