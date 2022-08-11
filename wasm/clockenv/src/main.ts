@@ -171,6 +171,8 @@ class AnalogClock {
 
 export function init(): void {
     // ToDo: Workaround: Initialize Wasm3 Stack
+    // Without this line, the Wasm3 stack will not work properly.
+    // For example, the argument of the clock() function is the destroyed value.
     memory.grow(1);
     // Test env.seed
     seed();
@@ -184,8 +186,6 @@ export function tick(): void {
     if(analogClock != null) {
         analogClock.tick();
     }
-    // c3dev.drawString(28, 16 * 3, c3dev.COLOR.WHITE, now.toDateString());
-    // c3dev.drawString(52, 16 * 4, c3dev.COLOR.WHITE, now.toTimeString());
 }
 
 function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
@@ -213,7 +213,6 @@ function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
 }
 
 function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
-
     let dx = abs<i32>(x1 - x0);
     let dy = abs<i32>(y1 - y0);
     let sx = x0 < x1 ? 1: -1;
