@@ -64,11 +64,6 @@ void setup(void)
     tft.invertDisplay(0);
     // tft.invertDisplay(1);
 
-    // RGB LED initialize
-    pixels.begin();
-    pixels.setPixelColor(0, pixels.Color(16, 0, 16));
-    pixels.show();
-
     // Test FreeType
     init_freetype();
     font_render = create_freetype_render(/* font size */ 20, /* font cache */ 64);
@@ -109,10 +104,23 @@ void loop(void)
 {
     // Test Switch
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+
+    // Test GPIO0 ADC (UNIT Light)
+    float_t an = (float_t)analogRead(C3DEV_GPIO_0) / (float_t)4096;
+    if(an > 1) an = 1;
+    ESP_LOGI(TAG, "GPIO0 analog: %f", an);
+
+    // Test RGB LED
+    an = pow(an, 8);
+    pixels.begin();
+    pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
+    pixels.show();
+
     // GPS
     #ifdef CONFIG_GPIO1819_UNIT_GPS
-    get_i2c_unitgps_data();
+    // get_i2c_unitgps_data();
     #endif
+
     // Test WebAssembly
     if(enable_wasm) tick_wasm();
     delay(500);
