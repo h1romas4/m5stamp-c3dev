@@ -154,8 +154,8 @@ CONFIG_C3DEV_NTP_SERVER2="ntp2.jst.mfeed.ad.jp"
 CONFIG_C3DEV_NTP_SERVER3="ntp3.jst.mfeed.ad.jp"
 # end of NTP Server Configuration
 
-# CONFIG_GPIO1819_NONE is not set
-CONFIG_GPIO1819_I2C=y
+CONFIG_GPIO1819_NONE=y
+# CONFIG_GPIO1819_I2C is not set
 # CONFIG_GPIO1819_UART is not set
 # end of C3DEV Configuration
 
