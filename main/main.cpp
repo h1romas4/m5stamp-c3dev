@@ -116,7 +116,7 @@ void loop(void)
 
     // GPS
     #ifdef CONFIG_GPIO1819_UART
-    // get_i2c_unitgps_data();
+    get_i2c_unitgps_data();
     #endif
 
     // Test WebAssembly
