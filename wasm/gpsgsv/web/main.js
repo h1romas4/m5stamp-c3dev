@@ -122,15 +122,54 @@ function decodeUTF8(wasmPtr) {
     return decoder.decode(utf8);
 }
 
+function getUint8Array(wasmPtr) {
+    const memory = wasmExports.memory.buffer;
+    const layout = new Uint32Array(memory, wasmPtr, 3);
+    return new Uint8Array(memory, layout[1], layout[2]);
+}
+
 /**
  * Main
  */
 (async function() {
     await loadWasm();
-    wasmExports.gpsgsv(80, 64, 63);
+
+    // import AssemblyScript functions
+    const { __pin, __unpin, __collect} = wasmExports;
+
+    // initialize application
     wasmExports.init();
+    wasmExports.gpsgsv(80, 64, 63);
+
+    // create temporary array for array interface
+    let satellitesArrayPrt = __pin(wasmExports.createSatellitesArray())
+    let satellites = getUint8Array(satellitesArrayPrt);
+
+    // set test data
+    wasmExports.setGvs(2 , 63, 201, 0);
+    wasmExports.setGvs(5 , 67, 319, 0);
+    wasmExports.setGvs(6 , 11, 152, 16);
+    wasmExports.setGvs(7 , 28, 53 , 32);
+    wasmExports.setGvs(11, 44, 162, 26);
+    wasmExports.setGvs(13, 62, 228, 0);
+    wasmExports.setGvs(15, 27, 244, 0);
+    wasmExports.setGvs(18, 11, 319, 0);
+    wasmExports.setGvs(20, 68, 84 , 33);
+    wasmExports.setGvs(29, 25, 278, 0);
+    wasmExports.setGvs(30, 44, 88 , 30);
+    satellites[0] = 6;
+    satellites[1] = 7;
+    satellites[2] = 11;
+    satellites[3] = 20;
+    satellites[4] = 30;
+    wasmExports.setSatellites(satellitesArrayPrt);
+
+    // free temporary array
+    __unpin(satellitesArrayPrt);
+
+    // loop
     setInterval(() => {
         wasmExports.tick();
-        wasmExports.__collect() // clean up all garbage
+        __collect() // clean up all garbage
     }, 500);
 })();
