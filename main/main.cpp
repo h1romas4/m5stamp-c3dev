@@ -10,12 +10,14 @@
 #include "test_tinypng.h"
 #include "test_nvs_wifi.h"
 
-#include "test_wasm3_clockenv.h"
 #ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
 #endif
 #ifdef CONFIG_GPIO1819_UART
 #include "test_uart_gpio1819.h"
+#include "test_wasm3_gpsgsv.h"
+#else
+#include "test_wasm3_clockenv.h"
 #endif
 
 static const char *TAG = "main.cpp";
@@ -95,7 +97,10 @@ void setup(void)
     #endif
 
     // Test WebAssembly
-    if(init_wasm() == ESP_OK) enable_wasm = true;
+    #ifdef CONFIG_GPIO1819_UART
+    #else
+    if(clockenv_init_wasm() == ESP_OK) enable_wasm = true;
+    #endif
 }
 
 void loop(void)
@@ -120,6 +125,12 @@ void loop(void)
     #endif
 
     // Test WebAssembly
-    if(enable_wasm) tick_wasm();
+    if(enable_wasm) {
+        #ifdef CONFIG_GPIO1819_UART
+        #else
+        clockenv_tick_wasm();
+        #endif
+    }
+
     delay(500);
 }

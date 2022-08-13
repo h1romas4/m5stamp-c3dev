@@ -320,14 +320,14 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     return ESP_OK;
 }
 
-esp_err_t clockenv_init_wasm(void)
+esp_err_t gpsgsv_init_wasm(void)
 {
     SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
 
-    File wasm_file = SPIFFS_WASM.open("/clockenv.wasm", "rb");
+    File wasm_file = SPIFFS_WASM.open("/gpsgsv.wasm", "rb");
     size_t wasm_size = wasm_file.size();
 
-    ESP_LOGI(TAG, "clockenv.wasm: %d", wasm_size);
+    ESP_LOGI(TAG, "gpsgsv.wasm: %d", wasm_size);
     // Read .wasm
     uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
     if(wasm_binary == nullptr) {
@@ -351,7 +351,7 @@ esp_err_t clockenv_init_wasm(void)
     return load_wasm(wasm_binary, wasm_size);
 }
 
-esp_err_t clockenv_tick_wasm(void)
+esp_err_t gpsgsv_tick_wasm(void)
 {
     M3Result result = m3Err_none;
 
