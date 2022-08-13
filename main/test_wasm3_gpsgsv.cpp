@@ -350,7 +350,7 @@ esp_err_t gpsgsv_init_wasm(void)
         return ESP_FAIL;
     }
     // Pined
-    uint32_t *i_argv[1] = { &wasm_satellites_ptr };
+    uint32_t *i_argv[2] = { &wasm_satellites_ptr };
     result = m3_Call(wasm3_func_pin, 1, (const void**)i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
