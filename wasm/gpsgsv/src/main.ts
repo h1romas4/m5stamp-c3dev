@@ -6,7 +6,7 @@ const MAX_SATELLITE: u32 = 12;
 const DEG_TO_RAD: f32 = Math.PI / 180;
 const ELAPSED_MINUTE_10 = 10 * 60 * 1000;
 
-class Gvs {
+class Gsv {
     elevation: u32;
     azimuth: u32;
     snr: u32;
@@ -21,7 +21,7 @@ class Pos {
 
 class GpsView {
     private satellites: Set<u32>;
-    private gsv: Map<u32, Gvs>;
+    private gsv: Map<u32, Gsv>;
 
     constructor(
         private cx: u32,
@@ -29,7 +29,7 @@ class GpsView {
         private cr: u32
     ) {
         this.satellites = new Set<u32>();
-        this.gsv = new Map<u32, Gvs>();
+        this.gsv = new Map<u32, Gsv>();
     }
 
     public tick(clear: bool): void {
