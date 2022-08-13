@@ -21,7 +21,12 @@ static const char *TAG = "test_wasm3_gpsgsv.cpp";
 IM3Environment wasm3_env;
 IM3Runtime wasm3_runtime;
 IM3Module wasm3_module;
+
+IM3Function wasm3_func_create_satellites_array;
+IM3Function wasm3_func_set_satellites;
+IM3Function wasm3_func_set_gvs;
 IM3Function wasm3_func_tick;
+IM3Function wasm3_func_pin;
 IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
@@ -34,6 +39,7 @@ IM3Function wasm3_func_collect;
 #define MAX_SATELLITE 12
 unitgpsgsv_t unitgpsgsv[MAX_SATELLITE];
 uint8_t satellites[MAX_SATELLITE];
+uint8_t *wasm_satellites;
 
 /**
  * SPIFFS member
@@ -227,6 +233,11 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         ESP_LOGE(TAG, "m3_FindFunction:wasm3_func_unpin: %s", result);
         return ESP_FAIL;
     }
+    result = m3_FindFunction(&wasm3_func_pin, wasm3_runtime, "__pin");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction:wasm3_func_pin: %s", result);
+        return ESP_FAIL;
+    }
     result = m3_FindFunction(&wasm3_func_collect, wasm3_runtime, "__collect");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction:wasm3_func_collect: %s", result);
@@ -262,8 +273,23 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    // Get tick function
+    // Get AS function
     result = m3_FindFunction(&wasm3_func_tick, wasm3_runtime, "tick");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
+        return ESP_FAIL;
+    }
+    result = m3_FindFunction(&wasm3_func_create_satellites_array, wasm3_runtime, "createSatellitesArray");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
+        return ESP_FAIL;
+    }
+    result = m3_FindFunction(&wasm3_func_set_satellites, wasm3_runtime, "setSatellites");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
+        return ESP_FAIL;
+    }
+    result = m3_FindFunction(&wasm3_func_set_gvs, wasm3_runtime, "setGvs");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
@@ -303,11 +329,40 @@ esp_err_t gpsgsv_init_wasm(void)
     tft.fillScreen(ST77XX_BLACK);
 
     // Load WebAssembly on Wasm3
-    return load_wasm(wasm_binary, wasm_size);
+    if(load_wasm(wasm_binary, wasm_size) != ESP_OK) {
+        return ESP_FAIL;
+    }
 
     // initialize GPS member
     memset(unitgpsgsv, 0, sizeof(unitgpsgsv_t) * 12);
     memset(satellites, 0, sizeof(satellites));
+
+    // Create Array memory
+    M3Result result = m3Err_none;
+    int32_t ptr = 0;
+    result = m3_Call(wasm3_func_create_satellites_array, 0, nullptr);
+    if (result) {
+        ESP_LOGE(TAG, "m3_Call: %s", result);
+        return ESP_FAIL;
+    }
+    result = m3_GetResultsV(wasm3_func_create_satellites_array, &ptr);
+    if (result) {
+        ESP_LOGE(TAG, "m3_GetResultsV: %s", result);
+        return ESP_FAIL;
+    }
+    // Pined
+    int32_t *i_argv[1] = { &ptr };
+    result = m3_Call(wasm3_func_pin, 1, (const void**)i_argv);
+    if (result) {
+        ESP_LOGE(TAG, "m3_Call: %s", result);
+        return ESP_FAIL;
+    }
+    // Get memory pointer
+    ESP_LOGI(TAG, "Create ArrayBuffer pointer: %d", ptr);
+    // Set wasm memory pointer
+    wasm_satellites = m3_GetMemory(wasm3_runtime, 0, ptr);
+
+    return ESP_OK;
 }
 
 esp_err_t gpsgsv_tick_wasm(bool clear)
