@@ -38,7 +38,7 @@ IM3Function wasm3_func_collect;
  */
 #define MAX_SATELLITE 12
 unitgpsgsv_t unitgpsgsv[MAX_SATELLITE];
-uint8_t satellites[MAX_SATELLITE];
+uint32_t wasm_satellites_ptr;
 uint8_t *wasm_satellites;
 
 /**
@@ -335,32 +335,31 @@ esp_err_t gpsgsv_init_wasm(void)
 
     // initialize GPS member
     memset(unitgpsgsv, 0, sizeof(unitgpsgsv_t) * 12);
-    memset(satellites, 0, sizeof(satellites));
 
     // Create Array memory
     M3Result result = m3Err_none;
-    int32_t ptr = 0;
+    wasm_satellites_ptr = 0;
     result = m3_Call(wasm3_func_create_satellites_array, 0, nullptr);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
-    result = m3_GetResultsV(wasm3_func_create_satellites_array, &ptr);
+    result = m3_GetResultsV(wasm3_func_create_satellites_array, &wasm_satellites_ptr);
     if (result) {
         ESP_LOGE(TAG, "m3_GetResultsV: %s", result);
         return ESP_FAIL;
     }
     // Pined
-    int32_t *i_argv[1] = { &ptr };
+    uint32_t *i_argv[1] = { &wasm_satellites_ptr };
     result = m3_Call(wasm3_func_pin, 1, (const void**)i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
     // Get memory pointer
-    ESP_LOGI(TAG, "Create ArrayBuffer pointer: %d", ptr);
+    ESP_LOGI(TAG, "Create ArrayBuffer pointer: %d", wasm_satellites_ptr);
     // Set wasm memory pointer
-    wasm_satellites = m3_GetMemory(wasm3_runtime, 0, ptr);
+    wasm_satellites = m3_GetMemory(wasm3_runtime, 0, wasm_satellites_ptr);
 
     return ESP_OK;
 }
@@ -368,12 +367,38 @@ esp_err_t gpsgsv_init_wasm(void)
 esp_err_t gpsgsv_tick_wasm(bool clear)
 {
     // get GPS data
-    get_uart_gpsgsv_data(unitgpsgsv, satellites);
+    get_uart_gpsgsv_data(unitgpsgsv, wasm_satellites);
 
     M3Result result = m3Err_none;
 
-    const char* i_argv[2] = { "80" };
-    result = m3_CallArgv(wasm3_func_tick, 1, i_argv);
+    // set GSV
+    for(uint32_t i = 0; i < MAX_SATELLITE; i++) {
+        uint32_t num = unitgpsgsv[i].num;
+        uint32_t elevation = unitgpsgsv[i].elevation;
+        uint32_t azimuth = unitgpsgsv[i].azimuth;
+        uint32_t snr = unitgpsgsv[i].snr;
+        if(num == 0) continue;
+
+        uint32_t *argv0[5] = { &num, &elevation, &azimuth, &snr };
+        result = m3_Call(wasm3_func_set_gvs, 4, (const void**)argv0);
+        if (result) {
+            ESP_LOGE(TAG, "m3_Call: %s", result);
+            return ESP_FAIL;
+        }
+    }
+
+    // set satellites
+    uint32_t *argv1[2] = { &wasm_satellites_ptr };
+    result = m3_Call(wasm3_func_set_satellites, 1, (const void**)argv1);
+    if (result) {
+        ESP_LOGE(TAG, "m3_Call: %s", result);
+        return ESP_FAIL;
+    }
+
+    // tick
+    uint32_t boolean = 1; // clear ? 1: 0;
+    uint32_t *argv2[2] = { &boolean };
+    result = m3_Call(wasm3_func_tick, 1, (const void**)argv2);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
