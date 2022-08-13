@@ -168,8 +168,9 @@ function getUint8Array(wasmPtr) {
     __unpin(satellitesArrayPrt);
 
     // loop
+    wasmExports.tick(true);
     setInterval(() => {
-        wasmExports.tick();
+        wasmExports.tick(false);
         __collect() // clean up all garbage
     }, 500);
 })();

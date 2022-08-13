@@ -30,10 +30,9 @@ class GpsView {
     ) {
         this.satellites = new Set<u32>();
         this.gsv = new Map<u32, Gvs>();
-        this.initView();
     }
 
-    public tick(): void {
+    public tick(clear: bool): void {
         const cx = this.cx;
         const cy = this.cy;
         const cr = <f32>this.cr;
@@ -41,6 +40,8 @@ class GpsView {
         const gsv = this.gsv;
         const now = c3dev.now();
         const ids = gsv.keys();
+
+        if(clear) this.initView();
 
         let pos = new Map<u32, Pos>();
         for(let index = 0; index < ids.length; index++) {
@@ -65,7 +66,9 @@ class GpsView {
             const stl = pos.get(keys[index]);
             // foregraund
             circle(stl.sx, stl.sy, 2, stl.color);
-            c3dev.drawString(stl.sx, stl.sy, c3dev.COLOR.WHITE, `${keys[index]}`)
+            if(clear) {
+                c3dev.drawString(stl.sx, stl.sy, c3dev.COLOR.WHITE, `${keys[index]}`)
+            }
         }
     }
 
@@ -90,6 +93,7 @@ class GpsView {
         const cy = this.cy;
         const cr = <f32>this.cr;
 
+        this.clearView();
         circle(cx, cy, this.cr, c3dev.COLOR.BLUE);
         circle(cx, cy, 2, c3dev.COLOR.BLUE);
 
@@ -109,6 +113,16 @@ class GpsView {
 
         c3dev.drawString(cx - 2,  0, c3dev.COLOR.WHITE, "N");
     }
+
+    private clearView(): void {
+        const width = this.cr * 2;
+        const left = this.cx - this.cr;
+        const right = left + width + 1;
+
+        for(let y: u32 = 0; y < width; y++) {
+            c3dev.draw_line(left, y, right, y, c3dev.COLOR.BLACK);
+        }
+    }
 }
 
 export function init(): void {
@@ -124,8 +138,8 @@ export function gpsgsv(x: u32, y: u32, r: u32): void {
     gpsView = new GpsView(x, y, r);
 }
 
-export function tick(): void {
-    gpsView.tick();
+export function tick(clear: bool): void {
+    gpsView.tick(clear);
 }
 
 export function createSatellitesArray(): Int8Array {
