@@ -360,6 +360,7 @@ esp_err_t gpsgsv_init_wasm(void)
     ESP_LOGI(TAG, "Create ArrayBuffer pointer: %d", wasm_satellites_ptr);
     // Set wasm memory pointer
     wasm_satellites = m3_GetMemory(wasm3_runtime, 0, wasm_satellites_ptr);
+    // TODO: indirect referencing wasm_satellites_ptr[1]
 
     return ESP_OK;
 }
