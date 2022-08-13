@@ -54,8 +54,9 @@ class GpsView {
                 continue;
             }
             // calc satellite pos
-            const sx = <u32>(<f32>cx + Mathf.sin(<f32>stl.azimuth) * (90 - <f32>stl.elevation) / 90 * cr);
-            const sy = <u32>(<f32>cy + Mathf.cos(<f32>stl.azimuth) * (90 - <f32>stl.elevation) / 90 * cr);
+            const ev = <f32>((90 - <f32>stl.elevation) / 90 * cr);
+            const sx = <u32>(<f32>cx + Mathf.sin(<f32>stl.azimuth) * ev);
+            const sy = <u32>(<f32>cy + Mathf.cos(<f32>stl.azimuth) * ev);
             const color = this.satellites.has(id)? c3dev.COLOR.RED : c3dev.COLOR.GREEN;
             pos.set(id, { sx: sx, sy: sy, color: color});
             // background
