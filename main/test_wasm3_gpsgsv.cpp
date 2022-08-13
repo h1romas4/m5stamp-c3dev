@@ -351,7 +351,7 @@ esp_err_t gpsgsv_init_wasm(void)
     return load_wasm(wasm_binary, wasm_size);
 }
 
-esp_err_t gpsgsv_tick_wasm(void)
+esp_err_t gpsgsv_tick_wasm(bool clear)
 {
     M3Result result = m3Err_none;
 

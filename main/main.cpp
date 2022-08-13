@@ -127,6 +127,7 @@ void loop(void)
     // Test WebAssembly
     if(enable_wasm) {
         #ifdef CONFIG_GPIO1819_UART
+        gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
         #else
         clockenv_tick_wasm();
         #endif
