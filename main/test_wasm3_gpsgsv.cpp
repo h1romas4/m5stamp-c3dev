@@ -11,21 +11,9 @@
 
 #include "c3dev_board.h"
 #include "test_freetype.h"
+#include "test_uart_gpio1819.h"
 
-#ifdef CONFIG_GPIO1819_I2C
-#include "test_i2c_gpio1819.h"
-/**
- * Unit ENV III member
- */
-unitenv_t unitenv;
-
-/**
- * Unit UltraSonic
- */
-unit_ultrasonic_t ultrasonic;
-#endif
-
-static const char *TAG = "test_wasm3_clockenv.cpp";
+static const char *TAG = "test_wasm3_gpsgsv.cpp";
 
 /**
  * Wasm3 member
@@ -39,6 +27,13 @@ IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
 #define FREETYPE_FONT_SIZE 9
+
+/**
+ * Unit GPS member
+ */
+#define MAX_SATELLITE 12
+unitgpsgsv_t unitgpsgsv[MAX_SATELLITE];
+uint8_t satellites[MAX_SATELLITE];
 
 /**
  * SPIFFS member
@@ -171,42 +166,6 @@ m3ApiRawFunction(c3dev_draw_string)
     m3ApiSuccess();
 }
 
-m3ApiRawFunction(c3dev_get_env_tmp) {
-    m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
-    m3ApiReturn(unitenv.tmp);
-    #else
-    m3ApiReturn(/* dummy */20.0);
-    #endif
-}
-
-m3ApiRawFunction(c3dev_get_env_hum) {
-    m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
-    m3ApiReturn(unitenv.hum);
-    #else
-    m3ApiReturn(/* dummy */40.0);
-    #endif
-}
-
-m3ApiRawFunction(c3dev_get_env_pressure) {
-    m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
-    m3ApiReturn(unitenv.pressure);
-    #else
-    m3ApiReturn(/* dummy */1000.0);
-    #endif
-}
-
-m3ApiRawFunction(c3dev_get_ultrasonic_distance) {
-    m3ApiReturnType(float_t)
-    #ifdef CONFIG_GPIO1819_I2C
-    m3ApiReturn(ultrasonic.distance);
-    #else
-    m3ApiReturn(/* dummy */20.0);
-    #endif
-}
-
 M3Result link_c3dev(IM3Runtime runtime) {
     IM3Module module = runtime->modules;
 
@@ -217,10 +176,6 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
     m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);
-    m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
-    m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);
-    m3_LinkRawFunction(module, "c3dev", "get_env_pressure", "f()",  &c3dev_get_env_pressure);
-    m3_LinkRawFunction(module, "c3dev", "get_ultrasonic_distance", "f()",  &c3dev_get_ultrasonic_distance);
     m3_LinkRawFunction(module, "c3dev", "log", "v(*)",  &c3dev_log);
 
     return m3Err_none;
@@ -293,15 +248,15 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     // Draw Clock
-    IM3Function clock;
-    result = m3_FindFunction(&clock, wasm3_runtime, "clock");
+    IM3Function gpsgsv;
+    result = m3_FindFunction(&gpsgsv, wasm3_runtime, "gpsgsv");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
     }
-    // export function clock(x: u32, y: u32, r: u32): void;
+    // export function gpsgsv(x: u32, y: u32, r: u32): void;
     const char* i_argv[4] = { "80", "64", "63" };
-    result = m3_CallArgv(clock, 3, i_argv);
+    result = m3_CallArgv(gpsgsv, 3, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
@@ -349,18 +304,21 @@ esp_err_t gpsgsv_init_wasm(void)
 
     // Load WebAssembly on Wasm3
     return load_wasm(wasm_binary, wasm_size);
+
+    // initialize GPS member
+    memset(unitgpsgsv, 0, sizeof(unitgpsgsv_t) * 12);
+    memset(satellites, 0, sizeof(satellites));
 }
 
 esp_err_t gpsgsv_tick_wasm(bool clear)
 {
+    // get GPS data
+    get_uart_gpsgsv_data(unitgpsgsv, satellites);
+
     M3Result result = m3Err_none;
 
-    #ifdef CONFIG_GPIO1819_I2C
-    // Get Unit ENV III date
-    get_i2c_unit_data(&unitenv, &ultrasonic);
-    #endif
-
-    result = m3_Call(wasm3_func_tick, 0, nullptr);
+    const char* i_argv[2] = { "80" };
+    result = m3_CallArgv(wasm3_func_tick, 1, i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;

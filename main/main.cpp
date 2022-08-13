@@ -98,6 +98,7 @@ void setup(void)
 
     // Test WebAssembly
     #ifdef CONFIG_GPIO1819_UART
+    if(gpsgsv_init_wasm() == ESP_OK) enable_wasm = true;
     #else
     if(clockenv_init_wasm() == ESP_OK) enable_wasm = true;
     #endif
@@ -119,16 +120,13 @@ void loop(void)
     pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
     pixels.show();
 
-    // GPS
-    #ifdef CONFIG_GPIO1819_UART
-    get_i2c_unitgps_data();
-    #endif
-
     // Test WebAssembly
     if(enable_wasm) {
         #ifdef CONFIG_GPIO1819_UART
+        // GPS GSV View
         gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
         #else
+        // Clock Env
         clockenv_tick_wasm();
         #endif
     }
