@@ -51,7 +51,7 @@ This repository contains MIT Licensed PCB data and example programs.
 ### Web Simulation
 
 - 🕸 [AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/)
-- 🕸 [AssemblyScript GPS GSV Viewer](https://h1romas4.github.io/m5stamp-c3dev/asgps/)
+- 🕸 [AssemblyScript GPS GVS Viewer](https://h1romas4.github.io/m5stamp-c3dev/asgps/)
 
 
 ## Schematic
