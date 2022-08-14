@@ -30,6 +30,8 @@ IM3Function wasm3_func_pin;
 IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
+uint8_t *wasm_mem;
+
 #define WASM3_STACK_SIZE 16384
 #define FREETYPE_FONT_SIZE 9
 
@@ -39,7 +41,7 @@ IM3Function wasm3_func_collect;
 #define MAX_SATELLITE 12
 unitgpsgsv_t unitgpsgsv[MAX_SATELLITE];
 uint32_t wasm_satellites_ptr;
-uint8_t *wasm_satellites;
+uint32_t wasm_satellites_real;
 
 /**
  * SPIFFS member
@@ -338,29 +340,36 @@ esp_err_t gpsgsv_init_wasm(void)
 
     // Create Array memory
     M3Result result = m3Err_none;
-    wasm_satellites_ptr = 0;
+    uint32_t p0 = 0;
     result = m3_Call(wasm3_func_create_satellites_array, 0, nullptr);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
-    result = m3_GetResultsV(wasm3_func_create_satellites_array, &wasm_satellites_ptr);
+    result = m3_GetResultsV(wasm3_func_create_satellites_array, &p0);
     if (result) {
         ESP_LOGE(TAG, "m3_GetResultsV: %s", result);
         return ESP_FAIL;
     }
     // Pined
-    uint32_t *i_argv[2] = { &wasm_satellites_ptr };
+    uint32_t *i_argv[2] = { &p0 };
+    wasm_satellites_ptr = 0;
     result = m3_Call(wasm3_func_pin, 1, (const void**)i_argv);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
+    result = m3_GetResultsV(wasm3_func_pin, &wasm_satellites_ptr);
+    if (result) {
+        ESP_LOGE(TAG, "m3_GetResultsV: %s", result);
+        return ESP_FAIL;
+    }
     // Get memory pointer
-    ESP_LOGI(TAG, "Create ArrayBuffer pointer: %d", wasm_satellites_ptr);
-    // Set wasm memory pointer
-    wasm_satellites = m3_GetMemory(wasm3_runtime, 0, wasm_satellites_ptr);
-    // TODO: indirect referencing wasm_satellites_ptr[1]
+    wasm_mem = m3_GetMemory(wasm3_runtime, 0, 0);
+    wasm_satellites_real = wasm_mem[wasm_satellites_ptr + 0];
+    wasm_satellites_real += wasm_mem[wasm_satellites_ptr + 1] << 8;
+    wasm_satellites_real += wasm_mem[wasm_satellites_ptr + 2] << 16;
+    wasm_satellites_real += wasm_mem[wasm_satellites_ptr + 3] << 32;
 
     return ESP_OK;
 }
@@ -368,7 +377,7 @@ esp_err_t gpsgsv_init_wasm(void)
 esp_err_t gpsgsv_tick_wasm(bool clear)
 {
     // get GPS data
-    get_uart_gpsgsv_data(unitgpsgsv, wasm_satellites);
+    get_uart_gpsgsv_data(unitgpsgsv, &wasm_mem[wasm_satellites_real]);
 
     M3Result result = m3Err_none;
 
