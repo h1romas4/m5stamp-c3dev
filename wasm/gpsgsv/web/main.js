@@ -146,17 +146,17 @@ function getUint8Array(wasmPtr) {
     let satellites = getUint8Array(satellitesArrayPrt);
 
     // set test data
-    wasmExports.setGvs(2 , 63, 201, 0);
-    wasmExports.setGvs(5 , 67, 319, 0);
-    wasmExports.setGvs(6 , 11, 152, 16);
-    wasmExports.setGvs(7 , 28, 53 , 32);
-    wasmExports.setGvs(11, 44, 162, 26);
-    wasmExports.setGvs(13, 62, 228, 0);
-    wasmExports.setGvs(15, 27, 244, 0);
-    wasmExports.setGvs(18, 11, 319, 0);
-    wasmExports.setGvs(20, 68, 84 , 33);
-    wasmExports.setGvs(29, 25, 278, 0);
-    wasmExports.setGvs(30, 44, 88 , 30);
+    wasmExports.setGsv(2 , 63, 201, 0);
+    wasmExports.setGsv(5 , 67, 319, 0);
+    wasmExports.setGsv(6 , 11, 152, 16);
+    wasmExports.setGsv(7 , 28, 53 , 32);
+    wasmExports.setGsv(11, 44, 162, 26);
+    wasmExports.setGsv(13, 62, 228, 0);
+    wasmExports.setGsv(15, 27, 244, 0);
+    wasmExports.setGsv(18, 11, 319, 0);
+    wasmExports.setGsv(20, 68, 84 , 33);
+    wasmExports.setGsv(29, 25, 278, 0);
+    wasmExports.setGsv(30, 44, 88 , 30);
     satellites[0] = 6;
     satellites[1] = 7;
     satellites[2] = 11;

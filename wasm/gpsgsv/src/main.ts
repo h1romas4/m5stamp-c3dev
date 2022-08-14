@@ -80,7 +80,7 @@ class GpsView {
         }
     }
 
-    public setGvs(id: u32, elevation: u32, azimuth: u32, snr: u32): void {
+    public setGsv(id: u32, elevation: u32, azimuth: u32, snr: u32): void {
         this.gsv.set(id, {
             elevation: elevation,
             azimuth: azimuth,
@@ -151,8 +151,8 @@ export function setSatellites(satellites: Int8Array) : void {
     gpsView.setSatellites(satellites);
 }
 
-export function setGvs(id: u32, elevation: u32, azimuth: u32, snr: u32): void {
-    gpsView.setGvs(id, elevation, azimuth, snr);
+export function setGsv(id: u32, elevation: u32, azimuth: u32, snr: u32): void {
+    gpsView.setGsv(id, elevation, azimuth, snr);
 }
 
 function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {

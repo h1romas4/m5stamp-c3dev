@@ -24,7 +24,7 @@ IM3Module wasm3_module;
 
 IM3Function wasm3_func_create_satellites_array;
 IM3Function wasm3_func_set_satellites;
-IM3Function wasm3_func_set_gvs;
+IM3Function wasm3_func_set_gsv;
 IM3Function wasm3_func_tick;
 IM3Function wasm3_func_pin;
 IM3Function wasm3_func_unpin;
@@ -291,7 +291,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
     }
-    result = m3_FindFunction(&wasm3_func_set_gvs, wasm3_runtime, "setGvs");
+    result = m3_FindFunction(&wasm3_func_set_gsv, wasm3_runtime, "setGsv");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
@@ -390,7 +390,7 @@ esp_err_t gpsgsv_tick_wasm(bool clear)
         if(num == 0) continue;
 
         uint32_t *argv0[5] = { &num, &elevation, &azimuth, &snr };
-        result = m3_Call(wasm3_func_set_gvs, 4, (const void**)argv0);
+        result = m3_Call(wasm3_func_set_gsv, 4, (const void**)argv0);
         if (result) {
             ESP_LOGE(TAG, "m3_Call: %s", result);
             return ESP_FAIL;
