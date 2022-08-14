@@ -18,7 +18,7 @@ npm run start
 ```
 npm run asbuild
 # and flash .wasm
-cd ..
+cd ../../
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin
 parttool.py --port write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
