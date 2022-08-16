@@ -31,7 +31,9 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
     - UNIT ULTRASONIC - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp#L52-L61)
 - Test UART on GPIO18, 19
     - UNIT GPS - [test_uart_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_uart_gpio1819.cpp)
-- WebAssembly execution with Wasm3 (sample analog clock using AssemblyScript) - [test_wasm3_clockenv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_clockenv.cpp)
+- WebAssembly execution with Wasm3
+    - Analog clock using AssemblyScript[test_wasm3_clockenv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_clockenv.cpp)
+    - GPS GSV viewer using AssemblyScript[test_wasm3_gpsgsv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_gpsgsv.cpp)
 - Support RGB LED (SK6812)
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
