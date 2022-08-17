@@ -232,7 +232,7 @@ idf.py menuconfig
 ## Build AssemblyScript
 
 ```
-cd wasm/clockenv
+cd wasm/clockenv # or cd wasm/gpsgsv
 npm install
 ```
 
