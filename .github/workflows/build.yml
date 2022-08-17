@@ -35,8 +35,8 @@ jobs:
 
     - name: Build
       run: |
-        pip3 install -r $IDF_PATH/requirements.txt
         . ~/esp/esp-idf/export.sh
+        pip3 install -r $IDF_PATH/requirements.txt
         idf.py build
         cd wasm/clockenv
         npm install
