@@ -12,23 +12,30 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
+
     - uses: actions/cache@v3
+      id: cache-toolchaine
       with:
         path: |
           ~/esp
         key: ${{ runner.os }}-espidf
-    - name: esp-idf Toolchain Setup
+
+    - name: esp-idf Sependencies Setup
       run: |
         sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+    - name: esp-idf Toolchain Setup
+      if: steps.cache-toolchaine.outputs.cache-hit != 'true'
+      run: |
         mkdir -p ~/esp
         cd ~/esp
         git clone -b v4.4.2 --recursive https://github.com/espressif/esp-idf.git
         cd ~/esp/esp-idf
         ./install.sh esp32c3
-        . ~/esp/esp-idf/export.sh
-        pip3 install -r $IDF_PATH/requirements.txt
+
     - name: Build
       run: |
+        pip3 install -r $IDF_PATH/requirements.txt
         . ~/esp/esp-idf/export.sh
         idf.py build
         cd wasm/clockenv
