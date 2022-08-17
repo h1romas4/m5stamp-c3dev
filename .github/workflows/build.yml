@@ -18,9 +18,10 @@ jobs:
       with:
         path: |
           ~/esp
-        key: ${{ runner.os }}-espidf-all
+          ~/.espressif/
+        key: ${{ runner.os }}-espidf-and-compiler
 
-    - name: esp-idf Sependencies Setup
+    - name: esp-idf Dependencies Setup
       run: |
         sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
@@ -31,7 +32,7 @@ jobs:
         cd ~/esp
         git clone -b v4.4.2 --recursive https://github.com/espressif/esp-idf.git
         cd ~/esp/esp-idf
-        ./install.sh
+        ./install.sh esp32c3
 
     - name: Build
       run: |
