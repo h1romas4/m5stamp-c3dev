@@ -244,7 +244,7 @@ npm run start
 # http://localhost:1234/
 ```
 
-**Build and Flash**
+**SPIFFS Build and Flash**
 
 ```
 npm run asbuild
