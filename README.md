@@ -127,6 +127,8 @@ cd m5stamp-c3dev
 idf.py build flash
 ```
 
+**Note**: If you get a compile error, change the sdkconfig back to the Git one. In some cases, the target of sdkconfig is changed to `esp32` instead of `eps32c3`.
+
 Write TypeType font to SPIFFS
 
 ```
