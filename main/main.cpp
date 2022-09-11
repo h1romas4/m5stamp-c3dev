@@ -13,7 +13,10 @@
 #ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
 #endif
-#ifdef CONFIG_GPIO1819_UART
+#ifdef CONFIG_GPIO1819_DIGIT_UNITIR
+#include "test_digit_gpio1819.h"
+#endif
+#ifdef CONFIG_GPIO1819_UART_UNITGPS
 #include "test_uart_gpio1819.h"
 #include "test_wasm3_gpsgsv.h"
 #else
@@ -92,12 +95,15 @@ void setup(void)
     #ifdef CONFIG_GPIO1819_I2C
     init_i2c_gpio1819();
     #endif
-    #ifdef CONFIG_GPIO1819_UART
+    #ifdef CONFIG_GPIO1819_UART_UNITGPS
     init_uart_gpio1819();
+    #endif
+    #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
+    init_digit_gpio1819();
     #endif
 
     // Test WebAssembly
-    #ifdef CONFIG_GPIO1819_UART
+    #ifdef CONFIG_GPIO1819_UART_UNITGPS
     if(gpsgsv_init_wasm() == ESP_OK) enable_wasm = true;
     #else
     if(clockenv_init_wasm() == ESP_OK) enable_wasm = true;
@@ -120,9 +126,14 @@ void loop(void)
     pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
     pixels.show();
 
+    // Test UNIT IR
+    #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
+    get_digit_unitir_data();
+    #endif
+
     // Test WebAssembly
     if(enable_wasm) {
-        #ifdef CONFIG_GPIO1819_UART
+        #ifdef CONFIG_GPIO1819_UART_UNITGPS
         // GPS GSV View
         gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
         #else

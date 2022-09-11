@@ -11,9 +11,10 @@ set(SRCS
     test_nvs_wifi.cpp
     test_i2c_gpio1819.cpp
     test_uart_gpio1819.cpp
+    test_digit_gpio1819.cpp
 )
 
 idf_component_register(
     INCLUDE_DIRS ${INCLUDEDIRS}
     SRCS ${SRCS}
-    REQUIRES arduino-esp32 freetype lcd led tinypng lwgps wasm unitenv ultrasonic)
+    REQUIRES arduino-esp32 freetype lcd led tinypng lwgps wasm unitenv ultrasonic unitir)
