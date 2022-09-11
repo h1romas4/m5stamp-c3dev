@@ -31,3 +31,6 @@
 [submodule "components/ultrasonic/M5Unit-Sonic"]
 	path = components/ultrasonic/M5Unit-Sonic
 	url = https://github.com/m5stack/M5Unit-Sonic
+[submodule "components/unitir/IRremoteESP8266"]
+	path = components/unitir/IRremoteESP8266
+	url = https://github.com/crankyoldgit/IRremoteESP8266.git

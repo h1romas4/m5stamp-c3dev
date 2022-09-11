@@ -1,0 +1,91 @@
+cmake_minimum_required(VERSION 3.5)
+
+set(INCLUDEDIRS
+    IRremoteESP8266/src
+)
+
+set(SRCS
+    IRremoteESP8266/src/IRac.cpp
+    IRremoteESP8266/src/IRrecv.cpp
+    IRremoteESP8266/src/IRsend.cpp
+    IRremoteESP8266/src/IRtext.cpp
+    IRremoteESP8266/src/IRtimer.cpp
+    IRremoteESP8266/src/IRutils.cpp
+    IRremoteESP8266/src/ir_Airton.cpp
+    IRremoteESP8266/src/ir_Airwell.cpp
+    IRremoteESP8266/src/ir_Aiwa.cpp
+    IRremoteESP8266/src/ir_Amcor.cpp
+    IRremoteESP8266/src/ir_Argo.cpp
+    IRremoteESP8266/src/ir_Arris.cpp
+    IRremoteESP8266/src/ir_Bosch.cpp
+    IRremoteESP8266/src/ir_Bose.cpp
+    IRremoteESP8266/src/ir_Carrier.cpp
+    IRremoteESP8266/src/ir_ClimaButler.cpp
+    IRremoteESP8266/src/ir_Coolix.cpp
+    IRremoteESP8266/src/ir_Corona.cpp
+    IRremoteESP8266/src/ir_Daikin.cpp
+    IRremoteESP8266/src/ir_Delonghi.cpp
+    IRremoteESP8266/src/ir_Denon.cpp
+    IRremoteESP8266/src/ir_Dish.cpp
+    IRremoteESP8266/src/ir_Doshisha.cpp
+    IRremoteESP8266/src/ir_Ecoclim.cpp
+    IRremoteESP8266/src/ir_Electra.cpp
+    IRremoteESP8266/src/ir_EliteScreens.cpp
+    IRremoteESP8266/src/ir_Epson.cpp
+    IRremoteESP8266/src/ir_Fujitsu.cpp
+    IRremoteESP8266/src/ir_GICable.cpp
+    IRremoteESP8266/src/ir_GlobalCache.cpp
+    IRremoteESP8266/src/ir_Goodweather.cpp
+    IRremoteESP8266/src/ir_Gree.cpp
+    IRremoteESP8266/src/ir_Haier.cpp
+    IRremoteESP8266/src/ir_Hitachi.cpp
+    IRremoteESP8266/src/ir_Inax.cpp
+    IRremoteESP8266/src/ir_JVC.cpp
+    IRremoteESP8266/src/ir_Kelon.cpp
+    IRremoteESP8266/src/ir_Kelvinator.cpp
+    IRremoteESP8266/src/ir_LG.cpp
+    IRremoteESP8266/src/ir_Lasertag.cpp
+    IRremoteESP8266/src/ir_Lego.cpp
+    IRremoteESP8266/src/ir_Lutron.cpp
+    IRremoteESP8266/src/ir_MWM.cpp
+    IRremoteESP8266/src/ir_Magiquest.cpp
+    IRremoteESP8266/src/ir_Metz.cpp
+    IRremoteESP8266/src/ir_Midea.cpp
+    IRremoteESP8266/src/ir_MilesTag2.cpp
+    IRremoteESP8266/src/ir_Mirage.cpp
+    IRremoteESP8266/src/ir_Mitsubishi.cpp
+    IRremoteESP8266/src/ir_MitsubishiHeavy.cpp
+    IRremoteESP8266/src/ir_Multibrackets.cpp
+    IRremoteESP8266/src/ir_NEC.cpp
+    IRremoteESP8266/src/ir_Neoclima.cpp
+    IRremoteESP8266/src/ir_Nikai.cpp
+    IRremoteESP8266/src/ir_Panasonic.cpp
+    IRremoteESP8266/src/ir_Pioneer.cpp
+    IRremoteESP8266/src/ir_Pronto.cpp
+    IRremoteESP8266/src/ir_RC5_RC6.cpp
+    IRremoteESP8266/src/ir_RCMM.cpp
+    IRremoteESP8266/src/ir_Rhoss.cpp
+    IRremoteESP8266/src/ir_Samsung.cpp
+    IRremoteESP8266/src/ir_Sanyo.cpp
+    IRremoteESP8266/src/ir_Sharp.cpp
+    IRremoteESP8266/src/ir_Sherwood.cpp
+    IRremoteESP8266/src/ir_Sony.cpp
+    IRremoteESP8266/src/ir_Symphony.cpp
+    IRremoteESP8266/src/ir_Tcl.cpp
+    IRremoteESP8266/src/ir_Technibel.cpp
+    IRremoteESP8266/src/ir_Teco.cpp
+    IRremoteESP8266/src/ir_Teknopoint.cpp
+    IRremoteESP8266/src/ir_Toshiba.cpp
+    IRremoteESP8266/src/ir_Toto.cpp
+    IRremoteESP8266/src/ir_Transcold.cpp
+    IRremoteESP8266/src/ir_Trotec.cpp
+    IRremoteESP8266/src/ir_Truma.cpp
+    IRremoteESP8266/src/ir_Vestel.cpp
+    IRremoteESP8266/src/ir_Voltas.cpp
+    IRremoteESP8266/src/ir_Whirlpool.cpp
+    IRremoteESP8266/src/ir_Whynter.cpp
+    IRremoteESP8266/src/ir_Xmp.cpp
+    IRremoteESP8266/src/ir_Zepeal.cpp
+)
+
+idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS} REQUIRES arduino-esp32)
