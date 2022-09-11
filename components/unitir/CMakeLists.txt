@@ -17,10 +17,8 @@ set(SRCS
     IRremoteESP8266/src/ir_Amcor.cpp
     IRremoteESP8266/src/ir_Argo.cpp
     IRremoteESP8266/src/ir_Arris.cpp
-    IRremoteESP8266/src/ir_Bosch.cpp
     IRremoteESP8266/src/ir_Bose.cpp
     IRremoteESP8266/src/ir_Carrier.cpp
-    IRremoteESP8266/src/ir_ClimaButler.cpp
     IRremoteESP8266/src/ir_Coolix.cpp
     IRremoteESP8266/src/ir_Corona.cpp
     IRremoteESP8266/src/ir_Daikin.cpp
@@ -76,7 +74,6 @@ set(SRCS
     IRremoteESP8266/src/ir_Teco.cpp
     IRremoteESP8266/src/ir_Teknopoint.cpp
     IRremoteESP8266/src/ir_Toshiba.cpp
-    IRremoteESP8266/src/ir_Toto.cpp
     IRremoteESP8266/src/ir_Transcold.cpp
     IRremoteESP8266/src/ir_Trotec.cpp
     IRremoteESP8266/src/ir_Truma.cpp
