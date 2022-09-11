@@ -272,6 +272,7 @@ Thanks for all the open source.
 |[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.5`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
+|[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.2`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.20.16`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
