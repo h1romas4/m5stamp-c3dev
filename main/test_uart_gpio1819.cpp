@@ -6,7 +6,7 @@
 
 static const char *TAG = "test_uart_gpio1819.cpp";
 
-// I2C Sensor
+// UART Sensor
 //  M5STACK UNIT GPS
 //  https://docs.m5stack.com/en/unit/gps
 HardwareSerial GPSRaw(1);
