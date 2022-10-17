@@ -28,7 +28,7 @@
   (pad "4" thru_hole circle (at -2.54 2.54) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask) (tstamp a13ab237-8f8d-4e16-8c47-4440653b8534))
   (pad "5" thru_hole circle (at 0 0) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask) (tstamp 994b6220-4755-4d84-91b3-6122ac1c2c5e))
   (pad "6" thru_hole circle (at 5.08 0) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask) (tstamp 6284122b-79c3-4e04-925e-3d32cc3ec077))
-  (model "./vrml2/BNX016-01.x3d"
+  (model "./fg-series.vrml2/BNX016-01.x3d"
     (offset (xyz 0 0 0))
     (scale (xyz 4 4 4))
     (rotate (xyz -90 0 180))
