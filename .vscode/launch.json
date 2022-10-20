@@ -15,7 +15,29 @@
             "program": "${workspaceRoot}/build/hello-world.elf",
             "launchCompleteCommand": "exec-continue",
             "setupCommands": [
-                { "text": "target extended-remote :3333" }
+                {
+                    "description": "enable pretty printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "file '${workspaceFolder}/build/hello-world.elf'"
+                },
+                {
+                    "text": "target remote :3333"
+                },
+                {
+                    "text": "set remote hardware-watchpoint-limit 2",
+                },
+                {
+                    "text": "flushregs"
+                },
+                {
+                    "text": "monitor reset halt"
+                },
+                {
+                    "text": "thb app_main"
+                }
             ],
             "args": [],
             "stopAtEntry": true,
