@@ -20,22 +20,25 @@ font_face_t font_face;
 const uint8_t alphamap[16] = {0, 17, 34, 51, 68, 85, 102, 119, 136, 153, 170, 187, 204, 221, 238, 255};
 
 /**
- * Utility drawFreetypeBitmap
+ * Utility draw_freetype_pixel
  */
-void drawFreetypeBitmap(int32_t cx, int32_t cy, uint16_t bw, uint16_t bh, uint16_t fg, uint8_t *bitmap)
+void draw_freetype_pixel(int32_t cx, int32_t cy, uint16_t bw, uint16_t bh, uint16_t fg, uint8_t *bitmap)
 {
     uint32_t pos = 0;
     uint16_t bg = 0;
+
+    tft.startWrite();
     for (int y = 0; y < bh; y++) {
         for (int x = 0; x < bw; x++) {
             if (pos & 0x1) {
-                tft.drawPixel(cx + x, cy + y, alphaBlend(alphamap[bitmap[pos >> 1] & 0x0F], fg, bg));
+                tft.writePixel(cx + x, cy + y, alphaBlend(alphamap[bitmap[pos >> 1] & 0x0F], fg, bg));
             } else {
-                tft.drawPixel(cx + x, cy + y, alphaBlend(alphamap[bitmap[pos >> 1] >> 4], fg, bg));
+                tft.writePixel(cx + x, cy + y, alphaBlend(alphamap[bitmap[pos >> 1] >> 4], fg, bg));
             }
             pos++;
         }
     }
+    tft.endWrite();
 }
 
 /**
@@ -53,7 +56,7 @@ void draw_freetype_string(const char *string, int32_t poX, int32_t poY, uint16_t
         if (font_render_glyph(render, uniCode) != ESP_OK) {
             ESP_LOGE(TAG, "Font render faild.");
         }
-        drawFreetypeBitmap(poX + render->bitmap_left,
+        draw_freetype_pixel(poX + render->bitmap_left,
             base_y - render->bitmap_top,
             render->bitmap_width,
             render->bitmap_height,
