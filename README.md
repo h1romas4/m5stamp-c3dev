@@ -131,19 +131,19 @@ idf.py build
 
 **Note**: If you get a compile error, change the `sdkconfig` back to the Git one. In some cases, the target of `sdkconfig` is changed to `esp32` instead of `eps32c3`.
 
-Write Partition table.
+Write Partition table:
 
 ```
 idf.py partition-table-flash
 ```
 
-Write TypeType font to SPIFFS
+Write TypeType font to SPIFFS:
 
 ```
 parttool.py write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
-Write WebAssembly(.wasm) to SPIFFS
+Write WebAssembly(.wasm) to SPIFFS:
 
 ```
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
@@ -157,7 +157,7 @@ idf.py flash monitor
 
 ### Setup WiFi (Optional)
 
-1. Change WiFi Setting
+Change WiFi Setting:
 
 `nvs_partition.csv`: Set own `[ssid]`, `[password]`
 
@@ -168,19 +168,19 @@ ssid,data,string,[ssid]
 passwd,data,string,[password]
 ```
 
-2. Create NVS Partation file
+Create NVS Partation file:
 
 ```
 python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_gen.py generate nvs_partition.csv nvs_partition.bin 0x6000
 ```
 
-3. Write NVS Partation
+Write NVS Partation:
 
 ```
 esptool.py write_flash 0x9000 nvs_partition.bin
 ```
 
-4. Run
+Run:
 
 NTP synchronization is performed by pressing the SW1 after the startup logo.
 
@@ -200,18 +200,18 @@ C3DEV Configuration → Select GPIO 18/19
 
 ### JTAG debug with Visual Studio Code
 
-1. Set ESP32_TOOLCHAIN_HOME
+Requre setup ESP32_TOOLCHAIN_HOME
 
 ```
 $ echo ${ESP32_TOOLCHAIN_HOME}
 /home/hiromasa/.espressif/tools/riscv32-esp-elf
 ```
 
-2. Connect the PC to the USB Type-C of the U1
-3. Open the source file in Visual Studio Code.
-4. Run Task "openocd (debug)" @see [.vscode/tasks.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/tasks.json#L7-L13)
-5. Set a breakpoint in the source code.
-6. Debug Launch (GDB) @see [.vscode/launch.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/launch.json#L8-L23)
+1. Connect the PC to the USB Type-C of the U1
+2. Open the source file in Visual Studio Code.
+3. Run Task "openocd (debug)" @see [.vscode/tasks.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/tasks.json#L7-L13)
+4. Set a breakpoint in the source code.
+5. Debug Launch (GDB) @see [.vscode/launch.json](https://github.com/h1romas4/m5stamp-c3dev/blob/main/.vscode/launch.json#L8-L23)
     The first time you start the program, it will often fail, so if you get an error, retry.
 
 ![vscode](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_02.png)
