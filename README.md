@@ -121,7 +121,7 @@ For bug reports, read
 
 ### Build and Execute
 
-git clone and build (Please add `--recursice`)
+1. git clone and build (Please add `--recursice`)
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stamp-c3dev
@@ -131,25 +131,25 @@ idf.py build
 
 **Note**: If you get a compile error, change the `sdkconfig` back to the Git one. In some cases, the target of `sdkconfig` is changed to `esp32` instead of `eps32c3`.
 
-Write Partition table:
+2. Write Partition table
 
 ```
 idf.py partition-table-flash
 ```
 
-Write TypeType font to SPIFFS:
+3. Write TypeType font to SPIFFS
 
 ```
 parttool.py write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
-Write WebAssembly(.wasm) to SPIFFS:
+4. Write WebAssembly(.wasm) to SPIFFS
 
 ```
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-Write main program to go!
+5. Write main program to go!
 
 ```
 idf.py flash monitor
@@ -157,7 +157,7 @@ idf.py flash monitor
 
 ### Setup WiFi (Optional)
 
-Change WiFi Setting:
+1. Change WiFi Setting
 
 `nvs_partition.csv`: Set own `[ssid]`, `[password]`
 
@@ -168,19 +168,19 @@ ssid,data,string,[ssid]
 passwd,data,string,[password]
 ```
 
-Create NVS Partation file:
+2. Create NVS Partation file
 
 ```
 python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_gen.py generate nvs_partition.csv nvs_partition.bin 0x6000
 ```
 
-Write NVS Partation:
+3. Write NVS Partation
 
 ```
 esptool.py write_flash 0x9000 nvs_partition.bin
 ```
 
-Run:
+4. Run
 
 NTP synchronization is performed by pressing the SW1 after the startup logo.
 
@@ -228,7 +228,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
     // tft.invertDisplay(1);
 ```
 
-#### Create SPIFFS parteation file
+#### Create SPIFFS parteation file from file system
 
 ```
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
