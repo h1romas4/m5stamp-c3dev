@@ -121,15 +121,21 @@ For bug reports, read
 
 ### Build and Execute
 
-git clone and build
+git clone and build (Please add `--recursice`)
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stamp-c3dev
 cd m5stamp-c3dev
-idf.py build flash
+idf.py build
 ```
 
 **Note**: If you get a compile error, change the `sdkconfig` back to the Git one. In some cases, the target of `sdkconfig` is changed to `esp32` instead of `eps32c3`.
+
+Write Partition table.
+
+```
+idf.py partition-table-flash
+```
 
 Write TypeType font to SPIFFS
 
@@ -143,7 +149,13 @@ Write WebAssembly(.wasm) to SPIFFS
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-Setup WiFi (Optional)
+Write main program to go!
+
+```
+idf.py flash monitor
+```
+
+### Setup WiFi (Optional)
 
 1. Change WiFi Setting
 
@@ -168,13 +180,15 @@ python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_ge
 esptool.py write_flash 0x9000 nvs_partition.bin
 ```
 
-Restart M5Stamp C3  (NTP synchronization is performed by pressing the SW1 after the startup logo)
+4. Run
+
+NTP synchronization is performed by pressing the SW1 after the startup logo.
 
 ```
 idf.py monitor
 ```
 
-### Select connected GPIO18 and GPIO19 device
+### Select connected GPIO18 and GPIO19 device (Optional)
 
 ```
 idf.py menuconfig
