@@ -112,8 +112,8 @@ gcc version 8.4.0 (crosstool-NG esp-2021r2)
 openocd (Optional)
 
 ```
-$ openocd
-Open On-Chip Debugger  v0.10.0-esp32-20211111 (2021-11-10-21:40)
+$ openocd -v
+Open On-Chip Debugger  v0.11.0-esp32-20220411 (2022-04-11-08:47)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
