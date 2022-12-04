@@ -126,15 +126,6 @@ class GpsView {
     }
 }
 
-export function init(): void {
-    // ToDo: Workaround: Initialize Wasm3 Stack
-    // Without this line, the Wasm3 stack will not work properly.
-    // For example, the argument of the gpsgsv() function is the destroyed value.
-    memory.grow(1);
-    // Test env.seed
-    seed();
-}
-
 export function gpsgsv(x: u32, y: u32, r: u32): void {
     gpsView = new GpsView(x, y, r);
 }

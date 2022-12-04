@@ -246,20 +246,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
         return ESP_FAIL;
     }
 
-    // ToDo: Workaround: Initialize Wasm3/AssemblyScript GC
-    // It appears that the stack will be destroyed if the function is not called once.
-    IM3Function init;
-    result = m3_FindFunction(&init, wasm3_runtime, "init");
-    if (result) {
-        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
-        return ESP_FAIL;
-    }
-    result = m3_Call(init, 0, nullptr);
-    if (result) {
-        ESP_LOGE(TAG, "m3_Call: %s", result);
-        return ESP_FAIL;
-    }
-
     // Draw Clock
     IM3Function gpsgsv;
     result = m3_FindFunction(&gpsgsv, wasm3_runtime, "gpsgsv");

@@ -138,7 +138,6 @@ function getUint8Array(wasmPtr) {
     const { __pin, __unpin, __collect} = wasmExports;
 
     // initialize application
-    wasmExports.init();
     wasmExports.gpsgsv(80, 64, 63);
 
     // create temporary array for array interface
