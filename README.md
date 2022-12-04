@@ -290,7 +290,7 @@ Thanks for all the open source.
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.2`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.20.16`|Apache-2.0 License|
+|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.24.1`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
