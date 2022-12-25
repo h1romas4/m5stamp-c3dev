@@ -30,7 +30,7 @@ jobs:
       run: |
         mkdir -p ~/esp
         cd ~/esp
-        git clone -b v4.4.2 --recursive https://github.com/espressif/esp-idf.git
+        git clone -b v4.4.3 --recursive https://github.com/espressif/esp-idf.git
         cd ~/esp/esp-idf
         ./install.sh esp32c3
 
