@@ -14,19 +14,19 @@ jobs:
         submodules: recursive
 
     - uses: actions/cache@v3
-      id: cache-toolchaine-v443
+      id: cache-toolchaine
       with:
         path: |
           ~/esp
           ~/.espressif/
-        key: ${{ runner.os }}-espidf-and-compiler
+        key: ${{ runner.os }}-espidf-and-compiler-v443
 
     - name: esp-idf Dependencies Setup
       run: |
         sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
     - name: esp-idf Toolchain Setup
-      if: steps.cache-toolchaine-v443.outputs.cache-hit != 'true'
+      if: steps.cache-toolchaine.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/esp
         cd ~/esp
