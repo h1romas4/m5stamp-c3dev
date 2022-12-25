@@ -82,9 +82,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF **v4.4.2**](https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32c3/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF **v4.4.3**](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32c3/get-started/index.html#installation-step-by-step)
 
-get_idf or (Windows) ESP-IDF **`4.4.2`** command prompt
+get_idf or (Windows) ESP-IDF **`4.4.3`** command prompt
 
 ```
 # Linux or macOS ->
@@ -106,14 +106,14 @@ $ riscv32-esp-elf-gcc -v
 Using built-in specs.
 COLLECT_GCC=riscv32-esp-elf-gcc
 ... snip ...
-gcc version 8.4.0 (crosstool-NG esp-2021r2)
+gcc version 8.4.0 (crosstool-NG esp-2021r2-patch5)
 ```
 
 openocd (Optional)
 
 ```
 $ openocd -v
-Open On-Chip Debugger  v0.11.0-esp32-20220411 (2022-04-11-08:47)
+Open On-Chip Debugger  v0.11.0-esp32-20220706 (2022-07-06-15:48)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
@@ -277,8 +277,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32c3/get-started/index.html)|`v4.4.2`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.5)|`2.0.5`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32c3/get-started/index.html)|`v4.4.3`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.6)|`2.0.6`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
