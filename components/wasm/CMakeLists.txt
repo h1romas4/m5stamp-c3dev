@@ -24,7 +24,11 @@ set(SRCS
     wasm3/source/m3_parse.c
 )
 
-idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS})
+idf_component_register(
+    INCLUDE_DIRS ${INCLUDEDIRS}
+    SRCS ${SRCS}
+    LDFRAGMENTS linker.lf
+)
 
 target_compile_options(${COMPONENT_TARGET} PRIVATE
     -DESP32

@@ -1,6 +1,6 @@
-[mapping:wasm3]
-archive: libm3.a
+[mapping:wasm]
+archive: libwasm.a
 entries:
-    m3_core (noflash_text)
-    m3_exec (noflash_text)
-    m3_compile (noflash_text)
+    m3_core (noflash)
+    m3_exec (noflash)
+    m3_compile (default) # Not enough IRAM memory
