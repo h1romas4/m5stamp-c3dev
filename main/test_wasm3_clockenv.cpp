@@ -125,6 +125,13 @@ m3ApiRawFunction(c3dev_delay) {
     m3ApiSuccess();
 }
 
+m3ApiRawFunction(c3dev_start_write)
+{
+    tft.startWrite();
+
+    m3ApiSuccess();
+}
+
 m3ApiRawFunction(c3dev_draw_pixel)
 {
     m3ApiGetArg(int32_t, x)
@@ -132,6 +139,17 @@ m3ApiRawFunction(c3dev_draw_pixel)
     m3ApiGetArg(int32_t, color)
 
     tft.drawPixel(x, y, color);
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(c3dev_write_pixel)
+{
+    m3ApiGetArg(int32_t, x)
+    m3ApiGetArg(int32_t, y)
+    m3ApiGetArg(int32_t, color)
+
+    tft.writePixel(x, y, color);
 
     m3ApiSuccess();
 }
@@ -145,6 +163,13 @@ m3ApiRawFunction(c3dev_draw_line)
     m3ApiGetArg(int32_t, color)
 
     tft.drawLine(x0, y0, x1, y1, color);
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(c3dev_end_write)
+{
+    tft.endWrite();
 
     m3ApiSuccess();
 }
@@ -214,8 +239,11 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "env", "abort", "v(**ii)",  &c3dev_abort);
     m3_LinkRawFunction(module, "c3dev", "now", "I()",  &c3dev_now);
     m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
+    m3_LinkRawFunction(module, "c3dev", "start_write", "v()",  &c3dev_start_write);
     m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
     m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
+    m3_LinkRawFunction(module, "c3dev", "write_pixel", "v(iii)",  &c3dev_write_pixel);
+    m3_LinkRawFunction(module, "c3dev", "end_write", "v()",  &c3dev_end_write);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);
     m3_LinkRawFunction(module, "c3dev", "get_env_tmp", "f()",  &c3dev_get_env_tmp);
     m3_LinkRawFunction(module, "c3dev", "get_env_hum", "f()",  &c3dev_get_env_hum);

@@ -1,6 +1,6 @@
 import * as c3dev from "./c3dev";
 
-let gpsView: GpsView;
+let gpsView: GpsView | null;
 
 const MAX_SATELLITE: u32 = 12;
 const DEG_TO_RAD: f32 = Math.PI / 180;
@@ -131,7 +131,9 @@ export function gpsgsv(x: u32, y: u32, r: u32): void {
 }
 
 export function tick(clear: bool): void {
-    gpsView.tick(clear);
+    if(gpsView != null) {
+        gpsView!.tick(clear);
+    }
 }
 
 export function createSatellitesArray(): Int8Array {
@@ -139,11 +141,15 @@ export function createSatellitesArray(): Int8Array {
 }
 
 export function setSatellites(satellites: Int8Array) : void {
-    gpsView.setSatellites(satellites);
+    if(gpsView != null) {
+        gpsView!.setSatellites(satellites);
+    }
 }
 
 export function setGsv(id: u32, elevation: u32, azimuth: u32, snr: u32): void {
-    gpsView.setGsv(id, elevation, azimuth, snr);
+    if(gpsView != null) {
+        gpsView!.setGsv(id, elevation, azimuth, snr);
+    }
 }
 
 function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
