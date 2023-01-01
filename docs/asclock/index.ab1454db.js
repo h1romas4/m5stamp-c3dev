@@ -143,13 +143,13 @@
     }
   }
 })({"ckVhm":[function(require,module,exports) {
-"use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 module.bundle.HMR_BUNDLE_ID = "85513773ab1454db";
+"use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -589,9 +589,21 @@ const CANVAS_FONT_SIZE = 8;
         }
     };
     imports["c3dev"] = {
+        "start_write": ()=>{
+        // nothing to do
+        },
         "draw_pixel": (x, y, color)=>{
+            // c3dev SPI non transactional
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x, y, 1, 1);
+        },
+        "write_pixel": (x, y, color)=>{
+            // c3dev SPI transactional
+            canvasContext.fillStyle = convertRGB565toStyle(color);
+            canvasContext.fillRect(x, y, 1, 1);
+        },
+        "end_write": ()=>{
+        // nothing to do
         },
         "draw_string": (x, y, color, string)=>{
             canvasContext.fillStyle = convertRGB565toStyle(color);
@@ -650,7 +662,6 @@ function decodeUTF8(wasmPtr) {
  */ (async function() {
     await loadWasm();
     wasmExports.clock(80, 64, 63);
-    wasmExports.init();
     setInterval(()=>{
         wasmExports.tick();
         wasmExports.__collect() // clean up all garbage
