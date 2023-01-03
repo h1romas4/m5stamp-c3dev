@@ -10,17 +10,23 @@
 #include "test_tinypng.h"
 #include "test_nvs_wifi.h"
 
+#ifdef CONFIG_GPIO1819_NONE
+#include "test_wasm3_clockenv.h"
+#endif
 #ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
+#include "test_wasm3_clockenv.h"
 #endif
 #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
 #include "test_digit_gpio1819.h"
+#include "test_wasm3_clockenv.h"
 #endif
 #ifdef CONFIG_GPIO1819_UART_UNITGPS
 #include "test_uart_gpio1819.h"
 #include "test_wasm3_gpsgsv.h"
-#else
-#include "test_wasm3_clockenv.h"
+#endif
+#ifdef CONFIG_GPIO1819_IMU6886
+#include "test_wasm3_imu6886.h"
 #endif
 
 static const char *TAG = "main.cpp";
@@ -105,6 +111,8 @@ void setup(void)
     // Test WebAssembly
     #ifdef CONFIG_GPIO1819_UART_UNITGPS
     if(gpsgsv_init_wasm() == ESP_OK) enable_wasm = true;
+    #elif CONFIG_GPIO1819_IMU6886
+    if(imu6886_init_wasm() == ESP_OK) enable_wasm = true;
     #else
     if(clockenv_init_wasm() == ESP_OK) enable_wasm = true;
     #endif
@@ -136,6 +144,9 @@ void loop(void)
         #ifdef CONFIG_GPIO1819_UART_UNITGPS
         // GPS GSV View
         gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
+        #elif CONFIG_GPIO1819_IMU6886
+        // 3D Cube
+        imu6886_tick_wasm();
         #else
         // Clock Env
         clockenv_tick_wasm();

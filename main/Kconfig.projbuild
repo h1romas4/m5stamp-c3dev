@@ -22,5 +22,7 @@ menu "C3DEV Configuration"
             bool "Connect UART (UNIT GPS)"
         config GPIO1819_DIGIT_UNITIR
             bool "Connect DIGITAL (UNIT IR)"
+        config GPIO1819_IMU6886
+            bool "Connect I2C (UNIT MPU6886)"
     endchoice
 endmenu
