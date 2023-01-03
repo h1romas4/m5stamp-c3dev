@@ -10,17 +10,23 @@
 #include "test_tinypng.h"
 #include "test_nvs_wifi.h"
 
+#ifdef CONFIG_GPIO1819_NONE
+#include "test_wasm3_clockenv.h"
+#endif
 #ifdef CONFIG_GPIO1819_I2C
 #include "test_i2c_gpio1819.h"
+#include "test_wasm3_clockenv.h"
 #endif
 #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
 #include "test_digit_gpio1819.h"
+#include "test_wasm3_clockenv.h"
 #endif
 #ifdef CONFIG_GPIO1819_UART_UNITGPS
 #include "test_uart_gpio1819.h"
 #include "test_wasm3_gpsgsv.h"
-#else
-#include "test_wasm3_clockenv.h"
+#endif
+#ifdef CONFIG_GPIO1819_IMU6886
+#include "test_wasm3_imu6886.h"
 #endif
 
 static const char *TAG = "main.cpp";
@@ -105,6 +111,8 @@ void setup(void)
     // Test WebAssembly
     #ifdef CONFIG_GPIO1819_UART_UNITGPS
     if(gpsgsv_init_wasm() == ESP_OK) enable_wasm = true;
+    #elif CONFIG_GPIO1819_IMU6886
+    if(imu6886_init_wasm() == ESP_OK) enable_wasm = true;
     #else
     if(clockenv_init_wasm() == ESP_OK) enable_wasm = true;
     #endif
@@ -113,18 +121,24 @@ void setup(void)
 void loop(void)
 {
     // Test Switch
+    #ifndef CONFIG_GPIO1819_IMU6886
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+    #endif
 
     // Test GPIO0 ADC (UNIT Light)
+    #ifndef CONFIG_GPIO1819_IMU6886
     float_t an = (float_t)analogRead(C3DEV_GPIO_0) / (float_t)4096;
     if(an > 1) an = 1;
     ESP_LOGI(TAG, "GPIO0 analog: %f", an);
+    #endif
 
     // Test RGB LED
+    #ifndef CONFIG_GPIO1819_IMU6886
     an = pow(an, 8);
     pixels.begin();
     pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
     pixels.show();
+    #endif
 
     // Test UNIT IR
     #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
@@ -136,11 +150,18 @@ void loop(void)
         #ifdef CONFIG_GPIO1819_UART_UNITGPS
         // GPS GSV View
         gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
+        #elif CONFIG_GPIO1819_IMU6886
+        // 3D Cube
+        imu6886_tick_wasm();
         #else
         // Clock Env
         clockenv_tick_wasm();
         #endif
     }
 
+    #ifdef CONFIG_GPIO1819_IMU6886
+    delay(1);
+    #else
     delay(500);
+    #endif
 }
