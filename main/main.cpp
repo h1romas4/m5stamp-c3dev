@@ -121,18 +121,24 @@ void setup(void)
 void loop(void)
 {
     // Test Switch
+    #ifndef CONFIG_GPIO1819_IMU6886
     ESP_LOGI(TAG, "SW: %d, SW1: %d", digitalRead(M5STAMP_C3_SW), digitalRead(C3DEV_SW1));
+    #endif
 
     // Test GPIO0 ADC (UNIT Light)
+    #ifndef CONFIG_GPIO1819_IMU6886
     float_t an = (float_t)analogRead(C3DEV_GPIO_0) / (float_t)4096;
     if(an > 1) an = 1;
     ESP_LOGI(TAG, "GPIO0 analog: %f", an);
+    #endif
 
     // Test RGB LED
+    #ifndef CONFIG_GPIO1819_IMU6886
     an = pow(an, 8);
     pixels.begin();
     pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
     pixels.show();
+    #endif
 
     // Test UNIT IR
     #ifdef CONFIG_GPIO1819_DIGIT_UNITIR
@@ -153,5 +159,9 @@ void loop(void)
         #endif
     }
 
+    #ifdef CONFIG_GPIO1819_IMU6886
+    delay(1);
+    #else
     delay(500);
+    #endif
 }

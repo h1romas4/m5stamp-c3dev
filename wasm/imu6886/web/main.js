@@ -1,8 +1,8 @@
 /**
  * Canvas settings
  */
-const CANVAS_WIDTH = 320;
-const CANVAS_HEIGHT = 240;
+const CANVAS_WIDTH = 160;
+const CANVAS_HEIGHT = 128;
 const CANVAS_FONT_SIZE = 14;
 
 /**

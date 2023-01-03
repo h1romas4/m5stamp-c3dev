@@ -114,7 +114,8 @@ m3ApiRawFunction(c3dev_delay) {
 
 m3ApiRawFunction(c3dev_start_write)
 {
-    tft.startWrite();
+    // TODO: SPI transaction
+    // tft.startWrite();
 
     m3ApiSuccess();
 }
@@ -158,7 +159,8 @@ m3ApiRawFunction(c3dev_fill_rect)
 
 m3ApiRawFunction(c3dev_end_write)
 {
-    tft.endWrite();
+    // TODO: SPI transaction
+    // tft.endWrite();
 
     m3ApiSuccess();
 }
@@ -316,7 +318,6 @@ esp_err_t imu6886_init_wasm(void)
 
 esp_err_t imu6886_tick_wasm(void)
 {
-    ESP_LOGI(TAG, "imu6886_tick_wasm 1");
     M3Result result = m3Err_none;
 
     result = m3_Call(wasm3_func_tick, 0, nullptr);
@@ -324,7 +325,6 @@ esp_err_t imu6886_tick_wasm(void)
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
-    ESP_LOGI(TAG, "imu6886_tick_wasm 2");
 
     // GC by tick for AssemblyScript --runtime minimal
     as_gc_collect();

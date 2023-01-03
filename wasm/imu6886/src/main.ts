@@ -16,7 +16,7 @@ const CUBE_POINTS: f32[][] = [
 const CUBE_LENGTH = 8;
 
 const DISTANCE: f32 = 4;
-const SCALE: f32 = 240;
+const SCALE: f32 = 120;
 
 /**
  * IMU sensor
