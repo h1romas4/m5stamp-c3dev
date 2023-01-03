@@ -49,8 +49,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Video
 
-- 📼 [YouTube Demo(LCD)](https://youtu.be/46I3Uo5Xivg)
-- 📼 [YouTube Demo(Wasm3)](https://youtu.be/TagQuPtwKCg)
+- 📼 [Demo(LCD)](https://youtu.be/46I3Uo5Xivg)
+- 📼 [Demo(Wasm3)](https://youtu.be/TagQuPtwKCg)
+- 📼 [Demo(3D Cube)](https://twitter.com/h1romas4/status/1610228824607985664)
 
 ### Web Simulation
 
