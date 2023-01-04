@@ -295,7 +295,7 @@ Thanks for all the open source.
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.2`|LGPL-2.1 license|
-|[Wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
+|[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.25.2`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
