@@ -34,8 +34,9 @@ target_compile_options(${COMPONENT_TARGET} PRIVATE
     -DESP32
     -DM3_IN_IRAM
     -O3
-    -g0
-    -s
+    -freorder-blocks
+    # -g0
+    # -s
     # -Dd_m3FixedHeap=32768
     # -DDEBUG
     # -Dd_m3LogNativeStack
