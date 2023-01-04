@@ -200,6 +200,10 @@ C3DEV Configuration → Select GPIO 18/19
 
 ![](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_05.png)
 
+`3D Cube Demo`
+
+![3D Cube](https://raw.githubusercontent.com/h1romas4/m5stamp-c3dev/main/docs/images/m5stamp_c3dev_06.jpg)
+
 ### JTAG debug with Visual Studio Code
 
 Requre setup ESP32_TOOLCHAIN_HOME
@@ -252,7 +256,7 @@ idf.py menuconfig
 ## Build AssemblyScript
 
 ```
-cd wasm/clockenv # or cd wasm/gpsgsv
+cd wasm/clockenv # or wasm/gpsgsv or wasm/imu6886
 npm install
 ```
 
