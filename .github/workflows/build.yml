@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -19,7 +19,7 @@ jobs:
         path: |
           ~/esp
           ~/.espressif/
-        key: ${{ runner.os }}-espidf-and-compiler-v443
+        key: ${{ runner.os }}-espidf-and-compiler-v443-u2204
 
     - name: esp-idf Dependencies Setup
       run: |
