@@ -152,7 +152,11 @@ void loop(void)
         gpsgsv_tick_wasm(digitalRead(C3DEV_SW1) == 0 ? true: false);
         #elif CONFIG_GPIO1819_IMU6886
         // 3D Cube
+        // uint32_t time = millis();
         imu6886_tick_wasm();
+        // ESP_LOGI(TAG, "time: %d", (uint32_t)(millis() - time));
+        // When draw to LCD is suppressed. (calculations only)
+        //     I (4057) main.cpp: time: 16
         #else
         // Clock Env
         clockenv_tick_wasm();
