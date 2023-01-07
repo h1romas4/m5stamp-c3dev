@@ -34,7 +34,6 @@ IM3Environment wasm3_env;
 IM3Runtime wasm3_runtime;
 IM3Module wasm3_module;
 IM3Function wasm3_func_tick;
-IM3Function wasm3_func_unpin;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
@@ -49,27 +48,6 @@ fs::SPIFFSFS SPIFFS_WASM;
  * FreeType member
  */
 font_render_t wasm_font_render;
-
-/**
- * as_gc_unpin_ptr
- *
- * ex. as_gc_unpin_ptr(m3ApiPtrToOffset(string_ptr));
- */
-void as_gc_unpin_ptr(uint32_t wasm_prt)
-{
-    M3Result result = m3Err_none;
-
-    char str_32bit[11];
-
-    sprintf(str_32bit, "%d", wasm_prt);
-    ESP_LOGI(TAG, "as_gc_unpin_ptr: %s", str_32bit);
-
-    const char* i_argv[1] = { str_32bit };
-    result = m3_CallArgv(wasm3_func_unpin, 1, i_argv);
-    if (result) {
-        ESP_LOGE(TAG, "m3_Call:as_gc_unpin_ptr: %s", result);
-    }
-}
 
 /**
  * as_gc_collect.
@@ -295,11 +273,6 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     ESP_LOGI(TAG, "Running...");
 
     // Get AssemblyScript GC interface
-    result = m3_FindFunction(&wasm3_func_unpin, wasm3_runtime, "__unpin");
-    if (result) {
-        ESP_LOGE(TAG, "m3_FindFunction:wasm3_func_unpin: %s", result);
-        return ESP_FAIL;
-    }
     result = m3_FindFunction(&wasm3_func_collect, wasm3_runtime, "__collect");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction:wasm3_func_collect: %s", result);
