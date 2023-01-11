@@ -102,7 +102,7 @@ class Imu {
         // draw points and save prev
         for(let i = 0; i < CUBE_LENGTH; i++) {
             const x = proj_2d_points[i][0];
-            const y = proj_2d_points[i][1]
+            const y = proj_2d_points[i][1];
             c3dev.draw_pixel(x, y, c3dev.COLOR.RED);
             this.prev_proj_2d_points[i] = [x, y];
         }

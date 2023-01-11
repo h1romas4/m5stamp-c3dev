@@ -45,3 +45,6 @@ jobs:
         cd ../gpsgsv
         npm install
         npm run asbuild
+        cd ../imu6886
+        npm install
+        npm run asbuild
