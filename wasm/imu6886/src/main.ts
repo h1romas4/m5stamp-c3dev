@@ -49,9 +49,9 @@ class Imu {
         const sin: f32 = Mathf.sin(angle);
 
         const rot_x: f32[][] = [
-            [    1,    0,    0],
-            [    0,  cos, -sin],
-            [    0,  sin,  cos]
+            [    1,    0,     0],
+            [    0,  cos,  -sin],
+            [    0,  sin,   cos]
         ];
         const rot_y: f32[][] = [
             [  cos,    0,  -sin],
