@@ -22,10 +22,10 @@ const SCALE: f32 = 120;
  * IMU sensor
  */
 class Imu {
-    private center_x: f32 = 0;
-    private center_y: f32 = 0;
+    private centerX: f32 = 0;
+    private centerY: f32 = 0;
     private angle: f32 = 0;
-    private prev_proj_2d_points: u32[][] = [];
+    private prevProj2dPoints: u32[][] = [];
 
     constructor(
         private width: u32,
@@ -35,10 +35,10 @@ class Imu {
     }
 
     init(): void {
-        this.center_x = this.width as f32 / 2.0;
-        this.center_y = this.height as f32 / 2.0;
+        this.centerX = this.width as f32 / 2.0;
+        this.centerY = this.height as f32 / 2.0;
         for(let i = 0; i < CUBE_LENGTH; i++) {
-            this.prev_proj_2d_points[i] = [0, 0];
+            this.prevProj2dPoints[i] = [0, 0];
         }
     }
 
@@ -48,39 +48,39 @@ class Imu {
         const cos: f32 = Mathf.cos(angle);
         const sin: f32 = Mathf.sin(angle);
 
-        const rot_x: f32[][] = [
+        const rotX: f32[][] = [
             [    1,    0,     0],
             [    0,  cos,  -sin],
             [    0,  sin,   cos]
         ];
-        const rot_y: f32[][] = [
+        const rotY: f32[][] = [
             [  cos,    0,  -sin],
             [    0,    1,     0],
             [  sin,    0,   cos]
         ];
-        const rot_z: f32[][] = [
+        const rotZ: f32[][] = [
             [  cos, -sin,     0],
             [  sin,  cos,     0],
             [    0,    0,     1]
         ];
 
-        let proj_2d_points: u32[][] = [];
-        let rot_2d: f32[];
+        let proj2dPoints: u32[][] = [];
+        let rot2d: f32[];
         for(let i = 0; i < CUBE_LENGTH; i++) {
-            rot_2d = matrix_multiple(rot_y, CUBE_POINTS[i]);
-            rot_2d = matrix_multiple(rot_x, rot_2d);
-            rot_2d = matrix_multiple(rot_z, rot_2d);
-            let z: f32 = 1 / (DISTANCE - rot_2d[2]);
-            const proj_2d: f32[] = matrix_multiple(
+            rot2d = matrixMultiple(rotY, CUBE_POINTS[i]);
+            rot2d = matrixMultiple(rotX, rot2d);
+            rot2d = matrixMultiple(rotZ, rot2d);
+            let z: f32 = 1 / (DISTANCE - rot2d[2]);
+            const proj2d: f32[] = matrixMultiple(
                 [
                     [z, 0, 0],
                     [0, z, 0]
                 ],
-                rot_2d
+                rot2d
             );
-            const x = ((proj_2d[0] * SCALE) + this.center_x) as u32;
-            const y = ((proj_2d[1] * SCALE) + this.center_y) as u32;
-            proj_2d_points[i] = [x, y];
+            const x = ((proj2d[0] * SCALE) + this.centerX) as u32;
+            const y = ((proj2d[1] * SCALE) + this.centerY) as u32;
+            proj2dPoints[i] = [x, y];
         }
 
         // Draw
@@ -89,22 +89,22 @@ class Imu {
         c3dev.start_write();
         // clear prev lines
         for(let i = 0; i < CUBE_LENGTH / 2; i++) {
-            this.connect(i, (i + 1) % 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
-            this.connect(i + 4, (i + 1) % 4 + 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
-            this.connect(i, i + 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
+            this.connect(i, (i + 1) % 4, this.prevProj2dPoints, c3dev.COLOR.BLACK);
+            this.connect(i + 4, (i + 1) % 4 + 4, this.prevProj2dPoints, c3dev.COLOR.BLACK);
+            this.connect(i, i + 4, this.prevProj2dPoints, c3dev.COLOR.BLACK);
         }
         // draw lines
         for(let i = 0; i < CUBE_LENGTH / 2; i++) {
-            this.connect(i, (i + 1) % 4, proj_2d_points, c3dev.COLOR.GREEN);
-            this.connect(i + 4, (i + 1) % 4 + 4, proj_2d_points, c3dev.COLOR.GREEN);
-            this.connect(i, i + 4, proj_2d_points, c3dev.COLOR.GREEN);
+            this.connect(i, (i + 1) % 4, proj2dPoints, c3dev.COLOR.GREEN);
+            this.connect(i + 4, (i + 1) % 4 + 4, proj2dPoints, c3dev.COLOR.GREEN);
+            this.connect(i, i + 4, proj2dPoints, c3dev.COLOR.GREEN);
         }
         // draw points and save prev
         for(let i = 0; i < CUBE_LENGTH; i++) {
-            const x = proj_2d_points[i][0];
-            const y = proj_2d_points[i][1];
+            const x = proj2dPoints[i][0];
+            const y = proj2dPoints[i][1];
             c3dev.draw_pixel(x, y, c3dev.COLOR.RED);
-            this.prev_proj_2d_points[i] = [x, y];
+            this.prevProj2dPoints[i] = [x, y];
         }
         c3dev.end_write();
 
@@ -128,7 +128,7 @@ export function tick(): void {
     }
 }
 
-function matrix_multiple(a: f32[][], b: f32[]): f32[] {
+function matrixMultiple(a: f32[][], b: f32[]): f32[] {
     let result: f32[] = [];
 
     for(let i = 0; i < a.length; i++) {
