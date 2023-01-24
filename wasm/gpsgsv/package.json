@@ -9,7 +9,7 @@
     "@babel/preset-env": "^7.18.10",
     "parcel": "^2.7.0",
     "@parcel/source-map": "^2.1.0",
-    "assemblyscript": "^0.26.5"
+    "assemblyscript": "^0.26.6"
   },
   "scripts": {
     "asbuild:web": "asc src/main.ts -o ./dist/gpsgsv.wasm -t build/gpsgsv.wat -b build/gpsgsv.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
