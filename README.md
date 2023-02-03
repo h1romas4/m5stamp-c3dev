@@ -288,7 +288,7 @@ Thanks for all the open source.
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
-|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.3`|BSD License|
+|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.5`|BSD License|
 |[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.1`|MIT License|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.9.3`|MIT License|
 |[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.10.6`|LGPL-3.0 License|
