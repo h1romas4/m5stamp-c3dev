@@ -84,9 +84,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF **v4.4.3**](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32c3/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF **v4.4.4**](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32c3/get-started/index.html#installation-step-by-step)
 
-get_idf or (Windows) ESP-IDF **`4.4.3`** command prompt
+get_idf or (Windows) ESP-IDF **`4.4.4`** command prompt
 
 ```
 # Linux or macOS ->
@@ -283,8 +283,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32c3/get-started/index.html)|`v4.4.3`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.6)|`2.0.6`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32c3/get-started/index.html)|`v4.4.4`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.7)|`2.0.7`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
