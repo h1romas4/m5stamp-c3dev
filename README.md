@@ -284,7 +284,7 @@ Thanks for all the open source.
 |Name|Version|License|
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32c3/get-started/index.html)|`v4.4.4`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.7)|`2.0.8`|LGPL-2.1 License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.8)|`2.0.8`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
@@ -296,7 +296,7 @@ Thanks for all the open source.
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.2`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.1`|Apache-2.0 License|
+|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.4`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
