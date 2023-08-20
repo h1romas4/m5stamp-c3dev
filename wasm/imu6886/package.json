@@ -9,7 +9,7 @@
     "@babel/preset-env": "^7.21.4",
     "parcel": "^2.8.3",
     "@parcel/source-map": "^2.1.1",
-    "assemblyscript": "^0.27.4"
+    "assemblyscript": "^0.27.9"
   },
   "scripts": {
     "asbuild:web": "asc src/main.ts -o ./dist/imu6886.wasm -t build/imu6886.wat -b build/imu6886.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
