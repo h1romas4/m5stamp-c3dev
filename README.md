@@ -285,16 +285,16 @@ Thanks for all the open source.
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32c3/get-started/index.html)|`v4.4.5`|BSD License|
 |[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.11)|`2.0.11`|LGPL-2.1 License|
-|[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
-|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.5`|MIT License|
+|[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.5`|FreeType Part(The FreeType License)|
+|[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.7`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
-|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.5`|BSD License|
-|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.1`|MIT License|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.0`|MIT License|
-|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.11.0`|LGPL-3.0 License|
+|[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.7`|BSD License|
+|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.3`|MIT License|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.2`|MIT License|
+|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.11.1`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
-|[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.2`|LGPL-2.1 license|
+|[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.6`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.9`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
