@@ -41,7 +41,7 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
-- Visual Studio Code C/C++ Extention configuration and JTAG debugging configuration in conjunction with openocd
+- Visual Studio Code C/C++ Extension configuration and JTAG debugging configuration in conjunction with openocd
 - AssembyScript sharing method between web browser and microcontroller - [wasm](https://github.com/h1romas4/m5stamp-c3dev/tree/main/wasm)
 
 This repository contains MIT Licensed PCB data and example programs.
@@ -123,7 +123,7 @@ For bug reports, read
 
 ### Build and Execute
 
-1. git clone and build (Please add `--recursice`)
+1. git clone and build (Please add `--recursive`)
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stamp-c3dev
@@ -170,13 +170,13 @@ ssid,data,string,[ssid]
 passwd,data,string,[password]
 ```
 
-2. Create NVS Partation file
+2. Create NVS Partition file
 
 ```
 python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_gen.py generate nvs_partition.csv nvs_partition.bin 0x6000
 ```
 
-3. Write NVS Partation
+3. Write NVS Partition
 
 ```
 esptool.py write_flash 0x9000 nvs_partition.bin
@@ -206,7 +206,7 @@ C3DEV Configuration → Select GPIO 18/19
 
 ### JTAG debug with Visual Studio Code
 
-Requre setup ESP32_TOOLCHAIN_HOME
+Require setup ESP32_TOOLCHAIN_HOME
 
 ```
 $ echo ${ESP32_TOOLCHAIN_HOME}
@@ -234,7 +234,7 @@ $ echo ${ESP32_TOOLCHAIN_HOME}
     // tft.invertDisplay(1);
 ```
 
-#### Create SPIFFS parteation file from file system
+#### Create SPIFFS partition file from file system
 
 ```
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
@@ -296,7 +296,7 @@ Thanks for all the open source.
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.6`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.9`|Apache-2.0 License|
+|[AssemblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.9`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
