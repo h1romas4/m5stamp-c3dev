@@ -283,8 +283,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32c3/get-started/index.html)|`v4.4.5`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.11)|`2.0.11`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.5/esp32c3/get-started/index.html)|`v4.4.5`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.13)|`2.0.13`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.5`|MIT License|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.7`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
