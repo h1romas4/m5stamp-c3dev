@@ -84,9 +84,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF **v4.4.5**](https://docs.espressif.com/projects/esp-idf/en/v4.4.5/esp32c3/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF **v4.4.6**](https://docs.espressif.com/projects/esp-idf/en/v4.4.6/esp32c3/get-started/index.html#installation-step-by-step)
 
-get_idf or (Windows) ESP-IDF **`4.4.5`** command prompt
+get_idf or (Windows) ESP-IDF **`4.4.6`** command prompt
 
 ```
 # Linux or macOS ->
