@@ -9,7 +9,7 @@
     "@babel/preset-env": "^7.22.20",
     "parcel": "^2.9.3",
     "@parcel/source-map": "^2.1.1",
-    "assemblyscript": "^0.27.11"
+    "assemblyscript": "^0.27.13"
   },
   "scripts": {
     "asbuild:web": "asc src/main.ts -o ./dist/clockenv.wasm -t build/clockenv.wat -b build/clockenv.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
