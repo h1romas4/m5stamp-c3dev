@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "RISC-V wasm3 example",
   "devDependencies": {
-    "@babel/core": "^7.23.0",
+    "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
-    "@babel/plugin-transform-runtime": "^7.22.15",
-    "@babel/preset-env": "^7.22.20",
-    "parcel": "^2.9.3",
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "parcel": "^2.10.1",
     "@parcel/source-map": "^2.1.1",
-    "assemblyscript": "^0.27.13"
+    "assemblyscript": "^0.27.14"
   },
   "scripts": {
     "asbuild:web": "asc src/main.ts -o ./dist/imu6886.wasm -t build/imu6886.wat -b build/imu6886.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
