@@ -31,13 +31,10 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
     - UNIT ULTRASONIC - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp#L52-L61)
 - Test UART on GPIO18, 19
     - UNIT GPS - [test_uart_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_uart_gpio1819.cpp)
-- Test DIGITAL on GPIO18, 19
-    - UNIT IR - [test_digit_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_digit_gpio1819.cpp)
 - WebAssembly execution with Wasm3
     - Analog clock using AssemblyScript - [test_wasm3_clockenv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_clockenv.cpp)
     - GPS GSV viewer using AssemblyScript - [test_wasm3_gpsgsv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_gpsgsv.cpp)
     - 3D Cube Demo using AssemblyScript - [test_wasm3_imu6886.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_imu6886.cpp)
-- Support RGB LED (SK6812) - [main.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/main.cpp#L35-L38)
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
@@ -84,9 +81,9 @@ This repository contains MIT Licensed PCB data and example programs.
 
 ### Require
 
-- [Setup ESF-IDF **v4.4.6**](https://docs.espressif.com/projects/esp-idf/en/v4.4.6/esp32c3/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF **release/v5.1**](https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32c3/get-started/linux-macos-setup.html)
 
-get_idf or (Windows) ESP-IDF **`4.4.6`** command prompt
+get_idf or (Windows) ESP-IDF command prompt
 
 ```
 # Linux or macOS ->
@@ -108,14 +105,14 @@ $ riscv32-esp-elf-gcc -v
 Using built-in specs.
 COLLECT_GCC=riscv32-esp-elf-gcc
 ... snip ...
-gcc version 8.4.0 (crosstool-NG esp-2021r2-patch5)
+gcc version 12.2.0 (crosstool-NG esp-12.2.0_20230208)
 ```
 
 openocd (Optional)
 
 ```
 $ openocd -v
-Open On-Chip Debugger  v0.11.0-esp32-20220706 (2022-07-06-15:48)
+Open On-Chip Debugger v0.12.0-esp32-20240318 (2024-03-18-18:25)
 Licensed under GNU GPL v2
 For bug reports, read
         http://openocd.org/doc/doxygen/bugs.html
@@ -283,20 +280,18 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/v4.4.6/esp32c3/get-started/index.html)|`v4.4.6`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/2.0.13)|`2.0.14`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32c3/get-started/index.html)|`release/v5.1`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32/releases/tag/3.0.2)|`3.0.2`|LGPL-2.1 License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.5`|MIT License|
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.7`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.9`|BSD License|
-|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.5`|MIT License|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.3`|MIT License|
-|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.11.1`|LGPL-3.0 License|
+|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.16.1`|MIT License|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.4`|MIT License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
-|[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)|`v2.8.6`|LGPL-2.1 license|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
-|[AssemblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.22`|Apache-2.0 License|
+|[AssemblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.29`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License

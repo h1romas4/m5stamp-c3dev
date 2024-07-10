@@ -19,25 +19,24 @@ jobs:
         path: |
           ~/esp
           ~/.espressif/
-        key: ${{ runner.os }}-espidf-and-compiler-v446-u2204
+        key: ${{ runner.os }}-espidf-and-compiler-v51-u2204
 
     - name: esp-idf Dependencies Setup
       run: |
-        sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+        sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
     - name: esp-idf Toolchain Setup
       if: steps.cache-toolchaine.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/esp
         cd ~/esp
-        git clone -b v4.4.6 --recursive https://github.com/espressif/esp-idf.git
+        git clone -b release/v5.1 --recursive https://github.com/espressif/esp-idf.git
         cd ~/esp/esp-idf
         ./install.sh esp32c3
 
     - name: Build
       run: |
         . ~/esp/esp-idf/export.sh
-        pip3 install -r $IDF_PATH/requirements.txt
         idf.py build
         cd wasm/clockenv
         npm install

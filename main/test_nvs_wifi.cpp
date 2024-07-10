@@ -18,7 +18,7 @@ void sync_wifi_ntp(void)
     String ssid = preferences.getString("ssid");
     String passwd = preferences.getString("passwd");
 
-    ESP_LOGI(TAG, "Connect to %s", ssid);
+    ESP_LOGI(TAG, "Connect to %s", ssid.c_str());
     WiFi.begin(ssid.c_str(), passwd.c_str());
     while (WiFi.status() != WL_CONNECTED) {
         delay(200);
