@@ -78,7 +78,7 @@ m3ApiRawFunction(c3dev_abort)
     m3ApiGetArg(int32_t, lineNumber)
     m3ApiGetArg(int32_t, columnNumber)
 
-    ESP_LOGE(TAG, "c3dev_abort: %ls %ls %d %d", message, fileName, lineNumber, columnNumber);
+    // ESP_LOGE(TAG, "c3dev_abort: %ls %ls %d %d", message, fileName, lineNumber, columnNumber);
 
     m3ApiSuccess();
 }

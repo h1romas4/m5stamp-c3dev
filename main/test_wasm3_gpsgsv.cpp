@@ -64,7 +64,7 @@ void as_gc_unpin_ptr(uint32_t wasm_prt)
 
     char str_32bit[11];
 
-    sprintf(str_32bit, "%d", wasm_prt);
+    sprintf(str_32bit, "%ld", wasm_prt);
     ESP_LOGI(TAG, "as_gc_unpin_ptr: %s", str_32bit);
 
     const char* i_argv[1] = { str_32bit };
@@ -103,7 +103,7 @@ m3ApiRawFunction(c3dev_abort)
     m3ApiGetArg(int32_t, lineNumber)
     m3ApiGetArg(int32_t, columnNumber)
 
-    ESP_LOGE(TAG, "c3dev_abort: %ls %ls %d %d", message, fileName, lineNumber, columnNumber);
+    // ESP_LOGE(TAG, "c3dev_abort: %ls %ls %d %d", message, fileName, lineNumber, columnNumber);
 
     m3ApiSuccess();
 }
