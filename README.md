@@ -286,8 +286,8 @@ Thanks for all the open source.
 |[UNIT_ENV](https://github.com/m5stack/UNIT_ENV)|`0.0.7`|MIT License|
 |[M5Unit-Sonic](https://github.com/m5stack/M5Unit-Sonic)|`0.0.2`|MIT License|
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.9`|BSD License|
-|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.5`|MIT License|
-|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.3`|MIT License|
+|[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.16.1`|MIT License|
+|[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.4`|MIT License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
