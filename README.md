@@ -291,7 +291,7 @@ Thanks for all the open source.
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
-|[AssemblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.22`|Apache-2.0 License|
+|[AssemblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.27.29`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
