@@ -17,4 +17,4 @@ set(SRCS
 idf_component_register(
     INCLUDE_DIRS ${INCLUDEDIRS}
     SRCS ${SRCS}
-    REQUIRES arduino-esp32 freetype lcd led tinypng lwgps wasm unitenv ultrasonic)
+    REQUIRES arduino-esp32 freetype lcd tinypng lwgps wasm unitenv ultrasonic)

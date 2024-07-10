@@ -31,13 +31,10 @@ This is a development board for the [M5Stamp C3](https://shop.m5stack.com/produc
     - UNIT ULTRASONIC - [test_i2c_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_i2c_gpio1819.cpp#L52-L61)
 - Test UART on GPIO18, 19
     - UNIT GPS - [test_uart_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_uart_gpio1819.cpp)
-- Test DIGITAL on GPIO18, 19
-    - UNIT IR - [test_digit_gpio1819.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_digit_gpio1819.cpp)
 - WebAssembly execution with Wasm3
     - Analog clock using AssemblyScript - [test_wasm3_clockenv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_clockenv.cpp)
     - GPS GSV viewer using AssemblyScript - [test_wasm3_gpsgsv.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_gpsgsv.cpp)
     - 3D Cube Demo using AssemblyScript - [test_wasm3_imu6886.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/test_wasm3_imu6886.cpp)
-- Support RGB LED (SK6812) - [main.cpp](https://github.com/h1romas4/m5stamp-c3dev/blob/main/main/main.cpp#L35-L38)
 - Usage of SPIFFS, which stores TrueType fonts and .wasm binaries (parttool.py and spiffsgen.py tools)
 - Use of NVS (cryptographically enabled key value store) that stores WiFi passwords (nvs_partition_gen.py tool)
 - Building libraries and managing dependencies using the esp-idf build system
@@ -291,7 +288,6 @@ Thanks for all the open source.
 |[Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)|`1.11.9`|BSD License|
 |[Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)|`1.14.5`|MIT License|
 |[Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)|`1.10.3`|MIT License|
-|[Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)|`1.11.1`|LGPL-3.0 License|
 |[tinyPNG](https://github.com/olliiiver/tinyPNG)|`0.11`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|

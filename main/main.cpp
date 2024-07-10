@@ -3,7 +3,6 @@
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ST7735.h"
-#include "Adafruit_NeoPixel.h"
 
 #include "c3dev_board.h"
 #include "test_freetype.h"
@@ -40,11 +39,6 @@ SPIClass *spi = &SPI;
  * LCD member
  */
 Adafruit_ST7735 tft = Adafruit_ST7735(spi, C3DEV_LCD_CS, C3DEV_LCD_DC, C3DEV_LCD_RST);
-
-/**
- * RGB LED member
- */
-Adafruit_NeoPixel pixels(1, M5STAMP_C3_LED, NEO_GRB + NEO_KHZ800);
 
 /**
  * FreeType member
@@ -130,14 +124,6 @@ void loop(void)
     float_t an = (float_t)analogRead(C3DEV_GPIO_0) / (float_t)4096;
     if(an > 1) an = 1;
     ESP_LOGI(TAG, "GPIO0 analog: %f", an);
-    #endif
-
-    // Test RGB LED
-    #ifndef CONFIG_GPIO1819_IMU6886
-    an = pow(an, 8);
-    pixels.begin();
-    pixels.setPixelColor(0, pixels.Color(255 * an, 8, 255 * an));
-    pixels.show();
     #endif
 
     // Test UNIT IR

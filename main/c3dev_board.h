@@ -1,6 +1,5 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ST7735.h"
-#include "Adafruit_NeoPixel.h"
 
 #define C3DEV_GPIO_0 0
 
@@ -20,5 +19,4 @@
 #define M5STAMP_C3_LED 2
 
 extern Adafruit_ST7735 tft;
-extern Adafruit_NeoPixel pixels;
 extern SPIClass *spi;
